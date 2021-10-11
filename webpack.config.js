@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const middleware = require("webpack-dev-middleware");
 const path = require("path");
-const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
