@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const webpack = require("webpack");
 const middleware = require("webpack-dev-middleware");
 const path = require("path");
