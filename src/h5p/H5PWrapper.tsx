@@ -13,7 +13,7 @@ export class H5PWrapper extends H5P.EventDispatcher {
     ReactDOM.render(<App adjective="astonishing" />, this.wrapper);
   }
 
-  attach([containerElement]: JQuery<HTMLElement>) {
+  attach([containerElement]: JQuery<HTMLElement>): void {
     containerElement.appendChild(this.wrapper);
     containerElement.classList.add("h5p-h5p-editor-timeline");
   }
