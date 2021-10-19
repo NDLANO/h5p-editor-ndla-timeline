@@ -21,7 +21,7 @@ export const EventItem: React.FC<EventItemProps> = ({ item }) => {
         <img
           className={styles.image}
           src={item.backgroundImage.path}
-          alt={item.backgroundImage.alt}
+          alt={item.backgroundImage.alt ?? ""}
         />
       )}
 
