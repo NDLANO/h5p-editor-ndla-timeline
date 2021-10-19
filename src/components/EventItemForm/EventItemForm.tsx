@@ -27,7 +27,6 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
   React.useEffect(() => {
     console.log("semantics", semantics);
     const field = getTopicMapField(semantics);
-    console.log("found field:",field);
     setTopicMapField(field);
 
     setFormParams({
