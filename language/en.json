@@ -1,0 +1,16 @@
+{
+  "libraryStrings": {
+    "context-menu_edit": "Edit",
+    "context-menu_delete": "Delete",
+    "context-menu_arrow-directional": "One sided arrow",
+    "context-menu_arrow-bi-directional": "Double sided arrow",
+    "context-menu_arrow-non-directional": "Single line",
+    "dialog_close": "Close dialog",
+    "draggable_selected": "Press arrow keys to move. Press escape to unselect.",
+    "draggable_not-selected": "Press enter to select",
+    "grid-indicator_label": "Click and drag to create a new element",
+    "toolbar-button-type_map-color": "Map color",
+    "toolbar-button-type_create-box": "Create box",
+    "toolbar-button-type_create-arrow": "Create arrow"
+  }
+}
