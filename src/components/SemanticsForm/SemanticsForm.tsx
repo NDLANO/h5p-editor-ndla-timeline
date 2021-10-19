@@ -9,7 +9,7 @@ export type SemanticsFormProps = {
   fields: Array<H5PField>;
   params: Params;
   parent: H5PForm;
-  onSave: any;
+  onSave: (newParams: Params) => void;
   formClassName: string;
 };
 

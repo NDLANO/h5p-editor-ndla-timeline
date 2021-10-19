@@ -25,7 +25,6 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
   const [formParams, setFormParams] = React.useState<Params>();
 
   React.useEffect(() => {
-    console.log("semantics", semantics);
     const field = getTopicMapField(semantics);
     setTopicMapField(field);
 
@@ -52,8 +51,6 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
     },
     [itemId, onSave],
   );
-  console.log("formParams", formParams);
-  console.log("topicMapField", topicMapField);
   return formParams && topicMapField ? (
     <SemanticsForm
       fields={[topicMapField]}
