@@ -14,7 +14,7 @@ export default {
   },
 } as ComponentMeta<typeof ContextMenu>;
 
-const Template: ComponentStory<typeof ContextMenu> = args => (
+const Template: ComponentStory<typeof ContextMenu> = (args) => (
   <div
     style={{
       position: "absolute",

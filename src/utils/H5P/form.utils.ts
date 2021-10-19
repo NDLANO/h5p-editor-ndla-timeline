@@ -1,6 +1,28 @@
 import { H5PEditor } from "../../h5p/H5P.util";
-import { H5PField, H5PFieldCommon, H5PFieldGroup } from "../../types/h5p/H5PField";
+import {
+  H5PField,
+  H5PFieldCommon,
+  H5PFieldGroup,
+} from "../../types/h5p/H5PField";
 import { H5PFieldType } from "../../types/h5p/H5PFieldType";
+
+const getSubfieldByName = (
+  name: string,
+  semantics: H5PField
+): H5PField | null => {
+  if ((<H5PFieldCommon>semantics).name === name) {
+    return semantics;
+  }
+
+  if ((<any>semantics).type === H5PFieldType.Group) {
+    return (
+      (<Array<H5PField>>(<any>semantics).fields)
+        .map((field) => getSubfieldByName(name, field))
+        .find((field) => field !== null) ?? null
+    );
+  }
+  return null;
+};
 
 export const getTopicMapField = (semantics: H5PField): H5PField | null => {
   if (!H5PEditor.findSemanticsField) {
@@ -8,10 +30,7 @@ export const getTopicMapField = (semantics: H5PField): H5PField | null => {
     return getSubfieldByName("eventItems", semantics);
   }
 
-  const topicMapField = H5PEditor.findSemanticsField(
-    "eventItems",
-    semantics,
-  );
+  const topicMapField = H5PEditor.findSemanticsField("eventItems", semantics);
 
   if (!topicMapField) {
     throw new Error("Could not find the `eventItems` field");
@@ -24,17 +43,3 @@ export const getTopicMapField = (semantics: H5PField): H5PField | null => {
 
   return topicMapField;
 };
-
-const getSubfieldByName = (name: string, semantics: H5PField): H5PField | null =>{
-  if((<H5PFieldCommon>semantics).name === name) {
-    return semantics;
-  }
-
-  if((<any>semantics).type === H5PFieldType.Group){
-    for(const field of (<Array<H5PField>>(<any>semantics).fields)){
-      let res = getSubfieldByName(name, field)
-      if(res !== null) return res;
-    }
-  }
-  return null;
-}

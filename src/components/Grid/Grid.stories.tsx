@@ -15,12 +15,12 @@ export default {
   },
 } as ComponentMeta<typeof Grid>;
 
-const Template: ComponentStory<typeof Grid> = args => <Grid {...args} />;
+const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 
 export const Empty = Template.bind({});
 Empty.args = {};
 
-const TemplateWithDraggable: ComponentStory<typeof Grid> = args => (
+const TemplateWithDraggable: ComponentStory<typeof Grid> = (args) => (
   <Grid {...args} />
 );
 

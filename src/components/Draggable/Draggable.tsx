@@ -43,7 +43,7 @@ export type DraggableProps = {
       | "left"
       | "top"
       | "top-left"
-      | "none",
+      | "none"
   ) => void;
   mouseOutsideGrid: boolean;
   editItem: (id: string) => void;
@@ -112,7 +112,7 @@ export const Draggable: React.FC<DraggableProps> = ({
       gridSize.width,
       initialHeight,
       initialWidth,
-    ],
+    ]
   );
 
   // Update Draggable's position whenever the container's size changes
@@ -149,12 +149,12 @@ export const Draggable: React.FC<DraggableProps> = ({
         y: y - position.y,
       });
     },
-    [setSelectedItem, id, position],
+    [setSelectedItem, id, position]
   );
 
   const getNewPosition = React.useCallback(
     (x: number, y: number) => ({ x, y }),
-    [],
+    []
   );
 
   const getClosestValidXPosition = React.useCallback(
@@ -164,9 +164,9 @@ export const Draggable: React.FC<DraggableProps> = ({
         gapSize,
         gridIndicatorSize,
         gridSize.width,
-        width,
+        width
       ),
-    [gapSize, gridIndicatorSize, gridSize.width, width],
+    [gapSize, gridIndicatorSize, gridSize.width, width]
   );
 
   const getClosestValidYPosition = React.useCallback(
@@ -176,9 +176,9 @@ export const Draggable: React.FC<DraggableProps> = ({
         gapSize,
         gridIndicatorSize,
         gridSize.height,
-        height,
+        height
       ),
-    [gapSize, gridIndicatorSize, gridSize.height, height],
+    [gapSize, gridIndicatorSize, gridSize.height, height]
   );
 
   const checkIfPositionIsFree = React.useCallback(
@@ -190,10 +190,10 @@ export const Draggable: React.FC<DraggableProps> = ({
         gridSize,
         gapSize,
         gridIndicatorSize,
-        occupiedCells,
+        occupiedCells
       );
     },
-    [gapSize, gridIndicatorSize, gridSize, height, id, occupiedCells, width],
+    [gapSize, gridIndicatorSize, gridSize, height, id, occupiedCells, width]
   );
 
   const stopDrag = React.useCallback(() => {
@@ -205,7 +205,7 @@ export const Draggable: React.FC<DraggableProps> = ({
     if (closestValidXPosition != null && closestValidYPosition != null) {
       const newPosition = getNewPosition(
         closestValidXPosition,
-        closestValidYPosition,
+        closestValidYPosition
       );
 
       if (checkIfPositionIsFree(newPosition)) {
@@ -244,7 +244,7 @@ export const Draggable: React.FC<DraggableProps> = ({
 
       const newPosition = getNewPosition(
         x - pointerStartPosition.x,
-        y - pointerStartPosition.y,
+        y - pointerStartPosition.y
       );
 
       setPosition(newPosition);
@@ -255,7 +255,7 @@ export const Draggable: React.FC<DraggableProps> = ({
       pointerStartPosition,
       mouseOutsideGrid,
       stopDrag,
-    ],
+    ]
   );
 
   const preventDefault = React.useCallback((event: React.DragEvent) => {

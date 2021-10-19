@@ -26,7 +26,7 @@ export interface H5PEditorObject {
   t: (
     library: "H5PEditor.Timeline" | "core",
     key: string,
-    vars?: Record<string, string>,
+    vars?: Record<string, string>
   ) => string;
 
   /**
@@ -41,7 +41,7 @@ export interface H5PEditorObject {
     semanticsChunk: H5PField | Array<H5PField>,
     params: Params,
     $wrapper: JQuery<HTMLElement>,
-    parent: H5PForm,
+    parent: H5PForm
   ) => void;
 
   /**
@@ -52,7 +52,7 @@ export interface H5PEditorObject {
    */
   findSemanticsField: (
     fieldName: string,
-    semanticsStructure: H5PField | Array<H5PField>,
+    semanticsStructure: H5PField | Array<H5PField>
   ) => H5PField | Array<H5PField> | null;
 }
 

@@ -7,7 +7,7 @@ export default {
   title: "Molecules/Draggable",
   component: Draggable,
   args: {
-    updatePosition: newPos => console.info("New position", newPos),
+    updatePosition: (newPos) => console.info("New position", newPos),
     initialXPosition: 200,
     initialYPosition: 200,
     height: 100,
@@ -29,7 +29,7 @@ export default {
   },
 } as ComponentMeta<typeof Draggable>;
 
-const Template: ComponentStory<typeof Draggable> = args => (
+const Template: ComponentStory<typeof Draggable> = (args) => (
   <Draggable {...args} />
 );
 

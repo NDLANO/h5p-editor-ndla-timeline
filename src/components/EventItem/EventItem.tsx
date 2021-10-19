@@ -25,12 +25,14 @@ export const EventItem: React.FC<EventItemProps> = ({ item }) => {
         />
       )}
 
-      {item.label !== "" && <div className={styles.inner}>
-        <div className={styles.label}>{item.label}</div>
-        {item.description && (
-          <div className={styles.description}>{item.description}</div>
-        )}
-      </div>}
+      {item.label !== "" && (
+        <div className={styles.inner}>
+          <div className={styles.label}>{item.label}</div>
+          {item.description && (
+            <div className={styles.description}>{item.description}</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

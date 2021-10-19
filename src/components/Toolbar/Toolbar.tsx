@@ -29,7 +29,7 @@ export const Toolbar: React.FC<ToolBarProps> = ({
   activeTool,
 }) => {
   const [activeButton, setActiveButton] = React.useState<string | null>(
-    activeTool,
+    activeTool
   );
 
   const setActive = (newValue: ToolbarButtonType): void => {
@@ -51,7 +51,7 @@ export const Toolbar: React.FC<ToolBarProps> = ({
       }
       return false;
     },
-    [activeButton, activeTool],
+    [activeButton, activeTool]
   );
 
   return (

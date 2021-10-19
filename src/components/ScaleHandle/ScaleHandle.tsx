@@ -35,7 +35,7 @@ export const ScaleHandle: React.FC<ScaleHandleProps> = ({
 
       event.stopPropagation();
     },
-    [onScaleStart],
+    [onScaleStart]
   );
 
   const stopDrag = React.useCallback(() => {

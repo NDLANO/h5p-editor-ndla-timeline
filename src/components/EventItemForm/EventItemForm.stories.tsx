@@ -13,11 +13,9 @@ export default {
   component: EventItemForm,
 } as ComponentMeta<typeof EventItemForm>;
 
-const Template: ComponentStory<typeof EventItemForm> = args => {
-  console.log("args", args);
-  return (
-    <EventItemForm {...args} />
-)};
+const Template: ComponentStory<typeof EventItemForm> = (args) => {
+  return <EventItemForm {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
