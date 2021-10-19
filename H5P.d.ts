@@ -1,4 +1,7 @@
 import { H5PWrapper } from "./src/h5p/H5PWrapper";
+import { H5PField } from "./src/types/h5p/H5PField";
+import { H5PForm } from "./src/types/h5p/H5PForm";
+import { Params } from "./src/types/h5p/Params";
 
 export interface H5PObject {
   EventDispatcher: typeof EventDispatcher;
@@ -6,6 +9,51 @@ export interface H5PObject {
 
 export interface H5PEditorObject {
   H5pEditorTimeline: typeof H5PWrapper;
+  widgets: {
+    timeline: typeof H5PWrapper;
+  };
+  $: typeof jQuery;
+
+  /**
+   * Translate text strings.
+   *
+   * @param library The library name(machineName), or "core".
+   * @param key Translation string identifier.
+   * @param vars Placeholders and values to replace in the text.
+   *
+   * @returns Translated string, or a default text if the translation is missing.
+   */
+  t: (
+    library: "H5PEditor.Timeline" | "core",
+    key: string,
+    vars?: Record<string, string>,
+  ) => string;
+
+  /**
+   * Recursive processing of the semantics chunks.
+   *
+   * @param semanticsChunk Array of semantics
+   * @param params
+   * @param $wrapper
+   * @param parent
+   */
+  processSemanticsChunk: (
+    semanticsChunk: H5PField | Array<H5PField>,
+    params: Params,
+    $wrapper: JQuery<HTMLElement>,
+    parent: H5PForm,
+  ) => void;
+
+  /**
+   * Search for a field or a set of fields. Returns `null` if the field isn't found.
+   *
+   * @param fieldName
+   * @param semanticsStructure
+   */
+  findSemanticsField: (
+    fieldName: string,
+    semanticsStructure: H5PField | Array<H5PField>,
+  ) => H5PField | Array<H5PField> | null;
 }
 
 declare class EventDispatcher {
