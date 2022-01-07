@@ -1,6 +1,6 @@
 name: Pack and release content type
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   pack-and-release:
