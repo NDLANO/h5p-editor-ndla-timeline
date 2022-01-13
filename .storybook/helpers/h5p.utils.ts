@@ -45,44 +45,191 @@ export const semantics: H5PField = {
         fields: [
           { name: "id", type: H5PFieldType.Text, widget: "hidden" },
           {
-            name: "xPercentagePosition",
-            type: H5PFieldType.Number,
-            widget: "hidden",
-          },
-          {
-            name: "yPercentagePosition",
-            type: H5PFieldType.Number,
-            widget: "hidden",
-          },
-          {
-            name: "widthPercentage",
-            type: H5PFieldType.Number,
-            widget: "hidden",
-          },
-          {
-            name: "heightPercentage",
-            type: H5PFieldType.Number,
-            widget: "hidden",
-          },
-          {
-            label: "Label",
-            description: "The label is shown on top of the background image",
-            name: "label",
+            label: "Start Date",
+            name: "start_date",
             type: H5PFieldType.Text,
           },
           {
-            label: "Background image",
-            name: "backgroundImage",
-            type: H5PFieldType.Image,
+            label: "End Date",
+            name: "end_date",
+            type: H5PFieldType.Text,
           },
           {
-            label: "Links",
-            name: "links",
-            description:
-              "These links are as auxiliary links for the user in the element's modal window",
-            type: H5PFieldType.List,
-            field: { label: "Link", name: "link", type: H5PFieldType.Text },
+            label: "Display Date",
+            name: "display_date",
+            type: H5PFieldType.Text,
           },
+          {
+            label: "Slide Unique Id",
+            name: "slide_unique_id",
+            type: H5PFieldType.Text,
+            widget: "none",
+          },
+
+          {
+            label: "Slide Type",
+            name: "slide_type",
+            type: H5PFieldType.Select,
+            description: "Select how the slide for this slide will be rendered",
+            options: [
+              {
+                value: "timelineJS",
+                label: "TimelineJS"
+              },
+              {
+                value: "grid",
+                label: "Grid"
+              }
+            ],
+            default: "grid"
+          },
+          {
+            label: "Timeline Slide Classic",
+            name: "timeline_slide",
+            type: H5PFieldType.Group,
+            widget: "showWhen",
+            showWhen: {
+              rules: [
+                {
+                  "field": "slide_type",
+                  "equals": "timelineJS"
+                }
+              ]
+            },
+            fields: [
+              {
+                label: "Text",
+                description: "Text for the event",
+                name: "text",
+                type: H5PFieldType.Text,
+              },
+              {
+                label: "Group",
+                description: "Timeline will organize events with the same value for group to be in the same row or adjacent rows,",
+                name: "group",
+                type: H5PFieldType.Text,
+              },
+              {
+                label: "Media",
+                description: "media",
+                name: "media",
+                type: H5PFieldType.Group,
+                fields: [
+                  {
+                    label: "Url",
+                    description: "Url",
+                    name: "url",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "Caption",
+                    description: "Caption",
+                    name: "caption",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "credit",
+                    description: "credit",
+                    name: "credit",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "thumbnail",
+                    description: "thumbnail",
+                    name: "thumbnail",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "alt",
+                    description: "alt",
+                    name: "alt",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "title",
+                    description: "title",
+                    name: "title",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "link",
+                    description: "link",
+                    name: "link",
+                    type: H5PFieldType.Text,
+                  },
+                  {
+                    label: "link_target",
+                    description: "link_target",
+                    name: "link_target",
+                    type: H5PFieldType.Text,
+                  },
+                ]
+              },
+            ],
+
+          },
+          {
+            label: "Timeline Slide Grid",
+            name: "timeline_grid_slide",
+            type: H5PFieldType.Group,
+            widget: "showWhen",
+            showWhen: {
+              rules: [
+                {
+                  "field": "slide_type",
+                  "equals": "grid"
+                }
+              ]
+            },
+            fields: [
+              {
+                label: "Items",
+                description: "items",
+                name: "items",
+                type: H5PFieldType.List,
+                field: {
+                  label: "item_spec",
+                  description: "item_spec",
+                  name: "item_spec",
+                  type: H5PFieldType.Text,
+                }
+              },
+              {
+                label: "Label",
+                description: "The label is shown on top of the background image",
+                name: "label",
+                type: H5PFieldType.Text,
+              },
+              
+              {
+                label: "Background image",
+                name: "backgroundImage",
+                type: H5PFieldType.Image,
+              },
+              {
+                name: "xPercentagePosition",
+                type: H5PFieldType.Number,
+                widget: "none",
+              },
+              {
+                name: "yPercentagePosition",
+                type: H5PFieldType.Number,
+                widget: "none",
+              },
+              {
+                name: "widthPercentage",
+                type: H5PFieldType.Number,
+                widget: "none",
+              },
+              {
+                name: "heightPercentage",
+                type: H5PFieldType.Number,
+                widget: "none",
+              },
+            ],
+
+          },
+          
         ],
       },
     },

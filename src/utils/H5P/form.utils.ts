@@ -24,22 +24,22 @@ const getSubfieldByName = (
   return null;
 };
 
-export const getTopicMapField = (semantics: H5PField): H5PField | null => {
+export const getEventsField = (semantics: H5PField): H5PField | null => {
   if (!H5PEditor.findSemanticsField) {
     console.error("no H5PEditor.findSemanticsField, finding it manually");
     return getSubfieldByName("eventItems", semantics);
   }
 
-  const topicMapField = H5PEditor.findSemanticsField("eventItems", semantics);
+  const eventsField = H5PEditor.findSemanticsField("eventItems", semantics);
 
-  if (!topicMapField) {
+  if (!eventsField) {
     throw new Error("Could not find the `eventItems` field");
   }
 
-  if (Array.isArray(topicMapField)) {
-    console.error("`topicMapField` is an array", topicMapField);
-    return topicMapField[0];
+  if (Array.isArray(eventsField)) {
+    console.error("`topicMapField` is an array", eventsField);
+    return eventsField[0];
   }
 
-  return topicMapField;
+  return eventsField;
 };

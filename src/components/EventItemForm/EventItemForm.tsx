@@ -2,7 +2,7 @@ import * as React from "react";
 import { H5PField } from "../../types/h5p/H5PField";
 import { H5PForm } from "../../types/h5p/H5PForm";
 import { Params } from "../../types/h5p/Params";
-import { getTopicMapField } from "../../utils/H5P/form.utils";
+import { getEventsField } from "../../utils/H5P/form.utils";
 import { SemanticsForm } from "../SemanticsForm/SemanticsForm";
 import "./EventItemForm.scss";
 
@@ -25,7 +25,7 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
   const [formParams, setFormParams] = React.useState<Params>();
 
   React.useEffect(() => {
-    const field = getTopicMapField(semantics);
+    const field = getEventsField(semantics);
     setTopicMapField(field);
 
     setFormParams({
