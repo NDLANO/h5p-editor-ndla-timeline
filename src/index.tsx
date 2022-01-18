@@ -6,5 +6,5 @@ import "./styles.scss";
 // eslint-disable-next-line no-console
 console.log("H5PEditor.init");
 
-H5PEditor.widgets.timeline = H5PWrapper;
-H5PEditor.Timeline = H5PWrapper;
+H5PEditor.widgets.ndlaTimeline = H5PWrapper;
+H5PEditor.NDLATimeline = H5PWrapper;
