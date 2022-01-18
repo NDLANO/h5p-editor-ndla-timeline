@@ -11,13 +11,13 @@ import { H5P } from "./H5P.util";
 export class H5PWrapper extends H5P.EventDispatcher {
   private wrapper: HTMLElement;
 
-  public field : H5PField;
-  
+  public field: H5PField;
+
   constructor(
     parent: H5PForm,
     semantics: H5PField,
     params: Params,
-    setValue: H5PSetValue,
+    setValue: H5PSetValue
   ) {
     super();
     this.wrapper = H5PWrapper.createWrapperElement();
@@ -27,15 +27,14 @@ export class H5PWrapper extends H5P.EventDispatcher {
     this.wrapper = H5PWrapper.createWrapperElement();
 
     ReactDOM.render(
-      <App  
-        setValue={newParams => setValue(semantics, newParams)}
+      <App
+        setValue={(newParams) => setValue(semantics, newParams)}
         semantics={semantics}
         initialParams={params}
         parent={parent}
-      />
-      , this.wrapper
+      />,
+      this.wrapper
     );
-
   }
 
   attach([containerElement]: JQuery<HTMLElement>): void {
@@ -53,7 +52,6 @@ export class H5PWrapper extends H5P.EventDispatcher {
     return this.wrapper !== null;
   }
 
-  
   remove(): void {
     console.log("H5PWrapper.remove", this);
   }
@@ -62,6 +60,4 @@ export class H5PWrapper extends H5P.EventDispatcher {
     console.log("H5PWrapper.createWrapperElement");
     return document.createElement("div");
   }
-
-  
 }

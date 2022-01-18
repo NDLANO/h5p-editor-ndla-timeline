@@ -4,7 +4,10 @@ import { hot } from "react-hot-loader/root";
 import { H5PField } from "./types/h5p/H5PField";
 import { H5PForm } from "./types/h5p/H5PForm";
 import { Params } from "./types/h5p/Params";
-import { fillInMissingParamsProperties, getEmptyParams } from "./utils/H5P/form.utils";
+import {
+  fillInMissingParamsProperties,
+  getEmptyParams,
+} from "./utils/H5P/form.utils";
 
 type AppProps = {
   setValue: (params: Params) => void;
@@ -22,18 +25,10 @@ const App: React.FC<AppProps> = ({
   const [params, setParams] = React.useState<Params>(
     initialParams
       ? fillInMissingParamsProperties(initialParams)
-      : getEmptyParams(),
+      : getEmptyParams()
   );
 
-  
-
-  
-
-  return (
-    <div className="h5p-editor-topic-map">
-      test
-    </div>
-  );
+  return <div className="h5p-editor-topic-map">test</div>;
 };
 
 // class App extends React.Component<Props> {

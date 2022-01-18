@@ -74,14 +74,14 @@ export const semantics: H5PField = {
             options: [
               {
                 value: "timelineJS",
-                label: "TimelineJS"
+                label: "TimelineJS",
               },
               {
                 value: "grid",
-                label: "Grid"
-              }
+                label: "Grid",
+              },
             ],
-            default: "grid"
+            default: "grid",
           },
           {
             label: "Timeline Slide Classic",
@@ -91,10 +91,10 @@ export const semantics: H5PField = {
             showWhen: {
               rules: [
                 {
-                  "field": "slide_type",
-                  "equals": "timelineJS"
-                }
-              ]
+                  field: "slide_type",
+                  equals: "timelineJS",
+                },
+              ],
             },
             fields: [
               {
@@ -105,7 +105,8 @@ export const semantics: H5PField = {
               },
               {
                 label: "Group",
-                description: "Timeline will organize events with the same value for group to be in the same row or adjacent rows,",
+                description:
+                  "Timeline will organize events with the same value for group to be in the same row or adjacent rows,",
                 name: "group",
                 type: H5PFieldType.Text,
               },
@@ -163,10 +164,9 @@ export const semantics: H5PField = {
                     name: "link_target",
                     type: H5PFieldType.Text,
                   },
-                ]
+                ],
               },
             ],
-
           },
           {
             label: "Timeline Slide Grid",
@@ -176,10 +176,10 @@ export const semantics: H5PField = {
             showWhen: {
               rules: [
                 {
-                  "field": "slide_type",
-                  "equals": "grid"
-                }
-              ]
+                  field: "slide_type",
+                  equals: "grid",
+                },
+              ],
             },
             fields: [
               {
@@ -192,15 +192,16 @@ export const semantics: H5PField = {
                   description: "item_spec",
                   name: "item_spec",
                   type: H5PFieldType.Text,
-                }
+                },
               },
               {
                 label: "Label",
-                description: "The label is shown on top of the background image",
+                description:
+                  "The label is shown on top of the background image",
                 name: "label",
                 type: H5PFieldType.Text,
               },
-              
+
               {
                 label: "Background image",
                 name: "backgroundImage",
@@ -227,9 +228,7 @@ export const semantics: H5PField = {
                 widget: "none",
               },
             ],
-
           },
-          
         ],
       },
     },

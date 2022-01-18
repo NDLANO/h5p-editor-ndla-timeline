@@ -55,7 +55,7 @@ export const getEmptyParams = (): Params => {
 };
 
 export const fillInMissingParamsProperties = (
-  partialParams: Partial<Params>,
+  partialParams: Partial<Params>
 ): Params => {
   const params: Params = {
     ...getEmptyParams(),

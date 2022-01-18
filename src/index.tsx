@@ -8,4 +8,3 @@ console.log("H5PEditor.init");
 
 H5PEditor.widgets.timeline = H5PWrapper;
 H5PEditor.Timeline = H5PWrapper;
-
