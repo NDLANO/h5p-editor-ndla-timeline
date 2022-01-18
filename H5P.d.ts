@@ -12,7 +12,6 @@ export interface H5PEditorObject {
   Timeline: typeof H5PWrapper;
   widgets: {
     timeline: typeof H5PWrapper;
-    dilldall: any;
   };
   $: typeof jQuery;
 
