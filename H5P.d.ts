@@ -9,8 +9,10 @@ export interface H5PObject {
 
 export interface H5PEditorObject {
   H5pEditorTimeline: typeof H5PWrapper;
+  Timeline: typeof H5PWrapper;
   widgets: {
     timeline: typeof H5PWrapper;
+    dilldall: any;
   };
   $: typeof jQuery;
 

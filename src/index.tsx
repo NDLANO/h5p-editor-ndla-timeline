@@ -3,4 +3,9 @@ import { H5PWrapper } from "./h5p/H5PWrapper";
 import "./styles.css";
 import "./styles.scss";
 
-H5PEditor.H5pEditorTimeline = H5PWrapper;
+// eslint-disable-next-line no-console
+console.log("H5PEditor.init");
+
+H5PEditor.widgets.timeline = H5PWrapper;
+H5PEditor.Timeline = H5PWrapper;
+

@@ -1,13 +1,25 @@
 {
   "title": "h5p-editor-timeline Editor",
-  "machineName": "H5PEditor.H5pEditorTimeline",
-  "majorVersion": 1,
+  "machineName": "H5PEditor.Timeline",
+  "majorVersion": 2,
   "minorVersion": 0,
   "patchVersion": 0,
-  "runnable": 1,
+  "runnable": 0,
   "preloadedJs": [
     {
-      "path": "src/h5p-editor-timeline.js"
+      "path": "dist/bundle.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "dist/main.css"
+    }
+  ],
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.Timeline",
+      "majorVersion": 2,
+      "minorVersion": 0
     }
   ]
 }
