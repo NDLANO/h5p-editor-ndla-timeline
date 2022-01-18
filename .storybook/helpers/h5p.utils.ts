@@ -36,17 +36,17 @@ export const semantics: H5PField = {
   fields: [
     {
       label: "Timeline editor",
-      name: "eventItems",
+      name: "event_items",
       type: H5PFieldType.List,
       entity: "Timeline item",
       field: {
-        name: "eventItem",
+        name: "event_item",
         type: H5PFieldType.Group,
         fields: [
           { name: "id", type: H5PFieldType.Text, widget: "hidden" },
           {
             label: "Start Date",
-            name: "startDate",
+            name: "start_date",
             type: H5PFieldType.Text,
           },
           {
@@ -204,26 +204,26 @@ export const semantics: H5PField = {
 
               {
                 label: "Background image",
-                name: "backgroundImage",
+                name: "background_Image",
                 type: H5PFieldType.Image,
               },
               {
-                name: "xPercentagePosition",
+                name: "x_percentage_position",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "yPercentagePosition",
+                name: "y_percentage_position",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "widthPercentage",
+                name: "width_percentage",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "heightPercentage",
+                name: "height_percentage",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
@@ -241,8 +241,8 @@ export const semantics: H5PField = {
         name: "arrow",
         type: H5PFieldType.Group,
         fields: [
-          { name: "showStartHead", type: H5PFieldType.Boolean, widget: "none" },
-          { name: "showEndHead", type: H5PFieldType.Boolean, widget: "none" },
+          { name: "show_start_head", type: H5PFieldType.Boolean, widget: "none" },
+          { name: "show_end_head", type: H5PFieldType.Boolean, widget: "none" },
         ],
       },
     },
