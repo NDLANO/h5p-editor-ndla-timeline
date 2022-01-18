@@ -46,7 +46,7 @@ export const semantics: H5PField = {
           { name: "id", type: H5PFieldType.Text, widget: "hidden" },
           {
             label: "Start Date",
-            name: "start_date",
+            name: "startDate",
             type: H5PFieldType.Text,
           },
           {
