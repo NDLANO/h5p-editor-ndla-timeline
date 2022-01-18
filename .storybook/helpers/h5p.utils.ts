@@ -36,39 +36,39 @@ export const semantics: H5PField = {
   fields: [
     {
       label: "Timeline editor",
-      name: "event_items",
+      name: "eventItems",
       type: H5PFieldType.List,
       entity: "Timeline item",
       field: {
-        name: "event_item",
+        name: "eventItem",
         type: H5PFieldType.Group,
         fields: [
           { name: "id", type: H5PFieldType.Text, widget: "hidden" },
           {
             label: "Start Date",
-            name: "start_date",
+            name: "startDate",
             type: H5PFieldType.Text,
           },
           {
             label: "End Date",
-            name: "end_date",
+            name: "endDate",
             type: H5PFieldType.Text,
           },
           {
             label: "Display Date",
-            name: "display_date",
+            name: "displayDate",
             type: H5PFieldType.Text,
           },
           {
             label: "Slide Unique Id",
-            name: "slide_unique_id",
+            name: "slideUniqueId",
             type: H5PFieldType.Text,
             widget: "none",
           },
 
           {
             label: "Slide Type",
-            name: "slide_type",
+            name: "slideType",
             type: H5PFieldType.Select,
             description: "Select how the slide for this slide will be rendered",
             options: [
@@ -85,13 +85,13 @@ export const semantics: H5PField = {
           },
           {
             label: "Timeline Slide Classic",
-            name: "timeline_slide",
+            name: "timelineSlide",
             type: H5PFieldType.Group,
             widget: "showWhen",
             showWhen: {
               rules: [
                 {
-                  field: "slide_type",
+                  field: "slideType",
                   equals: "timelineJS",
                 },
               ],
@@ -161,7 +161,7 @@ export const semantics: H5PField = {
                   {
                     label: "link_target",
                     description: "link_target",
-                    name: "link_target",
+                    name: "linkTarget",
                     type: H5PFieldType.Text,
                   },
                 ],
@@ -170,13 +170,13 @@ export const semantics: H5PField = {
           },
           {
             label: "Timeline Slide Grid",
-            name: "timeline_grid_slide",
+            name: "timelineGridSlide",
             type: H5PFieldType.Group,
             widget: "showWhen",
             showWhen: {
               rules: [
                 {
-                  field: "slide_type",
+                  field: "slideType",
                   equals: "grid",
                 },
               ],
@@ -190,7 +190,7 @@ export const semantics: H5PField = {
                 field: {
                   label: "item_spec",
                   description: "item_spec",
-                  name: "item_spec",
+                  name: "itemSpec",
                   type: H5PFieldType.Text,
                 },
               },
@@ -204,26 +204,26 @@ export const semantics: H5PField = {
 
               {
                 label: "Background image",
-                name: "background_Image",
+                name: "backgroundImage",
                 type: H5PFieldType.Image,
               },
               {
-                name: "x_percentage_position",
+                name: "xPercentagePosition",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "y_percentage_position",
+                name: "yPercentagePosition",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "width_percentage",
+                name: "widthPercentage",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
               {
-                name: "height_percentage",
+                name: "heightPercentage",
                 type: H5PFieldType.Number,
                 widget: "none",
               },
@@ -241,8 +241,8 @@ export const semantics: H5PField = {
         name: "arrow",
         type: H5PFieldType.Group,
         fields: [
-          { name: "show_start_head", type: H5PFieldType.Boolean, widget: "none" },
-          { name: "show_end_head", type: H5PFieldType.Boolean, widget: "none" },
+          { name: "showStartHead", type: H5PFieldType.Boolean, widget: "none" },
+          { name: "showEndHead", type: H5PFieldType.Boolean, widget: "none" },
         ],
       },
     },
