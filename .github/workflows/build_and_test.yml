@@ -1,32 +1,47 @@
 name: Node.js CI
 
-on: [push]
+on:
+  - push
+  - workflow_dispatch
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "15.x"
-
       - name: Install Node.js dependencies
-        run: npm ci
+        uses: bahmutov/npm-install@v1
 
       - name: Lint
         run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node.js dependencies
+        uses: bahmutov/npm-install@v1
 
       - name: Test
         run: npm run test
         env:
           CI: true
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node.js dependencies
+        uses: bahmutov/npm-install@v1
+
       - name: Build
-        run: npm run build:prod
+        run: npm run build
 
   chromatic-deployment:
     runs-on: ubuntu-latest

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/prefer-stateless-function */
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { Grid } from "./components/Grid/Grid";
 import { H5PField } from "./types/h5p/H5PField";
 import { H5PForm } from "./types/h5p/H5PForm";
@@ -18,7 +17,7 @@ type AppProps = {
   parent: H5PForm;
 };
 
-const App: React.FC<AppProps> = ({
+export const App: React.FC<AppProps> = ({
   setValue,
   semantics,
   initialParams,
@@ -93,4 +92,3 @@ const App: React.FC<AppProps> = ({
 //   }
 // }
 
-export default hot(App);

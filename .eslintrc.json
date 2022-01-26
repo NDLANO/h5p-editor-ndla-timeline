@@ -20,10 +20,11 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "default-case": "off",
     "no-use-before-define": "off",
     "no-shadow": "off",
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
-    "default-case": "off",
+    "class-methods-use-this": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -44,17 +45,17 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/*.test.*",
-          "**/*.stories.*",
-          "webpack.config.js"
-        ]
+        "devDependencies": ["**/*.test.*", "**/*.stories.*", "vite.config.ts"]
       }
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "react/require-default-props": "off",
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "arrow-function" }
+    ],
     "react/jsx-filename-extension": [
       "warn",
       {
@@ -67,5 +68,11 @@
       "typescript": {}
     }
   },
-  "ignorePatterns": ["dist", "stories", "storybook-static", "node_modules"]
+  "ignorePatterns": [
+    "dist",
+    "stories",
+    "storybook-static",
+    "node_modules",
+    "docs"
+  ]
 }

@@ -7,10 +7,11 @@
     "noImplicitAny": true,
     "module": "es6",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es2015",
     "allowJs": true,
     "jsx": "react",
     "downlevelIteration": true,
+    "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "../App";
+import { App } from "../App";
 import { H5PField } from "../types/h5p/H5PField";
 import { H5PForm } from "../types/h5p/H5PForm";
 import { H5PSetValue } from "../types/h5p/H5PSetValue";
@@ -17,23 +17,20 @@ export class H5PWrapper extends H5P.EventDispatcher {
     parent: H5PForm,
     semantics: H5PField,
     params: Params,
-    setValue: H5PSetValue
+    setValue: H5PSetValue,
   ) {
     super();
     this.wrapper = H5PWrapper.createWrapperElement();
     this.field = semantics;
-    super();
-    console.log("H5PWrapper.constructor", params);
-    this.wrapper = H5PWrapper.createWrapperElement();
 
     ReactDOM.render(
       <App
-        setValue={(newParams) => setValue(semantics, newParams)}
+        setValue={newParams => setValue(semantics, newParams)}
         semantics={semantics}
         initialParams={params}
         parent={parent}
       />,
-      this.wrapper
+      this.wrapper,
     );
   }
 
@@ -52,12 +49,9 @@ export class H5PWrapper extends H5P.EventDispatcher {
     return this.wrapper !== null;
   }
 
-  remove(): void {
-    console.log("H5PWrapper.remove", this);
-  }
+  remove(): void {}
 
   private static createWrapperElement(): HTMLDivElement {
-    console.log("H5PWrapper.createWrapperElement");
     return document.createElement("div");
   }
 }
