@@ -1,6 +1,6 @@
-import { H5PField } from "../../src/types/h5p/H5PField";
-import { H5PFieldType } from "../../src/types/h5p/H5PFieldType";
-import { H5PForm } from "../../src/types/h5p/H5PForm";
+import { H5PField } from "../../src/types/H5P/H5PField";
+import { H5PFieldType } from "../../src/types/H5P/H5PFieldType";
+import { H5PForm } from "../../src/types/H5P/H5PForm";
 
 export const params = {
   eventItems: [

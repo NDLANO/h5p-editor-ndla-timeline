@@ -1,5 +1,5 @@
 import * as React from "react";
-import { t } from "../../h5p/H5P.util";
+import { t } from "../../H5P/H5P.util";
 import { ToolbarButton } from "../ToolbarButton/ToolbarButton";
 import styles from "./Toolbar.module.scss";
 

@@ -1,10 +1,10 @@
-import { H5PEditor } from "../../h5p/H5P.util";
+import { H5PEditor } from "../../H5P/H5P.util";
 import {
   H5PField,
   H5PFieldCommon,
-} from "../../types/h5p/H5PField";
-import { H5PFieldType } from "../../types/h5p/H5PFieldType";
-import { Params } from "../../types/h5p/Params";
+} from "../../types/H5P/H5PField";
+import { H5PFieldType } from "../../types/H5P/H5PFieldType";
+import { Params } from "../../types/H5P/Params";
 
 const getSubfieldByName = (
   name: string,
