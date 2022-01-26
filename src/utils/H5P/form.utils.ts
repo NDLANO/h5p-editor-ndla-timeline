@@ -1,8 +1,5 @@
 import { H5PEditor } from "../../H5P/H5P.util";
-import {
-  H5PField,
-  H5PFieldCommon,
-} from "../../types/H5P/H5PField";
+import { H5PField } from "../../types/H5P/H5PField";
 import { H5PFieldType } from "../../types/H5P/H5PFieldType";
 import { Params } from "../../types/H5P/Params";
 
@@ -10,13 +7,13 @@ const getSubfieldByName = (
   name: string,
   semantics: H5PField,
 ): H5PField | null => {
-  if ((<H5PFieldCommon>semantics).name === name) {
+  if (semantics.name === name) {
     return semantics;
   }
 
-  if ((<any>semantics).type === H5PFieldType.Group) {
+  if (semantics.type === H5PFieldType.Group) {
     return (
-      (<Array<H5PField>>(<any>semantics).fields)
+      semantics.fields
         .map(field => getSubfieldByName(name, field))
         .find(field => field !== null) ?? null
     );

@@ -7,7 +7,7 @@ export const H5PEditor: H5PEditorObject = (window as any).H5PEditor ?? {};
 export const t: (
   key: TranslationKey,
   vars?: Record<string, string>,
-) => string = (key, vars) => H5PEditor.t("H5PEditor.Timeline", key, vars);
+) => string = (key, vars) => H5PEditor.t("H5PEditor.NDLATimeline", key, vars);
 /**
  * Get absolute path to image from relative parameters path
  *
