@@ -20,7 +20,7 @@ export default {
   },
 } as ComponentMeta<typeof EventItem>;
 
-const Template: ComponentStory<typeof EventItem> = (args) => (
+const Template: ComponentStory<typeof EventItem> = args => (
   <EventItem {...args} />
 );
 

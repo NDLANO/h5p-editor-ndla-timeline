@@ -2,14 +2,13 @@ import { H5PEditor } from "../../h5p/H5P.util";
 import {
   H5PField,
   H5PFieldCommon,
-  H5PFieldGroup,
 } from "../../types/h5p/H5PField";
 import { H5PFieldType } from "../../types/h5p/H5PFieldType";
 import { Params } from "../../types/h5p/Params";
 
 const getSubfieldByName = (
   name: string,
-  semantics: H5PField
+  semantics: H5PField,
 ): H5PField | null => {
   if ((<H5PFieldCommon>semantics).name === name) {
     return semantics;
@@ -18,8 +17,8 @@ const getSubfieldByName = (
   if ((<any>semantics).type === H5PFieldType.Group) {
     return (
       (<Array<H5PField>>(<any>semantics).fields)
-        .map((field) => getSubfieldByName(name, field))
-        .find((field) => field !== null) ?? null
+        .map(field => getSubfieldByName(name, field))
+        .find(field => field !== null) ?? null
     );
   }
   return null;
@@ -55,7 +54,7 @@ export const getEmptyParams = (): Params => {
 };
 
 export const fillInMissingParamsProperties = (
-  partialParams: Partial<Params>
+  partialParams: Partial<Params>,
 ): Params => {
   const params: Params = {
     ...getEmptyParams(),

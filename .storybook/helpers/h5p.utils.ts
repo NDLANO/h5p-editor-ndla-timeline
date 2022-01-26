@@ -304,6 +304,6 @@ export const parent: H5PForm = {
   readies: [],
   ready: (callback: () => void) => callback(),
   parent: null,
-  addLanguages: (langCode) => {},
-  removeLanguages: (langCode) => {},
+  addLanguages: langCode => {},
+  removeLanguages: langCode => {},
 };

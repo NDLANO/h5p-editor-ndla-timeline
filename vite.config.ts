@@ -3,7 +3,7 @@ import type { OutputAsset, OutputChunk } from "rollup";
 import { defineConfig, PluginOption } from "vite";
 
 const isOutputChunk = (
-  chunkOrAsset: OutputChunk | OutputAsset
+  chunkOrAsset: OutputChunk | OutputAsset,
 ): chunkOrAsset is OutputChunk => {
   // eslint-disable-next-line dot-notation
   return chunkOrAsset["code"] != null;
@@ -37,7 +37,7 @@ export default defineConfig({
         dir: null,
         inlineDynamicImports: true,
         manualChunks: null,
-        assetFileNames: (assetInfo) => {
+        assetFileNames: assetInfo => {
           if (assetInfo.name === "index.css") {
             return "main.css";
           }

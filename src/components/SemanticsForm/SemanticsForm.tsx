@@ -17,8 +17,6 @@ export const SemanticsForm: React.FC<SemanticsFormProps> = ({
   fields,
   params,
   parent,
-  onSave,
-  formClassName,
 }) => {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 

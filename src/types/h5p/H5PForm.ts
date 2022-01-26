@@ -20,7 +20,7 @@ export type H5PForm = {
    */
   addLanguages: (
     libraryName: string,
-    languageCodes: Array<string | undefined>
+    languageCodes: Array<string | undefined>,
   ) => void;
   children: Array<H5PWrapper | H5PGroup>;
 
@@ -44,7 +44,7 @@ export type H5PForm = {
   readies: Array<unknown>;
   removeLanguages: (
     libraryName: string,
-    languageCodes: Array<string | undefined>
+    languageCodes: Array<string | undefined>,
   ) => void;
   zebra: "odd" | "even";
   ready: (callback: () => void) => void;

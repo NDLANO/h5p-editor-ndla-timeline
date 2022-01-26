@@ -26,7 +26,7 @@ export const App: React.FC<AppProps> = ({
   const [params, setParams] = React.useState<Params>(
     initialParams
       ? fillInMissingParamsProperties(initialParams)
-      : getEmptyParams()
+      : getEmptyParams(),
   );
 
   const textRightLayout = [
@@ -91,4 +91,3 @@ export const App: React.FC<AppProps> = ({
 //     );
 //   }
 // }
-

@@ -13,7 +13,7 @@ export default {
   component: EventItemForm,
 } as ComponentMeta<typeof EventItemForm>;
 
-const Template: ComponentStory<typeof EventItemForm> = (args) => {
+const Template: ComponentStory<typeof EventItemForm> = args => {
   return <EventItemForm {...args} />;
 };
 

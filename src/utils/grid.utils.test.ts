@@ -110,7 +110,7 @@ describe(resizeItem.name, () => {
 
   it("should handle any number", () =>
     fc.assert(
-      fc.property(fc.double(), (scaleFactor) => {
+      fc.property(fc.double(), scaleFactor => {
         const item: DraggableType = {
           id: "test",
           xPercentagePosition: 10,
@@ -137,7 +137,7 @@ describe(resizeItem.name, () => {
 
         expect(actualItem).toEqual(expectedItem);
       }),
-      { verbose: true }
+      { verbose: true },
     ));
 });
 
@@ -479,7 +479,7 @@ describe(findCellsElementOccupies.name, () => {
       gridWidth,
       gridHeight,
       gapSize,
-      gridIndicatorSize
+      gridIndicatorSize,
     );
 
     expect(actualCells).toEqual(expectedCells);
@@ -529,7 +529,7 @@ describe(findCellsElementOccupies.name, () => {
       gridWidth,
       gridHeight,
       gapSize,
-      gridIndicatorSize
+      gridIndicatorSize,
     );
 
     expect(actualCells).toEqual(expectedCells);
@@ -565,7 +565,7 @@ describe(findCellsElementOccupies.name, () => {
       gridWidth,
       gridHeight,
       gapSize,
-      gridIndicatorSize
+      gridIndicatorSize,
     );
 
     expect(actualCells).toEqual(expectedCells);
@@ -596,7 +596,7 @@ describe(getAllCells.name, () => {
       gridWidth,
       gridHeight,
       gapSize,
-      gridIndicatorSize
+      gridIndicatorSize,
     );
 
     expect(actualCells).toEqual(expectedCells);
@@ -650,7 +650,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -676,7 +676,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -702,7 +702,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -728,7 +728,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -754,7 +754,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -780,7 +780,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -806,7 +806,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -832,7 +832,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -858,7 +858,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -884,7 +884,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -910,7 +910,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -936,7 +936,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -962,7 +962,7 @@ describe(cellIsOccupiedByElement.name, () => {
     const actual = cellIsOccupiedByElement(
       elementPosition,
       elementSize,
-      cellPosition
+      cellPosition,
     );
 
     expect(actual).toBe(expected);
@@ -1056,7 +1056,7 @@ describe(positionIsFree.name, () => {
       gridSize,
       gapSize,
       gridIndicatorSize,
-      occupiedCells
+      occupiedCells,
     );
 
     expect(actual).toBe(expected);
@@ -1083,7 +1083,7 @@ describe(positionIsFree.name, () => {
       gridSize,
       gapSize,
       gridIndicatorSize,
-      occupiedCells
+      occupiedCells,
     );
 
     expect(actual).toBe(expected);

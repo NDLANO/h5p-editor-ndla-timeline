@@ -1,6 +1,5 @@
 import { v4 as uuidV4 } from "uuid";
 import { ArrowDirection, ArrowType } from "../components/Arrow/Utils";
-import { Draggable, DraggableProps } from "../components/Draggable/Draggable";
 import { ArrowItemType } from "../types/ArrowItemType";
 import { Cell } from "../types/Cell";
 import { Element } from "../types/Element";
@@ -12,7 +11,7 @@ import { arraysHaveSomeOverlap } from "./array.utils";
 
 export const resizeItem = (
   item: DraggableType,
-  scaleFactor: number
+  scaleFactor: number,
 ): DraggableType => {
   const resizedItem = {
     ...item,
@@ -27,8 +26,8 @@ export const resizeItem = (
 
 export const resizeItems = (
   items: Array<DraggableType>,
-  scaleFactor: number
-): Array<DraggableType> => items.map((item) => resizeItem(item, scaleFactor));
+  scaleFactor: number,
+): Array<DraggableType> => items.map(item => resizeItem(item, scaleFactor));
 
 export const calculateXPercentage = (xPx: number, width: number): number => {
   return (xPx / width) * 100;
@@ -43,7 +42,7 @@ export const updateItem = (
   updatedItem: DraggableType,
   width: number,
   height: number,
-  { newPosition, newSize }: { newPosition?: Position; newSize?: Size }
+  { newPosition, newSize }: { newPosition?: Position; newSize?: Size },
 ): Array<DraggableType> => {
   const newItems = items.map((item: DraggableType) => {
     const isCorrectItem = item.id === updatedItem.id;
@@ -76,7 +75,7 @@ export const getAllCells = (
   gridWidth: number,
   gridHeight: number,
   gapSize: number,
-  gridIndicatorSize: number
+  gridIndicatorSize: number,
 ): Array<Cell> => {
   const cells: Array<Cell> = [];
 
@@ -101,7 +100,7 @@ export const getAllCells = (
 export const cellIsOccupiedByElement = (
   elementPosition: Position,
   elementSize: Size,
-  cellPosition: Position
+  cellPosition: Position,
 ): boolean =>
   cellPosition.x >= elementPosition.x &&
   cellPosition.x <= elementPosition.x + elementSize.width &&
@@ -113,17 +112,17 @@ export const findCellsElementOccupies = (
   gridWidth: number,
   gridHeight: number,
   gapSize: number,
-  gridIndicatorSize: number
+  gridIndicatorSize: number,
 ): Array<OccupiedCell> => {
   const allCells = getAllCells(
     gridWidth,
     gridHeight,
     gapSize,
-    gridIndicatorSize
+    gridIndicatorSize,
   );
 
   const occupiedCells = allCells
-    .filter((cell) => cellIsOccupiedByElement(position, size, cell))
+    .filter(cell => cellIsOccupiedByElement(position, size, cell))
     .map(({ x, y, index }) => ({
       occupiedById: id,
       occupiedByType: type,
@@ -140,7 +139,7 @@ export const findOccupiedCells = (
   gridWidth: number,
   gridHeight: number,
   gapSize: number,
-  gridIndicatorSize: number
+  gridIndicatorSize: number,
 ): Array<OccupiedCell> => {
   const occupiedCells: Array<OccupiedCell> = [];
 
@@ -152,8 +151,8 @@ export const findOccupiedCells = (
         gridWidth,
         gridHeight,
         gapSize,
-        gridIndicatorSize
-      )
+        gridIndicatorSize,
+      ),
     );
   }
 
@@ -168,7 +167,7 @@ export const scaleY = (yPercentage: number, height: number): number =>
 
 export const mapTopicMapItemToElement = (
   item: DraggableType,
-  gridSize: Size
+  gridSize: Size,
 ): Element => ({
   id: item.id,
   type: "item",
@@ -189,7 +188,7 @@ export const positionIsFree = (
   gridSize: Size,
   gapSize: number,
   gridIndicatorSize: number,
-  occupiedCells: Array<OccupiedCell>
+  occupiedCells: Array<OccupiedCell>,
 ): boolean => {
   const cellsThisElementWillOccupy = findCellsElementOccupies(
     {
@@ -201,16 +200,16 @@ export const positionIsFree = (
     gridSize.width,
     gridSize.height,
     gapSize,
-    gridIndicatorSize
+    gridIndicatorSize,
   );
 
   const cellsOccupiedByOtherElements = occupiedCells.filter(
-    (cell) => cell.occupiedById !== elementId
+    cell => cell.occupiedById !== elementId,
   );
 
   const posIsFree = !arraysHaveSomeOverlap(
     cellsOccupiedByOtherElements,
-    cellsThisElementWillOccupy
+    cellsThisElementWillOccupy,
   );
 
   return posIsFree;
@@ -219,7 +218,7 @@ export const positionIsFree = (
 export const coordinatePosToPx = (
   coordinate: number,
   gapSize: number,
-  gridIndicatorSize: number
+  gridIndicatorSize: number,
 ): number => {
   const stepSize = gapSize + gridIndicatorSize;
 
@@ -229,7 +228,7 @@ export const coordinatePosToPx = (
 export const coordinateSizeToPx = (
   coordinate: number,
   gapSize: number,
-  gridIndicatorSize: number
+  gridIndicatorSize: number,
 ): number => {
   return coordinate * gridIndicatorSize + (coordinate - 1) * gapSize;
 };
@@ -237,7 +236,7 @@ export const coordinateSizeToPx = (
 export const isDraggingLeft = (
   indicatorIndex: number,
   boxStartPosition: number,
-  numberOfColumns: number
+  numberOfColumns: number,
 ): boolean =>
   boxStartPosition % numberOfColumns >= indicatorIndex % numberOfColumns;
 
@@ -245,7 +244,7 @@ export const isDraggingUp = (
   indicatorIndex: number,
   boxStartPosition: number,
   numberOfColumns: number,
-  numberOfRows: number
+  numberOfRows: number,
 ): boolean =>
   (Math.floor(boxStartPosition / numberOfColumns) / numberOfRows) * 100 >=
   (Math.floor(indicatorIndex / numberOfColumns) / numberOfRows) * 100;
@@ -256,7 +255,7 @@ export const findWidthPercentage = (
   dragLeft: boolean,
   existingItem: DraggableType,
   xPercentagePosition: number,
-  xEndPercentagePosition: number
+  xEndPercentagePosition: number,
 ): number => {
   if (onlyScaleVertically) {
     return existingItem.widthPercentage;
@@ -282,7 +281,7 @@ export const findHeightPercentage = (
   dragUp: boolean,
   existingItem: DraggableType,
   yPercentagePosition: number,
-  yEndPercentagePosition: number
+  yEndPercentagePosition: number,
 ): number => {
   if (onlyScaleHorizontally) {
     return existingItem.heightPercentage;
@@ -320,7 +319,7 @@ export const createTopicMapItem = (): DraggableType => {
 };
 
 export const createArrowItem = (
-  arrowHeadDirection: ArrowDirection
+  arrowHeadDirection: ArrowDirection,
 ): ArrowItemType => {
   const id = uuidV4();
 
@@ -342,7 +341,7 @@ export const createArrowItem = (
 export const getArrowDirection = (
   dragLeft: boolean,
   dragUp: boolean,
-  horizontal: boolean
+  horizontal: boolean,
 ): ArrowDirection => {
   if (dragLeft && horizontal) {
     return ArrowDirection.Left;
@@ -358,11 +357,11 @@ export const getArrowDirection = (
 
 export const findItem = (
   id: string,
-  items: Array<DraggableType>
+  items: Array<DraggableType>,
 ): DraggableType | null => {
   if (!id) {
     return null;
   }
 
-  return items.find((item) => item.id === id) ?? null;
+  return items.find(item => item.id === id) ?? null;
 };

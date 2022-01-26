@@ -15,7 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof ContextMenuButton>;
 
-const Template: ComponentStory<typeof ContextMenuButton> = (args) => (
+const Template: ComponentStory<typeof ContextMenuButton> = args => (
   <ContextMenuButton {...args} />
 );
 

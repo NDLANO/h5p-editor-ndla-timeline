@@ -30,7 +30,7 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
 
     setFormParams({
       ...params,
-      eventItems: params.eventItems.filter((item) => item.id === itemId),
+      eventItems: params.eventItems.filter(item => item.id === itemId),
     });
   }, [itemId, params, semantics]);
 
@@ -39,7 +39,7 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
       const updatedItem = newParams.eventItems[0];
       onSave({
         ...newParams,
-        eventItems: newParams.eventItems.map((item) => {
+        eventItems: newParams.eventItems.map(item => {
           const isUpdatedItem = item.id === itemId;
           if (isUpdatedItem) {
             return updatedItem;
@@ -49,7 +49,7 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
         }),
       });
     },
-    [itemId, onSave]
+    [itemId, onSave],
   );
   return formParams && topicMapField ? (
     <SemanticsForm

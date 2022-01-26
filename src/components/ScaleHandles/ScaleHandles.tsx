@@ -12,7 +12,7 @@ export type ScaleHandlesProps = {
       | "left"
       | "top"
       | "top-left"
-      | "none"
+      | "none",
   ) => void;
   stopResize: () => void;
   verticalScaleHandleLabelText: string;

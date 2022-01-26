@@ -49,7 +49,7 @@ export class H5PWrapper extends H5P.EventDispatcher {
     return this.wrapper !== null;
   }
 
-  remove(): void {}
+  remove(): void { /* Can't be empty, must exist */ }
 
   private static createWrapperElement(): HTMLDivElement {
     return document.createElement("div");

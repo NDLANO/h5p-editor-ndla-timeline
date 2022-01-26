@@ -17,14 +17,14 @@ export default {
   },
 } as ComponentMeta<typeof ToolbarButton>;
 
-const Template: ComponentStory<typeof ToolbarButton> = (args) => (
+const Template: ComponentStory<typeof ToolbarButton> = args => (
   <ToolbarButton {...args} />
 );
 
 export const Primary = Template.bind({});
 Primary.args = {};
 
-const TemplateActive: ComponentStory<typeof ToolbarButton> = (args) => (
+const TemplateActive: ComponentStory<typeof ToolbarButton> = args => (
   <ToolbarButton {...args} />
 );
 
