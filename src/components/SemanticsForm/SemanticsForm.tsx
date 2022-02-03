@@ -1,8 +1,8 @@
 import * as React from "react";
-import { H5PEditor } from "../../h5p/H5P.util";
-import { H5PField } from "../../types/h5p/H5PField";
-import { H5PForm } from "../../types/h5p/H5PForm";
-import { Params } from "../../types/h5p/Params";
+import { H5PEditor } from "../../H5P/H5P.util";
+import { H5PField } from "../../types/H5P/H5PField";
+import { H5PForm } from "../../types/H5P/H5PForm";
+import { Params } from "../../types/H5P/Params";
 import styles from "./SemanticsForm.module.scss";
 
 export type SemanticsFormProps = {
@@ -17,8 +17,6 @@ export const SemanticsForm: React.FC<SemanticsFormProps> = ({
   fields,
   params,
   parent,
-  onSave,
-  formClassName,
 }) => {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 

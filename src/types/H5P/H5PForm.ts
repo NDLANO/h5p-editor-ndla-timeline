@@ -1,4 +1,4 @@
-import { H5PWrapper } from "../../h5p/H5PWrapper";
+import { H5PWrapper } from "../../H5P/H5PWrapper";
 import { H5PGroup } from "./H5PGroup";
 import { H5PMetadata } from "./H5PMetadata";
 import { H5PMetadataForm } from "./H5PMetadataForm";
@@ -20,7 +20,7 @@ export type H5PForm = {
    */
   addLanguages: (
     libraryName: string,
-    languageCodes: Array<string | undefined>
+    languageCodes: Array<string | undefined>,
   ) => void;
   children: Array<H5PWrapper | H5PGroup>;
 
@@ -44,7 +44,7 @@ export type H5PForm = {
   readies: Array<unknown>;
   removeLanguages: (
     libraryName: string,
-    languageCodes: Array<string | undefined>
+    languageCodes: Array<string | undefined>,
   ) => void;
   zebra: "odd" | "even";
   ready: (callback: () => void) => void;

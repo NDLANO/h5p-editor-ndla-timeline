@@ -28,16 +28,16 @@ describe("draggable utils", () => {
 
     it("should handle any number value", () =>
       fc.assert(
-        fc.property(fc.double(), (attemptedWidth) => {
+        fc.property(fc.double(), attemptedWidth => {
           const newWidth = calculateClosestValidSizeComponent(
             attemptedWidth,
             gapSize,
             gridIndicatorSize,
-            gridWidth
+            gridWidth,
           );
 
           return newWidth === findClosest(attemptedWidth, validWidths);
-        })
+        }),
       ));
 
     it("should find the closest valid width if it's larger than the value", () => {
@@ -48,7 +48,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -62,7 +62,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -76,7 +76,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -90,7 +90,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -104,7 +104,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -117,7 +117,7 @@ describe("draggable utils", () => {
         width,
         gapSize,
         gridIndicatorSize,
-        gridWidth
+        gridWidth,
       );
 
       expect(actualWidth).toBe(expectedWidth);
@@ -148,17 +148,17 @@ describe("draggable utils", () => {
 
     it("should handle all number values", () =>
       fc.assert(
-        fc.property(fc.double(), (attemptedXPosition) => {
+        fc.property(fc.double(), attemptedXPosition => {
           const xPosition = calculateClosestValidPositionComponent(
             attemptedXPosition,
             gapSize,
             gridIndicatorSize,
             gridWidth,
-            width
+            width,
           );
 
           return xPosition === findClosest(attemptedXPosition, validXPositions);
-        })
+        }),
       ));
 
     it("should place the element on the first valid position if it's placed to the left of the grid", () => {
@@ -170,7 +170,7 @@ describe("draggable utils", () => {
         gapSize,
         gridIndicatorSize,
         gridWidth,
-        width
+        width,
       );
 
       expect(actualXPos).toBe(expectedXPos);
@@ -185,7 +185,7 @@ describe("draggable utils", () => {
         gapSize,
         gridIndicatorSize,
         gridWidth,
-        width
+        width,
       );
 
       expect(actualXPos).toBe(expectedXPos);
@@ -200,7 +200,7 @@ describe("draggable utils", () => {
         gapSize,
         gridIndicatorSize,
         gridWidth,
-        width
+        width,
       );
 
       expect(actualXPos).toBe(expectedXPos);
@@ -215,7 +215,7 @@ describe("draggable utils", () => {
         gapSize,
         gridIndicatorSize,
         gridWidth,
-        width
+        width,
       );
 
       expect(actualXPos).toBe(expectedXPos);

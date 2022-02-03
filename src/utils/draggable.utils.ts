@@ -7,7 +7,7 @@ export const calculateClosestValidSizeComponent = (
   attemptedSize: number,
   gapSize: number,
   gridIndicatorSize: number,
-  gridSize: number
+  gridSize: number,
 ): number => {
   const stepSize = gridIndicatorSize + gapSize;
   const stepNumber = attemptedSize / stepSize;
@@ -30,7 +30,7 @@ export const calculateClosestValidPositionComponent = (
   gapSize: number,
   gridIndicatorSize: number,
   gridSizeComponent: number,
-  elementSizeComponent: number
+  elementSizeComponent: number,
 ): number => {
   const stepSize = gridIndicatorSize + gapSize;
 
@@ -52,7 +52,7 @@ export const calculateClosestValidPositionComponent = (
 };
 
 export const getPointerPositionFromEvent = (
-  event: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent
+  event: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent,
 ): Position => {
   let pos: Position;
   if (isMouseEvent(event)) {

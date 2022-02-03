@@ -9,7 +9,7 @@ export default {
   component: GridIndicator,
 } as ComponentMeta<typeof GridIndicator>;
 
-const Template: ComponentStory<typeof GridIndicator> = (args) => (
+const Template: ComponentStory<typeof GridIndicator> = args => (
   <GridIndicator {...args} />
 );
 

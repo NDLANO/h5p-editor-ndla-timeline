@@ -1,39 +1,33 @@
 /* eslint-disable no-console */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "../App";
-import { H5PField } from "../types/h5p/H5PField";
-import { H5PForm } from "../types/h5p/H5PForm";
-import { H5PSetValue } from "../types/h5p/H5PSetValue";
-import { Params } from "../types/h5p/Params";
+import { App } from "../App";
+import { H5PField, H5PFieldGroup } from "../types/H5P/H5PField";
+import { H5PForm } from "../types/H5P/H5PForm";
+import { H5PSetValue } from "../types/H5P/H5PSetValue";
+import { Params } from "../types/H5P/Params";
 import { H5P } from "./H5P.util";
 
 export class H5PWrapper extends H5P.EventDispatcher {
   private wrapper: HTMLElement;
 
-  public field: H5PField;
-
   constructor(
     parent: H5PForm,
-    semantics: H5PField,
+    semantics: H5PFieldGroup,
     params: Params,
-    setValue: H5PSetValue
+    setValue: H5PSetValue,
   ) {
     super();
-    this.wrapper = H5PWrapper.createWrapperElement();
-    this.field = semantics;
-    super();
-    console.log("H5PWrapper.constructor", params);
     this.wrapper = H5PWrapper.createWrapperElement();
 
     ReactDOM.render(
       <App
-        setValue={(newParams) => setValue(semantics, newParams)}
+        setValue={newParams => setValue(semantics, newParams)}
         semantics={semantics}
         initialParams={params}
         parent={parent}
       />,
-      this.wrapper
+      this.wrapper,
     );
   }
 
@@ -53,11 +47,10 @@ export class H5PWrapper extends H5P.EventDispatcher {
   }
 
   remove(): void {
-    console.log("H5PWrapper.remove", this);
+    /* Can't be empty, must exist */
   }
 
   private static createWrapperElement(): HTMLDivElement {
-    console.log("H5PWrapper.createWrapperElement");
     return document.createElement("div");
   }
 }

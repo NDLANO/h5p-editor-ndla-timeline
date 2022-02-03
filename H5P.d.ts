@@ -1,10 +1,11 @@
-import { H5PWrapper } from "./src/h5p/H5PWrapper";
-import { H5PField } from "./src/types/h5p/H5PField";
-import { H5PForm } from "./src/types/h5p/H5PForm";
-import { Params } from "./src/types/h5p/Params";
+import { H5PWrapper } from "./src/H5P/H5PWrapper";
+import { H5PField } from "./src/types/H5P/H5PField";
+import { H5PForm } from "./src/types/H5P/H5PForm";
+import { Params } from "./src/types/H5P/Params";
 
 export interface H5PObject {
   EventDispatcher: typeof EventDispatcher;
+  getPath: (path: string, contentId: string) => string;
 }
 
 export interface H5PEditorObject {
@@ -14,6 +15,7 @@ export interface H5PEditorObject {
     NDLATimelineEventLayout: typeof H5PWrapper;
   };
   $: typeof jQuery;
+  contentId: string;
 
   /**
    * Translate text strings.
@@ -25,9 +27,9 @@ export interface H5PEditorObject {
    * @returns Translated string, or a default text if the translation is missing.
    */
   t: (
-    library: "H5PEditor.Timeline" | "core",
+    library: "H5PEditor.NDLATimeline" | "core",
     key: string,
-    vars?: Record<string, string>
+    vars?: Record<string, string>,
   ) => string;
 
   /**
@@ -42,7 +44,7 @@ export interface H5PEditorObject {
     semanticsChunk: H5PField | Array<H5PField>,
     params: Params,
     $wrapper: JQuery<HTMLElement>,
-    parent: H5PForm
+    parent: H5PForm,
   ) => void;
 
   /**
@@ -53,7 +55,7 @@ export interface H5PEditorObject {
    */
   findSemanticsField: (
     fieldName: string,
-    semanticsStructure: H5PField | Array<H5PField>
+    semanticsStructure: H5PField | Array<H5PField>,
   ) => H5PField | Array<H5PField> | null;
 }
 
@@ -70,21 +72,29 @@ declare class EventDispatcher {
    * @param {Object} [thisArg]
    *   Optionally specify the this value when calling listener.
    */
-  on: (type: string, listener: any, thisArg?: any) => void;
+  on: (
+    type: string,
+    listener: (event: unknown) => void,
+    thisArg?: ThisType<unknown>,
+  ) => void;
 
   /**
    * Add new event listener that will be fired only once.
    *
    * @throws {TypeError}
    *   listener must be a function
-   * @param {string} type
+   * @param type
    *   Event type
-   * @param {H5P.EventCallback} listener
+   * @param listener
    *   Event listener
-   * @param {Object} thisArg
+   * @param thisArg
    *   Optionally specify the this value when calling listener.
    */
-  once: (type: string, listener: any, thisArg: any) => void;
+  once: (
+    type: string,
+    listener: (event: unknown) => void,
+    thisArg?: ThisType<unknown>,
+  ) => void;
 
   /**
    * Remove event listener.
@@ -97,7 +107,7 @@ declare class EventDispatcher {
    * @param {H5P.EventCallback} listener
    *   Event listener
    */
-  off: (type: string, listener: any) => void;
+  off: (type: string, listener: (event: unknown) => void) => void;
 
   /**
    * Dispatch event.
@@ -112,11 +122,21 @@ declare class EventDispatcher {
    * @param {boolean} [extras.external]
    */
   trigger: (
-    event: string | any,
-    eventData?: any,
+    event: string | unknown,
+    eventData?: unknown,
     extras?: {
       bubbles?: boolean;
       external?: boolean;
-    }
+    },
   ) => void;
+}
+
+declare interface IH5PWrapper {
+  attach($wrapper: JQuery<HTMLElement>): void;
+}
+
+declare interface IH5PEditorWrapper {
+  appendTo($wrapper: JQuery<HTMLElement>): void;
+  validate(): boolean;
+  remove(): void;
 }

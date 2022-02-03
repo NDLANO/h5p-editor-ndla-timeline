@@ -5,12 +5,12 @@ describe("number utils", () => {
   describe(clamp.name, () => {
     it("should return the value if it's larger than the minimum and smaller than the maximum", () =>
       fc.assert(
-        fc.property(fc.double(), (value) => {
+        fc.property(fc.double(), value => {
           const expectedValue = value;
           const actualValue = clamp(value - 1, value, value + 1);
 
           return expectedValue === actualValue;
-        })
+        }),
       ));
 
     it("should return the minimum if the value is smaller than the minimum", () => {

@@ -6,7 +6,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
-  webpackFinal: async (config) => {
+  webpackFinal: async config => {
     addScssSupport(config);
     return config;
   },

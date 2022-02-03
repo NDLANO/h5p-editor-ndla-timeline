@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./ContextMenu.module.scss";
 import { ContextMenuButton } from "../ContextMenuButton/ContextMenuButton";
-import { t } from "../../h5p/H5P.util";
+import { t } from "../../H5P/H5P.util";
 
 const labelTexts = {
   edit: t("context-menu_edit"),

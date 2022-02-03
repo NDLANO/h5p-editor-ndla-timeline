@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/prefer-stateless-function */
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { Grid } from "./components/Grid/Grid";
-import { H5PField } from "./types/h5p/H5PField";
-import { H5PForm } from "./types/h5p/H5PForm";
-import { Params } from "./types/h5p/Params";
+import { H5PField } from "./types/H5P/H5PField";
+import { H5PForm } from "./types/H5P/H5PForm";
+import { Params } from "./types/H5P/Params";
 import {
   fillInMissingParamsProperties,
   getEmptyParams,
@@ -18,7 +17,7 @@ type AppProps = {
   parent: H5PForm;
 };
 
-const App: React.FC<AppProps> = ({
+export const App: React.FC<AppProps> = ({
   setValue,
   semantics,
   initialParams,
@@ -27,7 +26,7 @@ const App: React.FC<AppProps> = ({
   const [params, setParams] = React.useState<Params>(
     initialParams
       ? fillInMissingParamsProperties(initialParams)
-      : getEmptyParams()
+      : getEmptyParams(),
   );
 
   const textRightLayout = [
@@ -71,7 +70,7 @@ const App: React.FC<AppProps> = ({
         numberOfRows={50}
         params={params}
         initialItems={textRightLayout}
-        updateItems={(items) => {}}
+        updateItems={items => {}}
         gapSize={10}
         setActiveTool={() => {}}
         activeTool={null}
@@ -92,5 +91,3 @@ const App: React.FC<AppProps> = ({
 //     );
 //   }
 // }
-
-export default hot(App);

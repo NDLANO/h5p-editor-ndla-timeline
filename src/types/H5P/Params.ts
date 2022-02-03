@@ -1,4 +1,3 @@
-import { ArrowItemType } from "../ArrowItemType";
 import { DraggableType } from "../DraggableType";
 import { EventItemType } from "../EventItemType";
 

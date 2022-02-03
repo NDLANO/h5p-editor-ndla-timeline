@@ -1,20 +1,18 @@
 import * as React from "react";
+import { DraggableType } from "../../types/DraggableType";
 import { Element } from "../../types/Element";
-import { H5PField } from "../../types/h5p/H5PField";
-import { H5PForm } from "../../types/h5p/H5PForm";
-import { Params } from "../../types/h5p/Params";
+import { H5PField } from "../../types/H5P/H5PField";
+import { H5PForm } from "../../types/H5P/H5PForm";
+import { Params } from "../../types/H5P/Params";
 import { OccupiedCell } from "../../types/OccupiedCell";
 import { Position } from "../../types/Position";
 import { Size } from "../../types/Size";
-import { DraggableType } from "../../types/DraggableType";
 import {
-  createArrowItem,
   createTopicMapItem,
   findHeightPercentage,
   findItem,
   findOccupiedCells,
   findWidthPercentage,
-  getArrowDirection,
   isDraggingLeft,
   isDraggingUp,
   mapTopicMapItemToElement,
@@ -27,7 +25,6 @@ import {
 import { Draggable } from "../Draggable/Draggable";
 import { GridIndicator } from "../GridIndicator/GridIndicator";
 import { ToolbarButtonType } from "../Toolbar/Toolbar";
-
 import styles from "./Grid.module.scss";
 
 export type GridProps = {
@@ -62,14 +59,14 @@ export const Grid: React.FC<GridProps> = ({
 
   const [selectedItem, setSelectedItem] = React.useState<string | null>(null);
   const [occupiedCells, setOccupiedCells] = React.useState<Array<OccupiedCell>>(
-    []
+    [],
   );
   const [boxStartIndex, setBoxStartIndex] = React.useState<number | null>(null);
   const [arrowStartIndex, setArrowStartIndex] = React.useState<number | null>(
-    null
+    null,
   );
   const [currentItemsLength, setCurrentItemsLength] = React.useState<number>(
-    items.length
+    items.length,
   );
 
   const [isDragging, setIsDragging] = React.useState<boolean>(false);
@@ -144,15 +141,15 @@ export const Grid: React.FC<GridProps> = ({
 
       setOccupiedCells(
         findOccupiedCells(
-          items.map((item) => mapTopicMapItemToElement(item, size)),
+          items.map(item => mapTopicMapItemToElement(item, size)),
           size.width,
           size.height,
           gapSize,
-          gridIndicatorSize
-        )
+          gridIndicatorSize,
+        ),
       );
     },
-    [gapSize, gridIndicatorSize, items, size, updateItems]
+    [gapSize, gridIndicatorSize, items, size, updateItems],
   );
 
   const createGridItemStart = React.useCallback(
@@ -166,7 +163,7 @@ export const Grid: React.FC<GridProps> = ({
         setIsDragging(true);
       }
     },
-    [activeTool]
+    [activeTool],
   );
 
   const createGridItemEnd = React.useCallback(() => {
@@ -213,13 +210,13 @@ export const Grid: React.FC<GridProps> = ({
       const dragLeft = isDraggingLeft(
         indicatorIndex,
         boxStartIndex,
-        numberOfColumns
+        numberOfColumns,
       );
       const dragUp = isDraggingUp(
         indicatorIndex,
         boxStartIndex,
         numberOfColumns,
-        numberOfRows
+        numberOfRows,
       );
 
       // Get x and y percentage position
@@ -280,7 +277,7 @@ export const Grid: React.FC<GridProps> = ({
         size,
         gapSize,
         gridIndicatorSize,
-        occupiedCells
+        occupiedCells,
       );
 
       if (posIsFree && !alreadyAdded) {
@@ -297,7 +294,7 @@ export const Grid: React.FC<GridProps> = ({
             lastItem,
             size.width,
             size.height,
-            { newPosition, newSize }
+            { newPosition, newSize },
           );
 
           updateItems(newItems);
@@ -321,7 +318,7 @@ export const Grid: React.FC<GridProps> = ({
       occupiedCells,
       updateItems,
       updateItemSize,
-    ]
+    ],
   );
 
   const resizeBoxEnter = React.useCallback(
@@ -342,7 +339,7 @@ export const Grid: React.FC<GridProps> = ({
       const existingItem = findItem(resizedItemId, items);
       if (!existingItem) {
         throw new Error(
-          `Resized item with id "${resizedItemId}" does not exist`
+          `Resized item with id "${resizedItemId}" does not exist`,
         );
       }
 
@@ -376,7 +373,7 @@ export const Grid: React.FC<GridProps> = ({
       // Get height percentage
       const yEnd = topHandle
         ? Math.floor(
-            (boxStartIndex + existingItem.widthPercentage) / numberOfColumns
+            (boxStartIndex + existingItem.widthPercentage) / numberOfColumns,
           )
         : Math.floor(indicatorIndex / numberOfColumns);
       const yEndPercentagePosition = ((yEnd + 1) / numberOfRows) * 100;
@@ -387,7 +384,7 @@ export const Grid: React.FC<GridProps> = ({
         dragUp,
         existingItem,
         yPercentagePosition,
-        yEndPercentagePosition
+        yEndPercentagePosition,
       );
 
       // Get width percentage
@@ -405,7 +402,7 @@ export const Grid: React.FC<GridProps> = ({
         dragLeft,
         existingItem,
         xPercentagePosition,
-        xEndPercentagePosition
+        xEndPercentagePosition,
       );
 
       const newPosition = {
@@ -426,7 +423,7 @@ export const Grid: React.FC<GridProps> = ({
         size,
         gapSize,
         gridIndicatorSize,
-        occupiedCells
+        occupiedCells,
       );
 
       if (posIsFree && isResizing) {
@@ -436,7 +433,7 @@ export const Grid: React.FC<GridProps> = ({
             existingItem,
             size.width,
             size.height,
-            { newPosition, newSize }
+            { newPosition, newSize },
           );
 
           updateItems(newItems);
@@ -460,7 +457,7 @@ export const Grid: React.FC<GridProps> = ({
       resizeDirectionLock,
       updateItemSize,
       prevIndex,
-    ]
+    ],
   );
 
   const cancelActions = React.useCallback(() => {
@@ -509,7 +506,7 @@ export const Grid: React.FC<GridProps> = ({
             key={`grid-indicator-${index}`}
             index={index}
             onMouseDown={createGridItemStart}
-            onMouseEnter={(indicatorIndex) => {
+            onMouseEnter={indicatorIndex => {
               const isResizing = resizedItemId != null;
               if (isResizing) {
                 resizeBoxEnter(indicatorIndex);
@@ -531,7 +528,7 @@ export const Grid: React.FC<GridProps> = ({
       activeHoverOnGrid,
       currentItemsLength,
       isDragging,
-    ]
+    ],
   );
 
   const updateItemPosition = React.useCallback(
@@ -547,8 +544,8 @@ export const Grid: React.FC<GridProps> = ({
       updateItems(newItems);
       setItems(newItems);
 
-      const elements: Array<Element> = items.map((item) =>
-        mapTopicMapItemToElement(item, size)
+      const elements: Array<Element> = items.map(item =>
+        mapTopicMapItemToElement(item, size),
       );
 
       const newOccupiedCells = findOccupiedCells(
@@ -556,24 +553,24 @@ export const Grid: React.FC<GridProps> = ({
         size.width,
         size.height,
         gapSize,
-        gridIndicatorSize
+        gridIndicatorSize,
       );
 
       setOccupiedCells(newOccupiedCells);
     },
-    [gapSize, gridIndicatorSize, items, size, updateItems]
+    [gapSize, gridIndicatorSize, items, size, updateItems],
   );
 
   const deleteItem = React.useCallback(
     (id: string) => {
       /* TODO: Add dialog to confirm delete */
-      const newItems = items.filter((item) => item.id !== id);
+      const newItems = items.filter(item => item.id !== id);
 
       updateItems(newItems);
       setItems(newItems);
       setCurrentItemsLength(newItems.length);
     },
-    [items, updateItems]
+    [items, updateItems],
   );
 
   const children = React.useMemo(() => {
@@ -581,13 +578,13 @@ export const Grid: React.FC<GridProps> = ({
       return null;
     }
 
-    return items.map((item) => (
+    return items.map(item => (
       <Draggable
         key={item.id}
         id={item.id}
         initialXPosition={scaleX(item.xPercentagePosition, size.width)}
         initialYPosition={scaleY(item.yPercentagePosition, size.height)}
-        updatePosition={(newPosition) => updateItemPosition(item, newPosition)}
+        updatePosition={newPosition => updateItemPosition(item, newPosition)}
         initialWidth={Math.abs(scaleX(item.widthPercentage, size.width))}
         initialHeight={Math.abs(scaleY(item.heightPercentage, size.height))}
         gapSize={gapSize}
@@ -599,9 +596,9 @@ export const Grid: React.FC<GridProps> = ({
         deleteItem={deleteItem}
         setSelectedItem={setSelected}
         selectedItem={selectedItem}
-        startResize={(directionLock) => {
+        startResize={directionLock => {
           const x = Math.floor(
-            (item.xPercentagePosition / 100) * numberOfColumns
+            (item.xPercentagePosition / 100) * numberOfColumns,
           );
           const y = Math.floor((item.yPercentagePosition / 100) * numberOfRows);
           const cellIndex = x + y * numberOfColumns;
@@ -644,7 +641,7 @@ export const Grid: React.FC<GridProps> = ({
 
       const isFirstRender = size == null;
       if (!isFirstRender) {
-        const scaleFactor = size?.width / width;
+        const scaleFactor = (size?.width ?? 0) / width;
 
         if (scaleFactor !== 1) {
           setItems(resizeItems(items, scaleFactor));
@@ -662,7 +659,7 @@ export const Grid: React.FC<GridProps> = ({
 
     const windowClickListener = (event: MouseEvent | TouchEvent): void => {
       const draggableWasClicked = !!(event.target as HTMLElement).closest(
-        ".draggable"
+        ".draggable",
       );
 
       if (!draggableWasClicked) {
@@ -697,12 +694,12 @@ export const Grid: React.FC<GridProps> = ({
 
     setOccupiedCells(
       findOccupiedCells(
-        items.map((item) => mapTopicMapItemToElement(item, size)),
+        items.map(item => mapTopicMapItemToElement(item, size)),
         size.width,
         size.height,
         gapSize,
-        gridIndicatorSize
-      )
+        gridIndicatorSize,
+      ),
     );
   }, [gapSize, gridIndicatorSize, items, size]);
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { t } from "../../h5p/H5P.util";
+import { t } from "../../H5P/H5P.util";
 import { ToolbarButton } from "../ToolbarButton/ToolbarButton";
 import styles from "./Toolbar.module.scss";
 
@@ -29,7 +29,7 @@ export const Toolbar: React.FC<ToolBarProps> = ({
   activeTool,
 }) => {
   const [activeButton, setActiveButton] = React.useState<string | null>(
-    activeTool
+    activeTool,
   );
 
   const setActive = (newValue: ToolbarButtonType): void => {
@@ -51,7 +51,7 @@ export const Toolbar: React.FC<ToolBarProps> = ({
       }
       return false;
     },
-    [activeButton, activeTool]
+    [activeButton, activeTool],
   );
 
   return (
