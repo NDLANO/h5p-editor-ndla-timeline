@@ -37,9 +37,11 @@ export class H5PWrapper extends H5P.EventDispatcher {
     containerElement.classList.add("h5p-h5p-editor-timeline");
   }
 
-  appendTo([containerElement]: JQuery<HTMLElement>): void {
-    containerElement.appendChild(this.wrapper);
-    containerElement.classList.add("h5p-timeline");
+  appendTo(containerElement: any): void {
+    console.log("H5PWrapper.appendTo", containerElement);
+    containerElement[0].appendChild(this.wrapper);
+    console.log("H5PWrapper.appendTo", "adding class");
+    containerElement[0].classList.add("h5p-timeline");
   }
 
   validate(): boolean {
