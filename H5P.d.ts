@@ -11,7 +11,6 @@ export interface H5PEditorObject {
   NDLATimelineEventLayout: typeof H5PWrapper;
   NDLATimeline: typeof H5PWrapper;
   widgets: {
-    ndlaTimeline: typeof H5PWrapper;
     NDLATimelineEventLayout: typeof H5PWrapper;
   };
   $: typeof jQuery;
