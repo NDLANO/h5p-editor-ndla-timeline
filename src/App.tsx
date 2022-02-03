@@ -70,7 +70,7 @@ export const App: React.FC<AppProps> = ({
         numberOfRows={50}
         params={params}
         initialItems={textRightLayout}
-        updateItems={(items) => {}}
+        updateItems={items => {}}
         gapSize={10}
         setActiveTool={() => {}}
         activeTool={null}
