@@ -2,9 +2,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import * as React from "react";
 import { Grid } from "./components/Grid/Grid";
-import { H5PField } from "./types/h5p/H5PField";
-import { H5PForm } from "./types/h5p/H5PForm";
-import { Params } from "./types/h5p/Params";
+import { H5PField } from "./types/H5P/H5PField";
+import { H5PForm } from "./types/H5P/H5PForm";
+import { Params } from "./types/H5P/Params";
 import {
   fillInMissingParamsProperties,
   getEmptyParams,
