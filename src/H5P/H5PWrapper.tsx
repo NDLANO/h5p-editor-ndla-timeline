@@ -31,17 +31,17 @@ export class H5PWrapper extends H5P.EventDispatcher {
     );
   }
 
-  attach([containerElement]: JQuery<HTMLElement>): void {
-    console.log("H5PWrapper.attach", containerElement);
-    containerElement.appendChild(this.wrapper);
-    containerElement.classList.add("h5p-h5p-editor-timeline");
-  }
+  appendTo($container: JQuery<HTMLElement>): void {
+    const containerElement = $container.get(0);
+    if (!containerElement) {
+      console.error(
+        "Found no containing element to attach `h5p-editor-timeline` to.",
+      );
+      return;
+    }
 
-  appendTo(containerElement: any): void {
-    console.log("H5PWrapper.appendTo", containerElement);
-    containerElement[0].appendChild(this.wrapper);
-    console.log("H5PWrapper.appendTo", "adding class");
-    containerElement[0].classList.add("h5p-timeline");
+    containerElement.appendChild(this.wrapper);
+    containerElement.classList.add("h5p-editor-timeline");
   }
 
   validate(): boolean {
