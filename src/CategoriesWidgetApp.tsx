@@ -77,4 +77,3 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
     </div>
   );
 };
-
