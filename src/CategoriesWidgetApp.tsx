@@ -18,8 +18,8 @@ type CategoriesWidgetAppProps = {
 };
 
 type CategoriesWidgetAppState = {
-  categories: string[],
-  selectedCategories: string[],
+  categories: string[];
+  selectedCategories: string[];
 };
 
 export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
@@ -34,8 +34,10 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
   //     : getEmptyParams(),
   // );
   const [categories, setCategories] = React.useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = React.useState<string[]>([]);
-  
+  const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
+    [],
+  );
+
   // const categoriesRefersher = setInterval(() => {
   //   console.log("new calculated categories", parent.parent?.parent?.params.categories);
   //   setCategories(parent.parent?.parent?.params.categories);
@@ -52,23 +54,35 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setCategories(parent.parent?.parent?.params.categories ?  parent.parent?.parent?.params.categories.map(c => c.name): categories);
-    }, 1000);  
-    return()=>clearInterval(interval)
-  },[]);
-
+      setCategories(
+        parent.parent?.parent?.params.categories
+          ? parent.parent?.parent?.params.categories.map(c => c.name)
+          : categories,
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="field h5p-editor-timeline-tags">
       {/* <label className="h5peditor-label-wrapper" htmlFor="field-tags"> */}
-        <span className="h5peditor-label h5peditor-required">Tags</span>
+      <span className="h5peditor-label h5peditor-required">Tags</span>
       {/* </label> */}
       <div className="tags">
-        
-        <div className="h5peditor-field-tag"><select onChange={(value) => {setSelectedCategories([...selectedCategories, value.currentTarget.value]) } }>
+        <div className="h5peditor-field-tag">
+          <select
+            onChange={value => {
+              setSelectedCategories([
+                ...selectedCategories,
+                value.currentTarget.value,
+              ]);
+            }}
+          >
             <option value="">Select a tag</option>
             {categories.map((category, index) => (
-              <option key={category} value={category}>{category}</option>
+              <option key={category} value={category}>
+                {category}
+              </option>
             ))}
           </select>
         </div>
@@ -78,10 +92,8 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
           <span>{category}</span>
         </div>
       ))}
-      <div className="h5p-errors"/>
+      <div className="h5p-errors" />
     </div>
-    
-    
   );
 };
 

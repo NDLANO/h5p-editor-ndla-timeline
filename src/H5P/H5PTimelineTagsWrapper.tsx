@@ -22,7 +22,7 @@ export class H5PTimelineTagsWrapper extends H5P.EventDispatcher {
     super();
     this.wrapper = H5PTimelineTagsWrapper.createWrapperElement();
     // this.categories = parent.parent?.parent?.params.categories;
-    
+
     // console.log("parent", parent)
     // console.log("categories", parent.parent?.parent?.params)
     ReactDOM.render(
@@ -31,10 +31,9 @@ export class H5PTimelineTagsWrapper extends H5P.EventDispatcher {
         semantics={semantics}
         initialParams={params}
         parent={parent}
-      />
-      , this.wrapper,
+      />,
+      this.wrapper,
     );
-
   }
 
   attach([containerElement]: JQuery<HTMLElement>): void {
