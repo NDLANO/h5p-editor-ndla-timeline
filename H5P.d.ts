@@ -1,3 +1,4 @@
+import { H5PTimelineTagsWrapper } from "./src/H5P/H5PTimelineTagsWrapper";
 import { H5PWrapper } from "./src/H5P/H5PWrapper";
 import { H5PField } from "./src/types/H5P/H5PField";
 import { H5PForm } from "./src/types/H5P/H5PForm";
@@ -10,9 +11,10 @@ export interface H5PObject {
 
 export interface H5PEditorObject {
   NDLATimelineEventLayout: typeof H5PWrapper;
-  NDLATimeline: typeof H5PWrapper;
+  NDLATimelineTags: typeof H5PTimelineTagsWrapper;
   widgets: {
     NDLATimelineEventLayout: typeof H5PWrapper;
+    NDLATimelineTags: typeof H5PTimelineTagsWrapper;
   };
   $: typeof jQuery;
   contentId: string;

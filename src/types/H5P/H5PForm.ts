@@ -7,6 +7,8 @@ import { Params } from "./Params";
 
 type UberName = `H5P.${string} ${number}.${number}`;
 
+
+
 export type H5PForm = {
   parent: H5PForm | null;
   $common: JQuery<HTMLElement> | null;
@@ -39,7 +41,10 @@ export type H5PForm = {
   metadata: H5PMetadata;
   metadataForm: H5PMetadataForm | null;
   offset: { top: number; left: number };
-  params: { timeline: Params };
+  params: { 
+    timeline: Params
+    categories: Array<{name:string}>| undefined;
+  };
   passReadies: boolean;
   readies: Array<unknown>;
   removeLanguages: (

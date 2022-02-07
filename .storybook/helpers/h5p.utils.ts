@@ -251,6 +251,7 @@ export const semantics: H5PField = {
 
 export const parent: H5PForm = {
   params: {
+    categories: [],
     timeline: {
       draggableItems: [],
       eventItems: [
