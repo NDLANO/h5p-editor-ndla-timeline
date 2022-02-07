@@ -28,29 +28,10 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
   initialParams,
   parent,
 }) => {
-  // const [params, setParams] = React.useState<Params>(
-  //   initialParams
-  //     ? fillInMissingParamsProperties(initialParams)
-  //     : getEmptyParams(),
-  // );
   const [categories, setCategories] = React.useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
     [],
   );
-
-  // const categoriesRefersher = setInterval(() => {
-  //   console.log("new calculated categories", parent.parent?.parent?.params.categories);
-  //   setCategories(parent.parent?.parent?.params.categories);
-  // }, 5000);
-
-  // console.log("inital categories", categories);
-  // useEffect(() => {
-  //   console.log("new categories", categories);
-  // }, [categories]);
-
-  // useEffect(() => {
-  //   console.log("new parent", parent);
-  // }, [parent]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -97,13 +78,3 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
   );
 };
 
-// class App extends React.Component<Props> {
-//   render(): JSX.Element {
-//     const { adjective } = this.props;
-//     return (
-//       <>
-//         <h1>Hi, you&apos;re {adjective}</h1>
-//       </>
-//     );
-//   }
-// }
