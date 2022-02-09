@@ -2,7 +2,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { App } from "../App";
-import { H5PField, H5PFieldGroup } from "../types/H5P/H5PField";
+import { H5PFieldGroup } from "../types/H5P/H5PField";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
 import { Params } from "../types/H5P/Params";
