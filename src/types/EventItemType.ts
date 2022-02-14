@@ -1,22 +1,19 @@
+import { EventContent } from "./EventContent";
 import { Image } from "./H5P/Image";
+import { Video } from "./H5P/Video";
 
 export type EventItemType = {
   id: string;
 
-  /** The x position as a percentage of the container's width */
-  xPercentagePosition: number;
+  title: string;
+  description?: string;
 
-  /** The y position as a percentage of the container's height */
-  yPercentagePosition: number;
+  mediaType: "image" | "video";
+  image?: Image;
+  video?: Video;
 
-  /** The width as a percentage of the container's width */
-  widthPercentage: number;
+  startDate?: string;
+  endDate?: string;
 
-  /** The height as a percentage of the container's height */
-  heightPercentage: number;
-
-  label: string;
-  description?: string | undefined;
-  backgroundImage?: Image | undefined;
-  links?: Array<string> | undefined;
+  eventContent?: EventContent;
 };

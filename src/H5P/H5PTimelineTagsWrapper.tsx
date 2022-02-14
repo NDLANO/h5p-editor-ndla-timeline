@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import * as React from "react";
-import { useEffect } from "react";
 import * as ReactDOM from "react-dom";
 import { CategoriesWidgetApp } from "../CategoriesWidgetApp";
 import { H5PField, H5PFieldGroup } from "../types/H5P/H5PField";

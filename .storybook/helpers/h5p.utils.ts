@@ -1,286 +1,381 @@
 import { H5PField } from "../../src/types/H5P/H5PField";
 import { H5PFieldType } from "../../src/types/H5P/H5PFieldType";
 import { H5PForm } from "../../src/types/H5P/H5PForm";
+import { layoutOptions } from "../../src/utils/layout.utils";
 
 export const params = {
   eventItems: [
     {
-      heightPercentage: 100,
-      widthPercentage: 100,
+      height: 100,
+      width: 100,
       id: "1",
       label: "Label 1",
       links: ["https://example.com", "https://example.com/2"],
-      xPercentagePosition: 0,
-      yPercentagePosition: 0,
+      x: 0,
+      y: 0,
       backgroundImage: { path: "", alt: "" },
     },
     {
-      heightPercentage: 100,
-      widthPercentage: 100,
+      height: 100,
+      width: 100,
       id: "2",
       label: "Label 2",
       links: [],
-      xPercentagePosition: 0,
-      yPercentagePosition: 0,
+      x: 0,
+      y: 0,
       backgroundImage: { path: "", alt: "" },
     },
   ],
 };
 
 export const semantics: H5PField = {
-  label: "Timeline editor",
-  name: "timeline",
+  label: "NDLA Timeline editor",
+  name: "ndlaTimeline",
   type: H5PFieldType.Group,
-  widget: "timeline",
   importance: "high",
   fields: [
     {
-      label: "Timeline editor",
-      name: "eventItems",
-      type: H5PFieldType.List,
-      entity: "Timeline item",
-      field: {
-        name: "eventItem",
-        type: H5PFieldType.Group,
-        fields: [
-          { name: "id", type: H5PFieldType.Text, widget: "hidden" },
-          {
-            label: "Start Date",
-            name: "startDate",
-            type: H5PFieldType.Text,
-          },
-          {
-            label: "End Date",
-            name: "endDate",
-            type: H5PFieldType.Text,
-          },
-          {
-            label: "Display Date",
-            name: "displayDate",
-            type: H5PFieldType.Text,
-          },
-          {
-            label: "Slide Unique Id",
-            name: "slideUniqueId",
-            type: H5PFieldType.Text,
-            widget: "none",
-          },
-
-          {
-            label: "Slide Type",
-            name: "slideType",
-            type: H5PFieldType.Select,
-            description: "Select how the slide for this slide will be rendered",
-            options: [
-              {
-                value: "timelineJS",
-                label: "TimelineJS",
-              },
-              {
-                value: "grid",
-                label: "Grid",
-              },
-            ],
-            default: "grid",
-          },
-          {
-            label: "Timeline Slide Classic",
-            name: "timelineSlide",
-            type: H5PFieldType.Group,
-            widget: "showWhen",
-            showWhen: {
-              rules: [
+      label: "Show title slide",
+      name: "showTitleSlide",
+      type: H5PFieldType.Boolean,
+      default: true,
+    },
+    {
+      label: "Title slide",
+      name: "titleSlide",
+      importance: "low",
+      type: H5PFieldType.Group,
+      fields: [
+        {
+          label: "Title",
+          name: "label",
+          type: H5PFieldType.Text,
+        },
+        {
+          label: "Text content",
+          name: "textContent",
+          type: H5PFieldType.Text,
+          widget: "html",
+        },
+        {
+          label: "Layout",
+          name: "layout",
+          type: H5PFieldType.Select,
+          default: layoutOptions.textOnRight.value,
+          options: Object.values(layoutOptions),
+        },
+        {
+          label: "Event content",
+          name: "eventContent",
+          type: H5PFieldType.Group,
+          importance: "low",
+          widget: "NDLATimelineEventLayout",
+          fields: [
+            {
+              label: "Items",
+              name: "items",
+              type: H5PFieldType.Group,
+              fields: [
                 {
-                  field: "slideType",
-                  equals: "timelineJS",
+                  label: "Id",
+                  name: "id",
+                  type: H5PFieldType.Text,
+                  widget: "none",
+                },
+                {
+                  label: "X position",
+                  name: "x",
+                  type: H5PFieldType.Text,
+                  widget: "none",
+                },
+                {
+                  label: "Y position",
+                  name: "y",
+                  type: H5PFieldType.Text,
+                  widget: "none",
+                },
+                {
+                  label: "Width",
+                  name: "width",
+                  type: H5PFieldType.Text,
+                  widget: "none",
+                },
+                {
+                  label: "Height",
+                  name: "height",
+                  type: H5PFieldType.Text,
+                  widget: "none",
+                },
+                {
+                  label: "Type",
+                  name: "type",
+                  type: H5PFieldType.Text,
+                  widget: "none",
                 },
               ],
             },
+          ],
+        },
+        {
+          label: "Image",
+          name: "image",
+          type: H5PFieldType.Image,
+        },
+        {
+          label: "Start date",
+          description:
+            "YYYY-MM-DD — only year is required. Years can be negative.",
+          name: "startDate",
+          type: H5PFieldType.Text,
+        },
+        {
+          label: "End date",
+          description:
+            "YYYY-MM-DD — only year is required. Years can be negative.",
+          name: "endDate",
+          type: H5PFieldType.Text,
+        },
+      ],
+      widget: "showWhen",
+      showWhen: {
+        rules: [
+          {
+            field: "showTitleSlide",
+            equals: true,
+          },
+        ],
+      },
+    },
+    {
+      label: "Timeline items",
+      name: "timelineItems",
+      type: H5PFieldType.List,
+      entity: "Timeline item",
+      importance: "low",
+      field: {
+        label: "Item",
+        name: "timelineItem",
+        importance: "low",
+        type: H5PFieldType.Group,
+        fields: [
+          {
+            label: "Title",
+            name: "label",
+            type: H5PFieldType.Text,
+          },
+          {
+            label: "Text content",
+            name: "textContent",
+            type: H5PFieldType.Text,
+            widget: "html",
+          },
+          {
+            label: "Layout",
+            name: "layout",
+            type: H5PFieldType.Select,
+            default: layoutOptions.textOnRight.value,
+            options: Object.values(layoutOptions),
+          },
+          {
+            label: "Event content",
+            name: "eventContent",
+            type: H5PFieldType.Group,
+            importance: "low",
+            widget: "NDLATimelineEventLayout",
             fields: [
               {
-                label: "Text",
-                description: "Text for the event",
-                name: "text",
-                type: H5PFieldType.Text,
-              },
-              {
-                label: "Group",
-                description:
-                  "Timeline will organize events with the same value for group to be in the same row or adjacent rows,",
-                name: "group",
-                type: H5PFieldType.Text,
-              },
-              {
-                label: "Media",
-                description: "media",
-                name: "media",
+                label: "Items",
+                name: "items",
                 type: H5PFieldType.Group,
                 fields: [
                   {
-                    label: "Url",
-                    description: "Url",
-                    name: "url",
+                    label: "Id",
+                    name: "id",
                     type: H5PFieldType.Text,
+                    widget: "none",
                   },
                   {
-                    label: "Caption",
-                    description: "Caption",
-                    name: "caption",
+                    label: "X position",
+                    name: "x",
                     type: H5PFieldType.Text,
+                    widget: "none",
                   },
                   {
-                    label: "credit",
-                    description: "credit",
-                    name: "credit",
+                    label: "Y position",
+                    name: "y",
                     type: H5PFieldType.Text,
+                    widget: "none",
                   },
                   {
-                    label: "thumbnail",
-                    description: "thumbnail",
-                    name: "thumbnail",
+                    label: "Width",
+                    name: "width",
                     type: H5PFieldType.Text,
+                    widget: "none",
                   },
                   {
-                    label: "alt",
-                    description: "alt",
-                    name: "alt",
+                    label: "Height",
+                    name: "height",
                     type: H5PFieldType.Text,
+                    widget: "none",
                   },
                   {
-                    label: "title",
-                    description: "title",
-                    name: "title",
+                    label: "Type",
+                    name: "type",
                     type: H5PFieldType.Text,
-                  },
-                  {
-                    label: "link",
-                    description: "link",
-                    name: "link",
-                    type: H5PFieldType.Text,
-                  },
-                  {
-                    label: "link_target",
-                    description: "link_target",
-                    name: "linkTarget",
-                    type: H5PFieldType.Text,
+                    widget: "none",
                   },
                 ],
               },
             ],
           },
           {
-            label: "Timeline Slide Grid",
-            name: "timelineGridSlide",
-            type: H5PFieldType.Group,
-            widget: "showWhen",
-            showWhen: {
-              rules: [
-                {
-                  field: "slideType",
-                  equals: "grid",
-                },
-              ],
-            },
-            fields: [
-              {
-                label: "Items",
-                description: "items",
-                name: "items",
-                type: H5PFieldType.List,
-                field: {
-                  label: "item_spec",
-                  description: "item_spec",
-                  name: "itemSpec",
-                  type: H5PFieldType.Text,
-                },
-              },
-              {
-                label: "Label",
-                description:
-                  "The label is shown on top of the background image",
-                name: "label",
-                type: H5PFieldType.Text,
-              },
-
-              {
-                label: "Background image",
-                name: "backgroundImage",
-                type: H5PFieldType.Image,
-              },
-              {
-                name: "xPercentagePosition",
-                type: H5PFieldType.Number,
-                widget: "none",
-              },
-              {
-                name: "yPercentagePosition",
-                type: H5PFieldType.Number,
-                widget: "none",
-              },
-              {
-                name: "widthPercentage",
-                type: H5PFieldType.Number,
-                widget: "none",
-              },
-              {
-                name: "heightPercentage",
-                type: H5PFieldType.Number,
-                widget: "none",
-              },
-            ],
+            label: "Image",
+            name: "image",
+            type: H5PFieldType.Image,
+          },
+          {
+            label: "Start date",
+            description:
+              "YYYY-MM-DD — only year is required. Years can be negative.",
+            name: "startDate",
+            type: H5PFieldType.Text,
+          },
+          {
+            label: "End date",
+            description:
+              "YYYY-MM-DD — only year is required. Years can be negative.",
+            name: "endDate",
+            type: H5PFieldType.Text,
           },
         ],
       },
     },
     {
-      label: "Arrows",
-      name: "arrows",
+      label: "Categories",
+      name: "categories",
       type: H5PFieldType.List,
-      entity: "Arrow",
+      entity: "Category",
+      importance: "low",
       field: {
-        name: "arrow",
+        label: "Category",
+        name: "category",
+        importance: "low",
         type: H5PFieldType.Group,
+
         fields: [
-          { name: "showStartHead", type: H5PFieldType.Boolean, widget: "none" },
-          { name: "showEndHead", type: H5PFieldType.Boolean, widget: "none" },
+          {
+            label: "Name",
+            name: "name",
+            type: H5PFieldType.Text,
+          },
+          {
+            label: "Color",
+            name: "color",
+            type: H5PFieldType.Text,
+            widget: "colorSelector",
+          },
+        ],
+      },
+    },
+    {
+      label: "Eras",
+      name: "eras",
+      type: H5PFieldType.List,
+      entity: "Era",
+      importance: "low",
+      field: {
+        label: "Era",
+        name: "era",
+        importance: "low",
+        type: H5PFieldType.Group,
+
+        fields: [
+          {
+            label: "Name",
+            name: "name",
+            type: H5PFieldType.Text,
+          },
+          {
+            label: "Color",
+            name: "color",
+            type: H5PFieldType.Text,
+            widget: "colorSelector",
+          },
+          {
+            label: "Start date",
+            name: "startDate",
+            type: H5PFieldType.Text,
+          },
+          {
+            label: "End date",
+            name: "endDate",
+            type: H5PFieldType.Text,
+          },
         ],
       },
     },
   ],
-} as H5PField;
+};
 
 export const parent: H5PForm = {
   params: {
     categories: [],
     timeline: {
-      draggableItems: [],
-      eventItems: [
+      showTitleSlide: false,
+      categories: [],
+      eras: [],
+      timelineItems: [
         {
           id: "6133281e-7b52-408b-a66c-0878fd839ca4",
-          xPercentagePosition: 15,
-          yPercentagePosition: 8.333333333333332,
-          widthPercentage: 20,
-          heightPercentage: 33.33333333333335,
-          backgroundImage: { path: "" },
-          label: "",
-        },
-        {
-          id: "461c2820-da07-43bb-8d14-a798c396fd7a",
-          xPercentagePosition: 45,
-          yPercentagePosition: 8.333333333333332,
-          widthPercentage: 45,
-          heightPercentage: 83.33333333333331,
-          backgroundImage: { path: "" },
-          label: "",
-        },
-        {
-          id: "8123ecbf-d416-42a5-8106-47b440de51ec",
-          xPercentagePosition: 15,
-          yPercentagePosition: 50,
-          widthPercentage: 20,
-          heightPercentage: 25,
-          backgroundImage: { path: "" },
-          label: "",
+          mediaType: "image",
+          startDate: "2000",
+          endDate: "2010",
+          title: "Dainty green tree frog",
+          description:
+            "The dainty green tree frog (Ranoidea gracilenta), also known as the graceful tree frog, is a tree frog native to eastern Queensland, and north-eastern New South Wales, Australia. (Wikipedia)",
+          image: {
+            path: "https://images.unsplash.com/photo-1502403421222-2ae1f0a65fe2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1779&q=80",
+            alt: "Dainty tree frog hiding in a waterlily flower",
+            copyright: {
+              author: "David Clode",
+              source: "https://unsplash.com/photos/IY9bfJAM2zM",
+              license: "Unsplash License",
+              title: "Dainty tree frog hiding in a watelily flower",
+              version: "1",
+              year: "2017",
+            },
+            height: 1583,
+            width: 2400,
+            mime: "image/jpg",
+          },
+          eventContent: {
+            items: [
+              {
+                id: "1",
+                width: 50,
+                height: 25,
+                x: 3,
+                y: 5,
+                type: "media",
+              },
+              {
+                id: "2",
+                type: "title",
+                width: 30,
+                height: 10,
+                x: 50,
+                y: 20,
+              },
+              {
+                id: "3",
+                type: "textContent",
+                width: 50,
+                height: 10,
+                x: 50,
+                y: 30,
+              },
+            ],
+          },
         },
       ],
     },

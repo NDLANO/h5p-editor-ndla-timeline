@@ -30,16 +30,21 @@ export const EventItemForm: React.FC<EventItemFormProps> = ({
 
     setFormParams({
       ...params,
-      eventItems: params.eventItems.filter(item => item.id === itemId),
+      timelineItems: params.timelineItems?.filter(item => item.id === itemId),
     });
   }, [itemId, params, semantics]);
 
   const onUpdate = React.useCallback(
     (newParams: Params) => {
-      const updatedItem = newParams.eventItems[0];
+      const updatedItem = newParams.timelineItems?.[0];
+
+      if (!updatedItem) {
+        return;
+      }
+
       onSave({
         ...newParams,
-        eventItems: newParams.eventItems.map(item => {
+        timelineItems: newParams.timelineItems?.map(item => {
           const isUpdatedItem = item.id === itemId;
           if (isUpdatedItem) {
             return updatedItem;

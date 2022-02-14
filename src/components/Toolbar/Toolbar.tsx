@@ -3,12 +3,6 @@ import { t } from "../../H5P/H5P.util";
 import { ToolbarButton } from "../ToolbarButton/ToolbarButton";
 import styles from "./Toolbar.module.scss";
 
-const labelTexts = {
-  mapColor: t("toolbar-button-type_map-color"),
-  createBox: t("toolbar-button-type_create-box"),
-  createArrow: t("toolbar-button-type_create-arrow"),
-};
-
 /*
   Name of svg icon should be similar to this,
   specify the svg icon in icons.tsx
@@ -16,7 +10,6 @@ const labelTexts = {
 export enum ToolbarButtonType {
   MapColor = "mapColor",
   CreateBox = "createBox",
-  CreateArrow = "createArrow",
 }
 
 export type ToolBarProps = {
@@ -28,6 +21,11 @@ export const Toolbar: React.FC<ToolBarProps> = ({
   setActiveTool,
   activeTool,
 }) => {
+  const labelTexts = {
+    mapColor: t("toolbar-button-type_map-color"),
+    createBox: t("toolbar-button-type_create-box"),
+  };
+
   const [activeButton, setActiveButton] = React.useState<string | null>(
     activeTool,
   );
@@ -68,13 +66,6 @@ export const Toolbar: React.FC<ToolBarProps> = ({
         label={labelTexts.createBox}
         onClick={() => setActive(ToolbarButtonType.CreateBox)}
         active={checkIfActive(ToolbarButtonType.CreateBox)}
-        showActive
-      />
-      <ToolbarButton
-        icon={ToolbarButtonType.CreateArrow}
-        label={labelTexts.createArrow}
-        onClick={() => setActive(ToolbarButtonType.CreateArrow)}
-        active={checkIfActive(ToolbarButtonType.CreateArrow)}
         showActive
       />
     </div>
