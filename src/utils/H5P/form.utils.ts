@@ -24,13 +24,13 @@ const getSubfieldByName = (
 export const getEventsField = (semantics: H5PField): H5PField | null => {
   if (!H5PEditor.findSemanticsField) {
     console.error("no H5PEditor.findSemanticsField, finding it manually");
-    return getSubfieldByName("eventItems", semantics);
+    return getSubfieldByName("timelineItems", semantics);
   }
 
-  const eventsField = H5PEditor.findSemanticsField("eventItems", semantics);
+  const eventsField = H5PEditor.findSemanticsField("timelineItems", semantics);
 
   if (!eventsField) {
-    throw new Error("Could not find the `eventItems` field");
+    throw new Error("Could not find the `timelineItems` field");
   }
 
   if (Array.isArray(eventsField)) {
@@ -43,8 +43,11 @@ export const getEventsField = (semantics: H5PField): H5PField | null => {
 
 export const getEmptyParams = (): Params => {
   const params: Params = {
-    eventItems: [],
-    draggableItems: [],
+    timelineItems: [],
+    showTitleSlide: false,
+    categories: [],
+    eras: [],
+    titleSlide: undefined,
   };
 
   return params;

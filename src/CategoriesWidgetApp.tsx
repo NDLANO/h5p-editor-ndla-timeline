@@ -42,7 +42,7 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
       );
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [categories, parent.parent?.parent?.params.categories]);
 
   return (
     <div className="field h5p-editor-timeline-tags">

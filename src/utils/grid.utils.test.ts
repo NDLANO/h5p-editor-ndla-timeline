@@ -1,10 +1,10 @@
 import fc from "fast-check";
 import { Cell } from "../types/Cell";
 import { Element } from "../types/Element";
+import { GridItem } from "../types/GridItem";
 import { OccupiedCell } from "../types/OccupiedCell";
 import { Position } from "../types/Position";
 import { Size } from "../types/Size";
-import { DraggableType } from "../types/DraggableType";
 import {
   calculateXPercentage,
   calculateYPercentage,
@@ -19,28 +19,24 @@ import {
 
 describe(resizeItem.name, () => {
   it("should scale the item down if the scale factor is lower than 1", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "test",
-      xPercentagePosition: 10,
-      yPercentagePosition: 10,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const scaleFactor = 0.5;
 
-    const expectedItem: DraggableType = {
+    const expectedItem: GridItem = {
       id: "test",
-      xPercentagePosition: 5,
-      yPercentagePosition: 5,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 5,
+      y: 5,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
     const actualItem = resizeItem(item, scaleFactor);
@@ -49,28 +45,24 @@ describe(resizeItem.name, () => {
   });
 
   it("should scale the item down if the scale factor is greater than 1", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "test",
-      xPercentagePosition: 10,
-      yPercentagePosition: 10,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const scaleFactor = 2;
 
-    const expectedItem: DraggableType = {
+    const expectedItem: GridItem = {
       id: "test",
-      xPercentagePosition: 20,
-      yPercentagePosition: 20,
-      widthPercentage: 40,
-      heightPercentage: 40,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 20,
+      y: 20,
+      width: 40,
+      height: 40,
+      type: "title",
     };
 
     const actualItem = resizeItem(item, scaleFactor);
@@ -79,28 +71,24 @@ describe(resizeItem.name, () => {
   });
 
   it("should do nothing if the scale factor is 1", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "test",
-      xPercentagePosition: 10,
-      yPercentagePosition: 10,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const scaleFactor = 1;
 
-    const expectedItem: DraggableType = {
+    const expectedItem: GridItem = {
       id: "test",
-      xPercentagePosition: 10,
-      yPercentagePosition: 10,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const actualItem = resizeItem(item, scaleFactor);
@@ -111,26 +99,22 @@ describe(resizeItem.name, () => {
   it("should handle any number", () =>
     fc.assert(
       fc.property(fc.double(), scaleFactor => {
-        const item: DraggableType = {
+        const item: GridItem = {
           id: "test",
-          xPercentagePosition: 10,
-          yPercentagePosition: 10,
-          widthPercentage: 20,
-          heightPercentage: 20,
-          backgroundImage: { path: "", alt: "" },
-          label: "Label",
-          links: [],
+          x: 10,
+          y: 10,
+          width: 20,
+          height: 20,
+          type: "title",
         };
 
-        const expectedItem: DraggableType = {
+        const expectedItem: GridItem = {
           id: "test",
-          xPercentagePosition: 10 * scaleFactor,
-          yPercentagePosition: 10 * scaleFactor,
-          widthPercentage: 20 * scaleFactor,
-          heightPercentage: 20 * scaleFactor,
-          backgroundImage: { path: "", alt: "" },
-          label: "Label",
-          links: [],
+          x: 10 * scaleFactor,
+          y: 10 * scaleFactor,
+          width: 20 * scaleFactor,
+          height: 20 * scaleFactor,
+          type: "title",
         };
 
         const actualItem = resizeItem(item, scaleFactor);
@@ -167,28 +151,24 @@ describe(calculateYPercentage.name, () => {
 
 describe(updateItem.name, () => {
   it("should find the item in the items list and update the position and size based on the grid's width and height", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
-    const items: Array<DraggableType> = [
+    const items: Array<GridItem> = [
       item,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ];
 
@@ -207,13 +187,11 @@ describe(updateItem.name, () => {
 
     const expectedItem = {
       id: "1",
-      xPercentagePosition: 5,
-      yPercentagePosition: 10,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 5,
+      y: 10,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const actualItems = updateItem(items, item, width, height, {
@@ -225,40 +203,34 @@ describe(updateItem.name, () => {
       expectedItem,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ]);
   });
 
   it("should update without changing the list, and without changing the item object itself", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
-    const items: Array<DraggableType> = [
+    const items: Array<GridItem> = [
       item,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ];
 
@@ -279,61 +251,51 @@ describe(updateItem.name, () => {
 
     expect(item).toEqual({
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     });
 
     expect(items[0]).toEqual({
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     });
 
     expect(items[1]).toEqual({
       id: "2",
-      xPercentagePosition: 25,
-      yPercentagePosition: 60,
-      widthPercentage: 65,
-      heightPercentage: 32,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 60,
+      width: 65,
+      height: 32,
+      type: "title",
     });
   });
 
   it("should be able to update only the size", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
-    const items: Array<DraggableType> = [
+    const items: Array<GridItem> = [
       item,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ];
 
@@ -345,15 +307,13 @@ describe(updateItem.name, () => {
     const width = 1000;
     const height = 1000;
 
-    const expectedItem: DraggableType = {
+    const expectedItem: GridItem = {
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 20,
-      heightPercentage: 20,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 20,
+      height: 20,
+      type: "title",
     };
 
     const actualItems = updateItem(items, item, width, height, {
@@ -364,40 +324,34 @@ describe(updateItem.name, () => {
       expectedItem,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ]);
   });
 
   it("should be able to update only the position", () => {
-    const item: DraggableType = {
+    const item: GridItem = {
       id: "1",
-      xPercentagePosition: 25,
-      yPercentagePosition: 20,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 25,
+      y: 20,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
-    const items: Array<DraggableType> = [
+    const items: Array<GridItem> = [
       item,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ];
 
@@ -409,15 +363,13 @@ describe(updateItem.name, () => {
     const width = 1000;
     const height = 1000;
 
-    const expectedItem: DraggableType = {
+    const expectedItem: GridItem = {
       id: "1",
-      xPercentagePosition: 5,
-      yPercentagePosition: 10,
-      widthPercentage: 10,
-      heightPercentage: 10,
-      backgroundImage: { path: "", alt: "" },
-      label: "Label",
-      links: [],
+      x: 5,
+      y: 10,
+      width: 10,
+      height: 10,
+      type: "title",
     };
 
     const actualItems = updateItem(items, item, width, height, {
@@ -428,13 +380,11 @@ describe(updateItem.name, () => {
       expectedItem,
       {
         id: "2",
-        xPercentagePosition: 25,
-        yPercentagePosition: 60,
-        widthPercentage: 65,
-        heightPercentage: 32,
-        backgroundImage: { path: "", alt: "" },
-        label: "Label",
-        links: [],
+        x: 25,
+        y: 60,
+        width: 65,
+        height: 32,
+        type: "title",
       },
     ]);
   });
@@ -459,7 +409,6 @@ describe(findCellsElementOccupies.name, () => {
   it("should return an array of all the cells that the element occupies (1*1)", () => {
     const element: Element = {
       id: "1",
-      type: "item",
       position: { x: 0, y: 0 },
       size: { width: 10, height: 10 },
     };
@@ -467,7 +416,6 @@ describe(findCellsElementOccupies.name, () => {
     const expectedCells: Array<OccupiedCell> = [
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 0,
         y: 0,
         index: 0,
@@ -488,7 +436,6 @@ describe(findCellsElementOccupies.name, () => {
   it("should return an array of all the cells that the element occupies (2*2)", () => {
     const element: Element = {
       id: "1",
-      type: "item",
       position: { x: 0, y: 0 },
       size: { width: 25, height: 25 },
     };
@@ -496,28 +443,24 @@ describe(findCellsElementOccupies.name, () => {
     const expectedCells: Array<OccupiedCell> = [
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 0,
         y: 0,
         index: 0,
       },
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 15,
         y: 0,
         index: 1,
       },
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 0,
         y: 15,
         index: 4,
       },
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 15,
         y: 15,
         index: 5,
@@ -538,7 +481,6 @@ describe(findCellsElementOccupies.name, () => {
   it("should return an array of all the cells that the element occupies (2*1 translated)", () => {
     const element: Element = {
       id: "1",
-      type: "item",
       position: { x: 30, y: 45 },
       size: { width: 25, height: 10 },
     };
@@ -546,14 +488,12 @@ describe(findCellsElementOccupies.name, () => {
     const expectedCells: Array<OccupiedCell> = [
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 30,
         y: 45,
         index: 14,
       },
       {
         occupiedById: "1",
-        occupiedByType: "item",
         x: 45,
         y: 45,
         index: 15,
@@ -991,42 +931,36 @@ describe(positionIsFree.name, () => {
     {
       index: 6,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(2, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(1, gapSize, gridIndicatorSize),
     },
     {
       index: 7,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(3, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(1, gapSize, gridIndicatorSize),
     },
     {
       index: 10,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(2, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(2, gapSize, gridIndicatorSize),
     },
     {
       index: 11,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(3, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(2, gapSize, gridIndicatorSize),
     },
     {
       index: 14,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(2, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(3, gapSize, gridIndicatorSize),
     },
     {
       index: 15,
       occupiedById: "1",
-      occupiedByType: "item",
       x: coordinatePosToPx(3, gapSize, gridIndicatorSize),
       y: coordinatePosToPx(3, gapSize, gridIndicatorSize),
     },

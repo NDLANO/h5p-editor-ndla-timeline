@@ -1,33 +1,29 @@
 import { v4 as uuidV4 } from "uuid";
-import { ArrowDirection, ArrowType } from "../components/Arrow/Utils";
-import { ArrowItemType } from "../types/ArrowItemType";
 import { Cell } from "../types/Cell";
 import { Element } from "../types/Element";
 import { OccupiedCell } from "../types/OccupiedCell";
 import { Position } from "../types/Position";
 import { Size } from "../types/Size";
-import { DraggableType } from "../types/DraggableType";
 import { arraysHaveSomeOverlap } from "./array.utils";
+import { GridItem } from "../types/GridItem";
+import { BlockType } from "../types/BlockType";
 
-export const resizeItem = (
-  item: DraggableType,
-  scaleFactor: number,
-): DraggableType => {
+export const resizeItem = (item: GridItem, scaleFactor: number): GridItem => {
   const resizedItem = {
     ...item,
-    heightPercentage: item.heightPercentage * scaleFactor,
-    widthPercentage: item.widthPercentage * scaleFactor,
-    xPercentagePosition: item.xPercentagePosition * scaleFactor,
-    yPercentagePosition: item.yPercentagePosition * scaleFactor,
+    height: item.height * scaleFactor,
+    width: item.width * scaleFactor,
+    x: item.x * scaleFactor,
+    y: item.y * scaleFactor,
   };
 
   return resizedItem;
 };
 
 export const resizeItems = (
-  items: Array<DraggableType>,
+  items: Array<GridItem>,
   scaleFactor: number,
-): Array<DraggableType> => items.map(item => resizeItem(item, scaleFactor));
+): Array<GridItem> => items.map(item => resizeItem(item, scaleFactor));
 
 export const calculateXPercentage = (xPx: number, width: number): number => {
   return (xPx / width) * 100;
@@ -38,31 +34,31 @@ export const calculateYPercentage = (yPx: number, height: number): number => {
 };
 
 export const updateItem = (
-  items: Array<DraggableType>,
-  updatedItem: DraggableType,
+  items: Array<GridItem>,
+  updatedItem: GridItem,
   width: number,
   height: number,
   { newPosition, newSize }: { newPosition?: Position; newSize?: Size },
-): Array<DraggableType> => {
-  const newItems = items.map((item: DraggableType) => {
+): Array<GridItem> => {
+  const newItems = items.map((item: GridItem) => {
     const isCorrectItem = item.id === updatedItem.id;
 
     if (!isCorrectItem) {
       return item;
     }
 
-    const newItem: DraggableType = {
+    const newItem: GridItem = {
       ...item,
     };
 
     if (newPosition) {
-      newItem.xPercentagePosition = calculateXPercentage(newPosition.x, width);
-      newItem.yPercentagePosition = calculateYPercentage(newPosition.y, height);
+      newItem.x = calculateXPercentage(newPosition.x, width);
+      newItem.y = calculateYPercentage(newPosition.y, height);
     }
 
     if (newSize) {
-      newItem.widthPercentage = calculateXPercentage(newSize.width, width);
-      newItem.heightPercentage = calculateYPercentage(newSize.height, height);
+      newItem.width = calculateXPercentage(newSize.width, width);
+      newItem.height = calculateYPercentage(newSize.height, height);
     }
 
     return newItem;
@@ -108,7 +104,7 @@ export const cellIsOccupiedByElement = (
   cellPosition.y <= elementPosition.y + elementSize.height;
 
 export const findCellsElementOccupies = (
-  { id, type, position, size }: Element,
+  { id, position, size }: Element,
   gridWidth: number,
   gridHeight: number,
   gapSize: number,
@@ -125,7 +121,6 @@ export const findCellsElementOccupies = (
     .filter(cell => cellIsOccupiedByElement(position, size, cell))
     .map(({ x, y, index }) => ({
       occupiedById: id,
-      occupiedByType: type,
       x,
       y,
       index,
@@ -165,19 +160,18 @@ export const scaleX = (xPercentage: number, gridWidth: number): number =>
 export const scaleY = (yPercentage: number, height: number): number =>
   (height * yPercentage) / 100;
 
-export const mapTopicMapItemToElement = (
-  item: DraggableType,
+export const mapGridItemToElement = (
+  item: GridItem,
   gridSize: Size,
 ): Element => ({
   id: item.id,
-  type: "item",
   position: {
-    x: scaleX(item.xPercentagePosition, gridSize.width),
-    y: scaleY(item.yPercentagePosition, gridSize.height),
+    x: scaleX(item.x, gridSize.width),
+    y: scaleY(item.y, gridSize.height),
   },
   size: {
-    width: scaleX(item.widthPercentage, gridSize.width),
-    height: scaleY(item.heightPercentage, gridSize.height),
+    width: scaleX(item.width, gridSize.width),
+    height: scaleY(item.height, gridSize.height),
   },
 });
 
@@ -193,7 +187,6 @@ export const positionIsFree = (
   const cellsThisElementWillOccupy = findCellsElementOccupies(
     {
       id: elementId,
-      type: "item",
       position: newPosition,
       size: elementSize,
     },
@@ -249,116 +242,65 @@ export const isDraggingUp = (
   (Math.floor(boxStartPosition / numberOfColumns) / numberOfRows) * 100 >=
   (Math.floor(indicatorIndex / numberOfColumns) / numberOfRows) * 100;
 
-export const findWidthPercentage = (
+export const findWidth = (
   onlyScaleVertically: boolean,
   leftHandle: boolean,
   dragLeft: boolean,
-  existingItem: DraggableType,
-  xPercentagePosition: number,
-  xEndPercentagePosition: number,
+  existingItem: GridItem,
+  x: number,
+  xEnd: number,
 ): number => {
   if (onlyScaleVertically) {
-    return existingItem.widthPercentage;
+    return existingItem.width;
   }
   if (leftHandle && !dragLeft) {
-    return (
-      existingItem.widthPercentage -
-      (xPercentagePosition - existingItem.xPercentagePosition)
-    );
+    return existingItem.width - (x - existingItem.x);
   }
   if (leftHandle && dragLeft) {
-    return (
-      existingItem.widthPercentage +
-      (existingItem.xPercentagePosition - xPercentagePosition)
-    );
+    return existingItem.width + (existingItem.x - x);
   }
-  return xEndPercentagePosition - xPercentagePosition;
+  return xEnd - x;
 };
 
-export const findHeightPercentage = (
+export const findHeight = (
   onlyScaleHorizontally: boolean,
   topHandle: boolean,
   dragUp: boolean,
-  existingItem: DraggableType,
-  yPercentagePosition: number,
-  yEndPercentagePosition: number,
+  existingItem: GridItem,
+  y: number,
+  yEnd: number,
 ): number => {
   if (onlyScaleHorizontally) {
-    return existingItem.heightPercentage;
+    return existingItem.height;
   }
   if (topHandle && dragUp) {
-    return (
-      existingItem.heightPercentage +
-      (existingItem.yPercentagePosition - yPercentagePosition)
-    );
+    return existingItem.height + (existingItem.y - y);
   }
   if (topHandle && !dragUp) {
-    return (
-      existingItem.heightPercentage -
-      (yPercentagePosition - existingItem.yPercentagePosition)
-    );
+    return existingItem.height - (y - existingItem.y);
   }
-  return yEndPercentagePosition - yPercentagePosition;
+  return yEnd - y;
 };
 
-export const createTopicMapItem = (): DraggableType => {
+export const createGridItem = (blockType: BlockType): GridItem => {
   const id = uuidV4();
 
-  const item: DraggableType = {
+  const item: GridItem = {
     id,
-    xPercentagePosition: 0,
-    yPercentagePosition: 0,
-    widthPercentage: 0,
-    heightPercentage: 0,
-    backgroundImage: { path: "", alt: "" },
-    label: "",
-    links: [],
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    type: blockType,
   };
 
   return item;
-};
-
-export const createArrowItem = (
-  arrowHeadDirection: ArrowDirection,
-): ArrowItemType => {
-  const id = uuidV4();
-
-  const item: ArrowItemType = {
-    id,
-    xPercentagePosition: 0,
-    yPercentagePosition: 0,
-    widthPercentage: 0,
-    heightPercentage: 0,
-    arrowDirection: arrowHeadDirection,
-    arrowType: ArrowType.Directional,
-    label: "",
-    links: [],
-  };
-
-  return item;
-};
-
-export const getArrowDirection = (
-  dragLeft: boolean,
-  dragUp: boolean,
-  horizontal: boolean,
-): ArrowDirection => {
-  if (dragLeft && horizontal) {
-    return ArrowDirection.Left;
-  }
-  if (dragUp && !horizontal) {
-    return ArrowDirection.Up;
-  }
-  if (!dragUp && !horizontal) {
-    return ArrowDirection.Down;
-  }
-  return ArrowDirection.Right;
 };
 
 export const findItem = (
   id: string,
-  items: Array<DraggableType>,
-): DraggableType | null => {
+  items: Array<GridItem>,
+): GridItem | null => {
   if (!id) {
     return null;
   }
