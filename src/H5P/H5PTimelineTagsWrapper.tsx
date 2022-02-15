@@ -9,6 +9,8 @@ import { Params } from "../types/H5P/Params";
 import { H5P } from "./H5P.util";
 
 export class H5PTimelineTagsWrapper extends H5P.EventDispatcher {
+  public field: H5PField;
+
   private wrapper: HTMLElement;
 
   // private categories: Array<{name:string}> | undefined;
@@ -20,6 +22,7 @@ export class H5PTimelineTagsWrapper extends H5P.EventDispatcher {
   ) {
     super();
     this.wrapper = H5PTimelineTagsWrapper.createWrapperElement();
+    this.field = semantics;
 
     ReactDOM.render(
       <CategoriesWidgetApp
