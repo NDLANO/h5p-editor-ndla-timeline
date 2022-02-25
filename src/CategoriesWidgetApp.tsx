@@ -34,6 +34,10 @@ export const CategoriesWidgetApp: React.FC<CategoriesWidgetAppProps> = ({
   );
 
   React.useEffect(() => {
+    setValue({...initialParams, timelineItems: [...initialParams?.timelineItems.map(item => ({...item, categories: [...item.categories]}))]});
+  }, [selectedCategories]);
+
+  React.useEffect(() => {
     const interval = setInterval(() => {
       setCategories(
         parent.parent?.parent?.params.categories

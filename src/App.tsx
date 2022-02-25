@@ -83,7 +83,6 @@ export const App: React.FC<AppProps> = ({
 
   return (
     <div className="h5p-editor-timeline-content">
-      test
       <Grid
         numberOfColumns={50}
         numberOfRows={50}
@@ -102,13 +101,3 @@ export const App: React.FC<AppProps> = ({
   );
 };
 
-// class App extends React.Component<Props> {
-//   render(): JSX.Element {
-//     const { adjective } = this.props;
-//     return (
-//       <>
-//         <h1>Hi, you&apos;re {adjective}</h1>
-//       </>
-//     );
-//   }
-// }
