@@ -13,6 +13,7 @@ export default {
 export const DarkBackground: ComponentStory<typeof Tag> = () => {
   const args: TagProps = {
     tag: {
+      id: "tag-1",
       color: "darkgreen",
       name: "Dark green tag",
       isActive: true,
@@ -25,6 +26,7 @@ export const DarkBackground: ComponentStory<typeof Tag> = () => {
 export const LightBackground: ComponentStory<typeof Tag> = () => {
   const args: TagProps = {
     tag: {
+      id: "tag-1",
       color: "lightgreen",
       name: "Light green tag",
       isActive: false,
