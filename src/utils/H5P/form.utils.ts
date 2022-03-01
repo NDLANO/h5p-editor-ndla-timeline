@@ -1,7 +1,6 @@
 import { H5PEditor } from "../../H5P/H5P.util";
 import { H5PField } from "../../types/H5P/H5PField";
 import { H5PFieldType } from "../../types/H5P/H5PFieldType";
-import { Params } from "../../types/H5P/Params";
 
 const getSubfieldByName = (
   name: string,
@@ -39,27 +38,4 @@ export const getEventsField = (semantics: H5PField): H5PField | null => {
   }
 
   return eventsField;
-};
-
-export const getEmptyParams = (): Params => {
-  const params: Params = {
-    timelineItems: [],
-    showTitleSlide: false,
-    categories: [],
-    eras: [],
-    titleSlide: undefined,
-  };
-
-  return params;
-};
-
-export const fillInMissingParamsProperties = (
-  partialParams: Partial<Params>,
-): Params => {
-  const params: Params = {
-    ...getEmptyParams(),
-    ...partialParams,
-  };
-
-  return params;
 };

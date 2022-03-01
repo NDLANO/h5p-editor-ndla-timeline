@@ -1,8 +1,13 @@
-import { H5PTimelineTagsWrapper } from "./src/H5P/H5PTimelineTagsWrapper";
-import { H5PWrapper } from "./src/H5P/H5PWrapper";
+import {
+  NDLATagsEditor,
+  NDLATagsEditorParams,
+} from "./src/widgets/NDLATagsEditor.widget";
+import {
+  NDLATagsPicker,
+  NDLATagsPickerParams,
+} from "./src/widgets/NDLATagsPicker.widget";
 import { H5PField } from "./src/types/H5P/H5PField";
 import { H5PForm } from "./src/types/H5P/H5PForm";
-import { Params } from "./src/types/H5P/Params";
 
 export interface H5PObject {
   EventDispatcher: typeof EventDispatcher;
@@ -10,11 +15,11 @@ export interface H5PObject {
 }
 
 export interface H5PEditorObject {
-  NDLATimelineEventLayout: typeof H5PWrapper;
-  NDLATimelineTags: typeof H5PTimelineTagsWrapper;
+  NDLATagsPicker: typeof NDLATagsPicker;
+  NDLATagsEditor: typeof NDLATagsEditor;
   widgets: {
-    NDLATimelineEventLayout: typeof H5PWrapper;
-    NDLATimelineTags: typeof H5PTimelineTagsWrapper;
+    NDLATagsPicker: typeof NDLATagsPicker;
+    NDLATagsEditor: typeof NDLATagsEditor;
   };
   $: typeof jQuery;
   contentId: string;
@@ -44,7 +49,7 @@ export interface H5PEditorObject {
    */
   processSemanticsChunk: (
     semanticsChunk: H5PField | Array<H5PField>,
-    params: Params,
+    params: NDLATagsEditorParams | NDLATagsPickerParams,
     $wrapper: JQuery<HTMLElement>,
     parent: H5PForm,
   ) => void;

@@ -1,9 +1,7 @@
-import { H5PWrapper } from "../../H5P/H5PWrapper";
 import { H5PGroup } from "./H5PGroup";
 import { H5PMetadata } from "./H5PMetadata";
 import { H5PMetadataForm } from "./H5PMetadataForm";
 import { H5PSetValue } from "./H5PSetValue";
-import { Params } from "./Params";
 
 type UberName = `H5P.${string} ${number}.${number}`;
 
@@ -22,7 +20,7 @@ export type H5PForm = {
     libraryName: string,
     languageCodes: Array<string | undefined>,
   ) => void;
-  children: Array<H5PWrapper | H5PGroup>;
+  children: Array<H5PGroup>;
 
   commonFields: Record<
     UberName,
@@ -31,7 +29,7 @@ export type H5PForm = {
         instance: H5PGroup;
         params: unknown;
         parents: H5PForm;
-        setValues: H5PSetValue;
+        setValues: H5PSetValue<unknown>;
       };
     }
   >;
@@ -40,7 +38,7 @@ export type H5PForm = {
   metadataForm: H5PMetadataForm | null;
   offset: { top: number; left: number };
   params: {
-    timeline: Params;
+    timeline: unknown;
     categories: Array<{ name: string }> | undefined;
   };
   passReadies: boolean;
