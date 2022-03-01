@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/prefer-stateless-function */
 import * as React from "react";
-import { Grid } from "./components/Grid/Grid";
 import { H5PField } from "./types/H5P/H5PField";
 import { H5PForm } from "./types/H5P/H5PForm";
-import { Params } from "./types/H5P/Params";
-import {
-  fillInMissingParamsProperties,
-  getEmptyParams,
-} from "./utils/H5P/form.utils";
+import { NDLATagsEditorParams } from "./widgets/NDLATagsEditor.widget";
 
 type CategoriesWidgetAppProps = {
-  setValue: (params: Params) => void;
+  setValue: (params: NDLATagsEditorParams) => void;
   semantics: H5PField;
-  initialParams: Partial<Params> | undefined;
+  initialParams: Partial<NDLATagsEditorParams> | undefined;
   parent: H5PForm;
 };
 

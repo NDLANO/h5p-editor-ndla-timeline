@@ -1,34 +1,35 @@
-/* eslint-disable no-console */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "../App";
-import { H5PField, H5PFieldGroup } from "../types/H5P/H5PField";
+import { H5PField, H5PFieldList } from "../types/H5P/H5PField";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
-import { Params } from "../types/H5P/Params";
-import { H5P } from "./H5P.util";
+import { H5P } from "../H5P/H5P.util";
+import { TagType } from "../types/TagType";
+import { TagPicker } from "../components/TagPicker/TagPicker";
 
-export class H5PWrapper extends H5P.EventDispatcher {
+export type NDLATagsPickerParams = {
+  tags: Array<TagType>;
+};
+
+export class NDLATagsPicker extends H5P.EventDispatcher {
   public field: H5PField;
 
   private wrapper: HTMLElement;
 
   constructor(
     parent: H5PForm,
-    semantics: H5PFieldGroup,
-    params: Params,
-    setValue: H5PSetValue,
+    semantics: H5PFieldList,
+    params: NDLATagsPickerParams,
+    setValue: H5PSetValue<NDLATagsPickerParams>,
   ) {
     super();
-    this.wrapper = H5PWrapper.createWrapperElement();
+    this.wrapper = NDLATagsPicker.createWrapperElement();
     this.field = semantics;
 
     ReactDOM.render(
-      <App
-        setValue={newParams => setValue(semantics, newParams)}
-        semantics={semantics}
-        initialParams={params}
-        parent={parent}
+      <TagPicker
+        setActiveTags={tags => setValue(semantics, { tags })}
+        tags={params.tags}
       />,
       this.wrapper,
     );
@@ -38,13 +39,13 @@ export class H5PWrapper extends H5P.EventDispatcher {
     const containerElement = $container.get(0);
     if (!containerElement) {
       console.error(
-        "Found no containing element to attach `h5p-editor-timeline` to.",
+        "Found no containing element to attach `h5p-tags-picker` to.",
       );
       return;
     }
 
     containerElement.appendChild(this.wrapper);
-    containerElement.classList.add("h5p-editor-timeline");
+    containerElement.classList.add("h5p-tags-picker");
   }
 
   validate(): boolean {
