@@ -5,7 +5,7 @@ import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
 import { H5P } from "../H5P/H5P.util";
 import { TagType } from "../types/TagType";
-import { CategoriesWidgetApp } from "../CategoriesWidgetApp";
+// import { CategoriesWidgetApp } from "../CategoriesWidgetApp";
 
 export type NDLATagsEditorParams = {
   tags: Array<Omit<TagType, "isActive">>;
@@ -27,12 +27,13 @@ export class NDLATagsEditor extends H5P.EventDispatcher {
     this.field = semantics;
 
     ReactDOM.render(
-      <CategoriesWidgetApp
-        semantics={semantics}
-        setValue={updatedParams => setValue(semantics, updatedParams)}
-        initialParams={params}
-        parent={parent}
-      />,
+      // <CategoriesWidgetApp
+      //   semantics={semantics}
+      //   setValue={updatedParams => setValue(semantics, updatedParams)}
+      //   initialParams={params}
+      //   parent={parent}
+      // />,
+      <div />,
       this.wrapper,
     );
   }
