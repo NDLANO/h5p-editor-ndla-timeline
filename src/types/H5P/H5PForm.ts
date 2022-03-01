@@ -1,3 +1,4 @@
+import { TagType } from "../TagType";
 import { H5PGroup } from "./H5PGroup";
 import { H5PMetadata } from "./H5PMetadata";
 import { H5PMetadataForm } from "./H5PMetadataForm";
@@ -37,10 +38,8 @@ export type H5PForm = {
   metadata: H5PMetadata;
   metadataForm: H5PMetadataForm | null;
   offset: { top: number; left: number };
-  params: {
-    timeline: unknown;
-    categories: Array<{ name: string }> | undefined;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: any;
   passReadies: boolean;
   readies: Array<unknown>;
   removeLanguages: (
