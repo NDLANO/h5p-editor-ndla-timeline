@@ -24,6 +24,7 @@
     "no-use-before-define": "off",
     "no-shadow": "off",
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "no-restricted-syntax": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
