@@ -4,11 +4,11 @@ import { H5PField, H5PFieldList } from "../types/H5P/H5PField";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
 import { H5P } from "../H5P/H5P.util";
-import { TagType } from "../types/TagType";
+import { PickerTagType } from "../types/PickerTagType";
 import { NDLATagsPickerApp } from "../apps/NDLATagsPicker.app";
 
 export type NDLATagsPickerParams = {
-  tags: Array<TagType>;
+  tags: Array<PickerTagType>;
 };
 
 export class NDLATagsPicker extends H5P.EventDispatcher {
@@ -19,7 +19,7 @@ export class NDLATagsPicker extends H5P.EventDispatcher {
   constructor(
     parent: H5PForm,
     semantics: H5PFieldList,
-    params: NDLATagsPickerParams,
+    params: NDLATagsPickerParams | undefined,
     setValue: H5PSetValue<NDLATagsPickerParams>,
   ) {
     super();
@@ -37,7 +37,7 @@ export class NDLATagsPicker extends H5P.EventDispatcher {
     ReactDOM.render(
       <NDLATagsPickerApp
         updateTags={tags => setValue(semantics, { tags })}
-        tags={params.tags}
+        tags={params?.tags ?? []}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         fieldNameToWatch={(semantics as any).fieldNameToWatch}
         parent={parent}

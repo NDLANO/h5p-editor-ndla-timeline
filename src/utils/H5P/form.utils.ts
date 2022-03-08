@@ -1,41 +1,50 @@
 import { H5PEditor } from "../../H5P/H5P.util";
 import { H5PField } from "../../types/H5P/H5PField";
-import { H5PFieldType } from "../../types/H5P/H5PFieldType";
+import { NDLATagsEditorParams } from "../../widgets/NDLATagsEditor.widget";
 
-const getSubfieldByName = (
-  name: string,
+const getSingleField = <Type extends H5PField>(
+  fieldName: string,
   semantics: H5PField,
-): H5PField | null => {
-  if (semantics.name === name) {
-    return semantics;
+): Type | null => {
+  if (!H5PEditor.findSemanticsField) {
+    return null;
   }
 
-  if (semantics.type === H5PFieldType.Group) {
-    return (
-      semantics.fields
-        .map(field => getSubfieldByName(name, field))
-        .find(field => field !== null) ?? null
-    );
+  const field = H5PEditor.findSemanticsField(
+    fieldName,
+    semantics,
+  ) as Type | null;
+
+  if (!field) {
+    throw new Error(`Could not find the \`${fieldName}\` field`);
   }
-  return null;
+
+  if (Array.isArray(field)) {
+    console.error(
+      `\`${fieldName}\` is an array, which means that more than one field with the name was found.`,
+      field,
+    );
+    return field[0];
+  }
+
+  return field;
 };
 
-export const getEventsField = (semantics: H5PField): H5PField | null => {
-  if (!H5PEditor.findSemanticsField) {
-    console.error("no H5PEditor.findSemanticsField, finding it manually");
-    return getSubfieldByName("timelineItems", semantics);
-  }
+export const getTagNameField = (tagsField: H5PField): H5PField | null =>
+  getSingleField("name", tagsField);
 
-  const eventsField = H5PEditor.findSemanticsField("timelineItems", semantics);
+export const getTagColorField = (tagsField: H5PField): H5PField | null =>
+  getSingleField("color", tagsField);
 
-  if (!eventsField) {
-    throw new Error("Could not find the `timelineItems` field");
-  }
+const getEmptyTagEditorParams = (): NDLATagsEditorParams => ({
+  tags: [],
+});
 
-  if (Array.isArray(eventsField)) {
-    console.error("`topicMapField` is an array", eventsField);
-    return eventsField[0];
-  }
-
-  return eventsField;
+export const fillInMissingTagEditorParamsProperties = (
+  partialParams: Partial<NDLATagsEditorParams> | undefined,
+): NDLATagsEditorParams => {
+  return {
+    ...getEmptyTagEditorParams(),
+    ...(partialParams ?? {}),
+  };
 };

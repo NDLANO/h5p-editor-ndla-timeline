@@ -4,11 +4,13 @@ import { H5PField, H5PFieldGroup } from "../types/H5P/H5PField";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
 import { H5P } from "../H5P/H5P.util";
-import { TagType } from "../types/TagType";
+import { EditorTagType } from "../types/EditorTagType";
+import { TagEditor } from "../components/TagEditor/TagEditor";
+import { fillInMissingTagEditorParamsProperties } from "../utils/H5P/form.utils";
 // import { CategoriesWidgetApp } from "../CategoriesWidgetApp";
 
 export type NDLATagsEditorParams = {
-  tags: Array<Omit<TagType, "isActive">>;
+  tags: Array<EditorTagType>;
 };
 
 export class NDLATagsEditor extends H5P.EventDispatcher {
@@ -19,7 +21,7 @@ export class NDLATagsEditor extends H5P.EventDispatcher {
   constructor(
     parent: H5PForm,
     semantics: H5PFieldGroup,
-    params: NDLATagsEditorParams,
+    params: NDLATagsEditorParams | undefined,
     setValue: H5PSetValue<NDLATagsEditorParams>,
   ) {
     super();
@@ -27,13 +29,13 @@ export class NDLATagsEditor extends H5P.EventDispatcher {
     this.field = semantics;
 
     ReactDOM.render(
-      // <CategoriesWidgetApp
-      //   semantics={semantics}
-      //   setValue={updatedParams => setValue(semantics, updatedParams)}
-      //   initialParams={params}
-      //   parent={parent}
-      // />,
-      <div />,
+      <TagEditor
+        tags={params?.tags ?? []}
+        updateTags={tags => setValue(semantics, { tags })}
+        params={fillInMissingTagEditorParamsProperties(params)}
+        parent={parent}
+        tagsField={semantics}
+      />,
       this.wrapper,
     );
   }

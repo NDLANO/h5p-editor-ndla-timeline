@@ -1,15 +1,15 @@
 import * as React from "react";
 import { FC } from "react";
 import fontColorContrast from "font-color-contrast";
-import { TagType } from "../../types/TagType";
-import styles from "./Tag.module.scss";
+import { PickerTagType } from "../../types/PickerTagType";
+import styles from "./PickerTag.module.scss";
 
 type TagProps = {
-  toggleActiveTag: (tag: TagType) => void;
-  tag: TagType;
+  toggleActiveTag: (tag: PickerTagType) => void;
+  tag: PickerTagType;
 };
 
-export const Tag: FC<TagProps> = ({ toggleActiveTag, tag }) => {
+export const PickerTag: FC<TagProps> = ({ toggleActiveTag, tag }) => {
   const { name, color: backgroundColor } = tag;
   const textColor = fontColorContrast(backgroundColor);
 

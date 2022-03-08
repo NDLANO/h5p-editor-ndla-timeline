@@ -1,4 +1,3 @@
-import { TagType } from "../TagType";
 import { H5PGroup } from "./H5PGroup";
 import { H5PMetadata } from "./H5PMetadata";
 import { H5PMetadataForm } from "./H5PMetadataForm";

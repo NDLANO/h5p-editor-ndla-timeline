@@ -12,6 +12,7 @@ import { H5PForm } from "./src/types/H5P/H5PForm";
 export interface H5PObject {
   EventDispatcher: typeof EventDispatcher;
   getPath: (path: string, contentId: string) => string;
+  createUUID: () => string;
 }
 
 export interface H5PEditorObject {

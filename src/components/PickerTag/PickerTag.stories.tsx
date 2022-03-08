@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Tag } from "./Tag";
+import { PickerTag } from "./PickerTag";
 
-type TagProps = React.ComponentPropsWithoutRef<typeof Tag>;
+type TagProps = React.ComponentPropsWithoutRef<typeof PickerTag>;
 
 export default {
-  title: "Atoms/Tag",
-  component: Tag,
-} as ComponentMeta<typeof Tag>;
+  title: "Atoms/Picker tag",
+  component: PickerTag,
+} as ComponentMeta<typeof PickerTag>;
 
-export const DarkBackground: ComponentStory<typeof Tag> = () => {
+export const DarkBackground: ComponentStory<typeof PickerTag> = () => {
   const args: TagProps = {
     tag: {
       id: "tag-1",
@@ -20,10 +20,10 @@ export const DarkBackground: ComponentStory<typeof Tag> = () => {
     },
     toggleActiveTag: tag => console.info("Updated tag", { tag }),
   };
-  return <Tag {...args} />;
+  return <PickerTag {...args} />;
 };
 
-export const LightBackground: ComponentStory<typeof Tag> = () => {
+export const LightBackground: ComponentStory<typeof PickerTag> = () => {
   const args: TagProps = {
     tag: {
       id: "tag-1",
@@ -33,5 +33,5 @@ export const LightBackground: ComponentStory<typeof Tag> = () => {
     },
     toggleActiveTag: tag => console.info("Updated tag", { tag }),
   };
-  return <Tag {...args} />;
+  return <PickerTag {...args} />;
 };
