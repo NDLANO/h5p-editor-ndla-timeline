@@ -1,0 +1,26 @@
+.tag {
+  align-items: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0.167em;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5em;
+}
+
+.tagColorPreview {
+  border-radius: 0.25rem;
+  height: 1.3125rem;
+  width: 2.375rem;
+}
+
+.tagContent {
+  flex-grow: 1;
+}
+
+.editButton,
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}

@@ -1,17 +1,12 @@
-import {
-  NDLATagsEditor,
-  NDLATagsEditorParams,
-} from "./src/widgets/NDLATagsEditor.widget";
-import {
-  NDLATagsPicker,
-  NDLATagsPickerParams,
-} from "./src/widgets/NDLATagsPicker.widget";
+import { NDLATagsEditor } from "./src/widgets/NDLATagsEditor.widget";
+import { NDLATagsPicker } from "./src/widgets/NDLATagsPicker.widget";
 import { H5PField } from "./src/types/H5P/H5PField";
 import { H5PForm } from "./src/types/H5P/H5PForm";
 
 export interface H5PObject {
   EventDispatcher: typeof EventDispatcher;
   getPath: (path: string, contentId: string) => string;
+  createUUID: () => string;
 }
 
 export interface H5PEditorObject {
@@ -49,7 +44,7 @@ export interface H5PEditorObject {
    */
   processSemanticsChunk: (
     semanticsChunk: H5PField | Array<H5PField>,
-    params: NDLATagsEditorParams | NDLATagsPickerParams,
+    params: unknown,
     $wrapper: JQuery<HTMLElement>,
     parent: H5PForm,
   ) => void;

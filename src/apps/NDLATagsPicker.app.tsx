@@ -1,22 +1,27 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import { TagPicker } from "../components/TagPicker/TagPicker";
+import { EditorTagType } from "../types/EditorTagType";
 import { H5PForm } from "../types/H5P/H5PForm";
-import { TagType } from "../types/TagType";
+import { PickerTagType } from "../types/PickerTagType";
 
 type NDLATagsPickerAppProps = {
-  updateTags: (tags: Array<TagType>) => void;
-  tags: Array<TagType>;
+  updateTags: (tags: Array<PickerTagType>) => void;
+  tags: Array<PickerTagType>;
   parent: H5PForm;
   fieldNameToWatch: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const isTagsField = (field: any): field is Array<Omit<TagType, "isActive">> => {
-  return (
-    ("length" in field && field.length === 0) ||
-    (field[Symbol.iterator] && "name" in field[0] && "color" in field[0])
-  );
+const getSemanticsParent = (h5pForm: H5PForm): H5PForm => {
+  const { parent } = h5pForm;
+  const grandParent = parent?.parent;
+
+  const isSecondToTop = !grandParent;
+  if (!isSecondToTop) {
+    return getSemanticsParent(parent);
+  }
+
+  return h5pForm;
 };
 
 export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
@@ -25,20 +30,21 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
   parent,
   fieldNameToWatch,
 }) => {
-  const [tags, setTags] = useState<Array<TagType>>(initialTags);
+  const [tags, setTags] = useState<Array<PickerTagType>>(initialTags);
 
   useEffect(() => {
-    const watchedField = parent.parent?.parent?.params?.[
-      fieldNameToWatch
-    ] as unknown;
-
-    if (!isTagsField(watchedField)) {
-      throw new Error(
-        `Field with name \`${fieldNameToWatch}\` is not an array of type \`TagType\`.`,
-      );
-    }
+    const eldestParent = getSemanticsParent(parent);
 
     const interval = window.setInterval(() => {
+      const watchedField = eldestParent?.params?.[
+        fieldNameToWatch
+      ] as Array<EditorTagType> | null;
+
+      const noTagsYet = !watchedField;
+      if (noTagsYet) {
+        return;
+      }
+
       const editorTags = watchedField.map(tag => ({
         ...tag,
         isActive: false,
@@ -59,7 +65,7 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [fieldNameToWatch, parent.parent?.parent?.params, tags, updateTags]);
+  }, [fieldNameToWatch, parent, tags, updateTags]);
 
   return <TagPicker setActiveTags={updateTags} tags={tags} />;
 };
