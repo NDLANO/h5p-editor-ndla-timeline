@@ -2,8 +2,6 @@ import * as React from "react";
 import { H5PEditor, t } from "../../H5P/H5P.util";
 import { H5PField } from "../../types/H5P/H5PField";
 import { H5PForm } from "../../types/H5P/H5PForm";
-import { NDLATagsEditorParams } from "../../widgets/NDLATagsEditor.widget";
-import { NDLATagsPickerParams } from "../../widgets/NDLATagsPicker.widget";
 import styles from "./SemanticsForm.module.scss";
 
 type SemanticsFormProps<Params> = {
@@ -14,9 +12,13 @@ type SemanticsFormProps<Params> = {
   formClassName?: string;
 };
 
-export const SemanticsForm: React.FC<
-  SemanticsFormProps<NDLATagsEditorParams | NDLATagsPickerParams>
-> = ({ fields, params, parent, onSave, formClassName }) => {
+export const SemanticsForm: React.FC<SemanticsFormProps<unknown>> = ({
+  fields,
+  params,
+  parent,
+  onSave,
+  formClassName,
+}) => {
   const generatedFormRef = React.useRef<HTMLDivElement>(null);
   const saveLabel = t("semantics-form_save");
   const [hasRendered, setHasRendered] = React.useState(false);

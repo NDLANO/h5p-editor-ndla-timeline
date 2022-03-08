@@ -8,6 +8,7 @@ import { NDLATagsEditorParams } from "../../widgets/NDLATagsEditor.widget";
 import { Dialog } from "../Dialog/Dialog";
 import { EditorForm } from "../EditorForm/EditorForm";
 import { EditorTag } from "../EditorTag/EditorTag";
+import styles from "./TagEditor.module.scss";
 
 type TagEditorProps = {
   tags: Array<EditorTagType>;
@@ -52,18 +53,44 @@ export const TagEditor: FC<TagEditorProps> = ({
   const createNewTag = useCallback(() => {
     const emptyTag: EditorTagType = {
       id: H5P.createUUID(),
-      color: "",
+      color: "#000000",
       name: "",
     };
 
     setEditedTag(emptyTag);
   }, []);
 
+  const updateTag = useCallback(
+    (updatedTag: EditorTagType) => {
+      let updatedTags: Array<EditorTagType>;
+
+      const isNew = tags.find(tag => tag.id === updatedTag.id) == null;
+      if (isNew) {
+        updatedTags = [...tags, updatedTag];
+      } else {
+        updatedTags = tags.map(tag =>
+          tag.id === updatedTag.id ? updatedTag : tag,
+        );
+      }
+
+      updateTags(updatedTags);
+      setTags(updatedTags);
+
+      setEditedTag(null);
+    },
+    [tags, updateTags],
+  );
+
   return (
     <>
-      <ul>
+      <ul className={styles.tagList}>
         {tags.map(tag => (
-          <EditorTag tag={tag} editTag={editTag} deleteTag={deleteTag} />
+          <EditorTag
+            key={tag.id}
+            tag={tag}
+            editTag={editTag}
+            deleteTag={deleteTag}
+          />
         ))}
       </ul>
       <button
@@ -76,19 +103,19 @@ export const TagEditor: FC<TagEditorProps> = ({
       {editedTag ? (
         <Dialog
           isOpen={!!editedTag}
-          onOpenChange={isOpen => !isOpen && setEditedTag(null)}
+          onOpenChange={isOpen => {
+            if (!isOpen) {
+              setEditedTag(null);
+            }
+          }}
           size="medium"
         >
           <EditorForm
-            tagId={editedTag.id}
+            editedTag={editedTag}
             params={params}
             parent={parent}
             tagsField={tagsField}
-            updateTags={updatedTags => {
-              updateTags(updatedTags);
-              setTags(updatedTags);
-              setEditedTag(null);
-            }}
+            updateTag={updateTag}
           />
         </Dialog>
       ) : null}

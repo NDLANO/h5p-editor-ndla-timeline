@@ -8,22 +8,21 @@ import { NDLATagsEditorParams } from "../../widgets/NDLATagsEditor.widget";
 import { getTagColorField, getTagNameField } from "../../utils/H5P/form.utils";
 
 type EditorFormProps = {
-  updateTags: (tags: Array<EditorTagType>) => void;
+  updateTag: (tag: EditorTagType) => void;
   tagsField: H5PFieldGroup;
   params: NDLATagsEditorParams;
   parent: H5PForm;
-  tagId: string;
+  editedTag: EditorTagType;
 };
 
 export const EditorForm: FC<EditorFormProps> = ({
-  updateTags,
+  updateTag,
   tagsField,
   params,
   parent,
-  tagId: itemId,
+  editedTag,
 }) => {
   const [tagFields, setTagFields] = useState<Array<H5PField>>();
-  const [formParams, setFormParams] = useState<NDLATagsEditorParams>();
 
   React.useEffect(() => {
     const nameField = getTagNameField(tagsField);
@@ -40,40 +39,25 @@ export const EditorForm: FC<EditorFormProps> = ({
     }
 
     setTagFields([nameField, colorField]);
-
-    if (!params.tags) {
-      return;
-    }
-
-    setFormParams({
-      ...params,
-      tags: params.tags.filter(item => item.id === itemId),
-    });
-  }, [itemId, params, tagsField]);
+  }, [params, tagsField]);
 
   const onUpdate = React.useCallback(
-    (newParams: NDLATagsEditorParams) => {
-      if (!newParams.tags) {
+    (newTag: EditorTagType) => {
+      if (!newTag) {
         return;
       }
 
-      const updatedItem = newParams.tags[0];
-      const updatedItems =
-        params.tags?.map(item =>
-          item.id === updatedItem.id ? updatedItem : item,
-        ) ?? [];
-
-      updateTags(updatedItems);
+      updateTag(newTag);
     },
-    [params.tags, updateTags],
+    [updateTag],
   );
 
-  return formParams && tagFields ? (
+  return tagFields ? (
     <SemanticsForm
       fields={tagFields}
-      params={formParams}
+      params={editedTag}
       parent={parent}
-      onSave={onUpdate}
+      onSave={updatedTag => onUpdate(updatedTag as EditorTagType)}
     />
   ) : null;
 };

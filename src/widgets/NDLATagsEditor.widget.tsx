@@ -7,7 +7,6 @@ import { H5P } from "../H5P/H5P.util";
 import { EditorTagType } from "../types/EditorTagType";
 import { TagEditor } from "../components/TagEditor/TagEditor";
 import { fillInMissingTagEditorParamsProperties } from "../utils/H5P/form.utils";
-// import { CategoriesWidgetApp } from "../CategoriesWidgetApp";
 
 export type NDLATagsEditorParams = {
   tags: Array<EditorTagType>;

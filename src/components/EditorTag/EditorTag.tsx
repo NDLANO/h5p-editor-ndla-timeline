@@ -23,21 +23,32 @@ export const EditorTag: FC<TagProps> = ({ deleteTag, editTag, tag }) => {
     // eslint-disable-next-line jsx-a11y/no-redundant-roles
     <li role="listitem" className={styles.tag}>
       <div className={styles.tagColorPreview} style={{ backgroundColor }} />
-      {name}
 
-      <button type="button" onClick={() => editTag(tag)}>
-        <span className="sr-only">
-          {editText} {name}
-        </span>
-        <EditIcon />
-      </button>
+      <span className={styles.tagContent}>{name}</span>
 
-      <button type="button" onClick={() => deleteTag(tag)}>
-        <span className="sr-only">
-          {deleteText} {name}
-        </span>
-        <DeleteIcon />
-      </button>
+      <div className={styles.buttons}>
+        <button
+          type="button"
+          className={styles.editButton}
+          onClick={() => editTag(tag)}
+        >
+          <span className="sr-only">
+            {editText} {name}
+          </span>
+          <EditIcon />
+        </button>
+
+        <button
+          type="button"
+          className={styles.deleteButton}
+          onClick={() => deleteTag(tag)}
+        >
+          <span className="sr-only">
+            {deleteText} {name}
+          </span>
+          <DeleteIcon />
+        </button>
+      </div>
     </li>
   );
 };
