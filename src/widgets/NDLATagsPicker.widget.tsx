@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { NDLATagsPickerApp } from "../apps/NDLATagsPicker.app";
+import { H5P } from "../H5P/H5P.util";
 import { H5PField, H5PFieldList } from "../types/H5P/H5PField";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { H5PSetValue } from "../types/H5P/H5PSetValue";
-import { H5P } from "../H5P/H5P.util";
 import { PickerTagType } from "../types/PickerTagType";
-import { NDLATagsPickerApp } from "../apps/NDLATagsPicker.app";
 
 export type NDLATagsPickerParams = {
   tags: Array<PickerTagType>;
@@ -16,9 +16,11 @@ export class NDLATagsPicker extends H5P.EventDispatcher {
 
   private wrapper: HTMLElement;
 
+  private semantics: H5PFieldList & { fieldNameToWatch: string };
+
   constructor(
     parent: H5PForm,
-    semantics: H5PFieldList,
+    semantics: H5PFieldList & { fieldNameToWatch: string },
     params: NDLATagsPickerParams | undefined,
     setValue: H5PSetValue<NDLATagsPickerParams>,
   ) {
@@ -38,12 +40,14 @@ export class NDLATagsPicker extends H5P.EventDispatcher {
       <NDLATagsPickerApp
         updateTags={tags => setValue(semantics, { tags })}
         tags={params?.tags ?? []}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        fieldNameToWatch={(semantics as any).fieldNameToWatch}
+        fieldNameToWatch={semantics.fieldNameToWatch}
         parent={parent}
+        label={semantics.label}
       />,
       this.wrapper,
     );
+
+    this.semantics = semantics;
   }
 
   appendTo($container: JQuery<HTMLElement>): void {
@@ -56,7 +60,7 @@ export class NDLATagsPicker extends H5P.EventDispatcher {
     }
 
     containerElement.appendChild(this.wrapper);
-    containerElement.classList.add("h5p-tags-picker");
+    this.wrapper.className = `h5p-tags-picker field field-name-${this.semantics.name}`;
   }
 
   validate(): boolean {
