@@ -10,9 +10,7 @@ import { PickerTagType } from "../types/PickerTagType";
 
 type Field = H5PFieldList & { fieldNameToWatch: string };
 
-type Params = {
-  tags: Array<PickerTagType>;
-};
+type Params = Array<PickerTagType>;
 
 export class NDLATagsPicker
   extends H5PWidget<Field, Params>
@@ -21,12 +19,12 @@ export class NDLATagsPicker
   constructor(
     parent: H5PForm,
     field: Field,
-    params: Params | undefined,
+    tags: Params | undefined,
     setValue: H5PSetValue<Params>,
   ) {
-    super(parent, field, params, setValue);
+    super(parent, field, tags, setValue);
 
-    console.info("Tags picker", { params, field });
+    console.info("Tags picker", { params: tags, field });
 
     if (!("fieldNameToWatch" in field)) {
       throw new Error(
@@ -44,7 +42,7 @@ export class NDLATagsPicker
       return;
     }
 
-    const { parent, field, params, setValue, wrapper } = this;
+    const { parent, field, params: tags, setValue, wrapper } = this;
 
     wrapper.classList.add(
       "h5p-tags-picker",
@@ -55,8 +53,8 @@ export class NDLATagsPicker
 
     ReactDOM.render(
       <NDLATagsPickerApp
-        storeTags={tags => setValue(field, { tags })}
-        tags={params?.tags ?? []}
+        storeTags={newTags => setValue(field, newTags)}
+        tags={tags ?? []}
         fieldNameToWatch={field.fieldNameToWatch}
         parent={parent}
         label={field.label}
