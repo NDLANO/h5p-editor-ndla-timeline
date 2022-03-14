@@ -1,13 +1,13 @@
 import chroma from "chroma-js";
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
-import Select, { StylesConfig } from "react-select";
-import { EditorTagType } from "../types/EditorTagType";
+import Select, { MultiValue, StylesConfig } from "react-select";
+import { H5P } from "../H5P/H5P.util";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { PickerTagType } from "../types/PickerTagType";
 
 type NDLATagsPickerAppProps = {
-  updateTags: (tags: Array<PickerTagType>) => void;
+  storeTags: (tags: Array<PickerTagType>) => void;
   tags: Array<PickerTagType>;
   parent: H5PForm;
   fieldNameToWatch: string;
@@ -25,13 +25,14 @@ const getSemanticsParent = (h5pForm: H5PForm): H5PForm => {
 };
 
 export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
-  updateTags,
+  storeTags,
   tags: initialTags,
   parent,
   fieldNameToWatch,
   label,
 }) => {
-  const [tags, setTags] = useState<Array<PickerTagType>>(initialTags);
+  const [selectedTags, setSelectedTags] = useState(initialTags);
+  const [availableTags, setAvailableTags] = useState(initialTags);
 
   useEffect(() => {
     const eldestParent = getSemanticsParent(parent);
@@ -39,34 +40,50 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
     const interval = window.setInterval(() => {
       const watchedField = eldestParent?.params?.[
         fieldNameToWatch
-      ] as Array<EditorTagType> | null;
+      ] as Array<PickerTagType> | null;
 
       const noTagsYet = !watchedField;
       if (noTagsYet) {
         return;
       }
 
-      const editorTags = watchedField.map(tag => ({
-        ...tag,
-        isActive: false,
-      }));
-
-      const updatedTags = tags.filter(tag =>
-        editorTags.find(t => tag.id === t.id),
-      );
-
-      for (const tag of editorTags) {
-        if (!tags.find(t => t.id === tag.id)) {
-          updatedTags.push(tag);
+      watchedField.forEach(tag => {
+        const noId = !tag.id;
+        if (noId) {
+          // eslint-disable-next-line no-param-reassign
+          tag.id = H5P.createUUID();
         }
-      }
 
-      setTags(updatedTags);
-      updateTags(updatedTags);
+        const noColor = !tag.color?.trim();
+        if (noColor) {
+          // eslint-disable-next-line no-param-reassign
+          tag.color = "#000";
+        }
+      });
+
+      const hasChanges =
+        JSON.stringify([...watchedField]) !== JSON.stringify(availableTags);
+      if (hasChanges) {
+        setAvailableTags([...watchedField]);
+
+        const updatedSelectedTags = selectedTags.filter(
+          ({ id }) => !!watchedField.find(tag => tag.id === id),
+        );
+
+        setSelectedTags(updatedSelectedTags);
+        storeTags(updatedSelectedTags);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [fieldNameToWatch, parent, tags, updateTags]);
+  }, [availableTags, fieldNameToWatch, parent, selectedTags, storeTags]);
+
+  const onChange = (newTags: MultiValue<PickerTagType>): void => {
+    const updatedTags = newTags as Array<PickerTagType>;
+
+    setSelectedTags(updatedTags);
+    storeTags(updatedTags);
+  };
 
   const colourStyles: StylesConfig<PickerTagType, true> = {
     control: styles => ({ ...styles, backgroundColor: "white" }),
@@ -148,13 +165,14 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
       </div>
 
       <Select
-        options={tags
-          .filter(tag => tag.name?.trim().length > 0)
-          .map(tag => ({ ...tag, label: tag.name }))}
+        options={availableTags.filter(tag => tag.name?.trim().length > 0)}
         closeMenuOnSelect={false}
-        defaultValue={tags.filter(tag => tag.isActive)}
+        defaultValue={selectedTags}
         isMulti
         styles={colourStyles}
+        onChange={newTags => onChange(newTags)}
+        getOptionLabel={tag => tag.name}
+        getOptionValue={tag => tag.id}
       />
     </>
   );
