@@ -1,4 +1,3 @@
-import { NDLATagsEditor } from "./src/widgets/NDLATagsEditor.widget";
 import { NDLATagsPicker } from "./src/widgets/NDLATagsPicker.widget";
 import { H5PField } from "./src/types/H5P/H5PField";
 import { H5PForm } from "./src/types/H5P/H5PForm";
@@ -11,10 +10,8 @@ export interface H5PObject {
 
 export interface H5PEditorObject {
   NDLATagsPicker: typeof NDLATagsPicker;
-  NDLATagsEditor: typeof NDLATagsEditor;
   widgets: {
     NDLATagsPicker: typeof NDLATagsPicker;
-    NDLATagsEditor: typeof NDLATagsEditor;
   };
   $: typeof jQuery;
   contentId: string;
