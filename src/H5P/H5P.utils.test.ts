@@ -11,7 +11,7 @@ describe("H5P Utils", () => {
       expect(actual).toBe(expected);
     });
 
-    it("should return the given url if it's already absolute: insecure url", () => {
+    it("should return the given url if it's already absolute: unsecure url", () => {
       const url = "http://example.org";
 
       const expected = url;
