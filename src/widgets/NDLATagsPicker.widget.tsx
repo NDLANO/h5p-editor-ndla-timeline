@@ -24,8 +24,6 @@ export class NDLATagsPicker
   ) {
     super(parent, field, tags, setValue);
 
-    console.info("Tags picker", { params: tags, field });
-
     if (!("fieldNameToWatch" in field)) {
       throw new Error(
         "Missing field `fieldNameToWatch`. It should be the name of the corresponding editor field",

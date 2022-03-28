@@ -14,12 +14,5 @@
     {
       "path": "dist/main.css"
     }
-  ],
-  "preloadedDependencies": [
-    {
-      "machineName": "H5P.NDLATimeline",
-      "majorVersion": 0,
-      "minorVersion": 0
-    }
   ]
 }
