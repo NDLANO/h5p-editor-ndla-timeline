@@ -2,7 +2,6 @@ import chroma from "chroma-js";
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import Select, { MultiValue, StylesConfig } from "react-select";
-import { H5P } from "../H5P/H5P.util";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { PickerTagType } from "../types/PickerTagType";
 
@@ -54,8 +53,6 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
         const updatedSelectedTags = selectedTags.filter(
           ({ id }) => !!watchedField.find(tag => tag.id === id),
         );
-
-        console.log({watchedField})
 
         setSelectedTags(updatedSelectedTags);
         storeTags(updatedSelectedTags);
