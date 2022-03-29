@@ -2,7 +2,6 @@ import chroma from "chroma-js";
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
 import Select, { MultiValue, StylesConfig } from "react-select";
-import { H5P } from "../H5P/H5P.util";
 import { H5PForm } from "../types/H5P/H5PForm";
 import { PickerTagType } from "../types/PickerTagType";
 
@@ -38,28 +37,13 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
     const eldestParent = getSemanticsParent(parent);
 
     const interval = window.setInterval(() => {
-      const watchedField = eldestParent?.params?.[
-        fieldNameToWatch
-      ] as Array<PickerTagType> | null;
+      const watchedField: Array<PickerTagType> | null =
+        eldestParent?.params?.[fieldNameToWatch];
 
       const noTagsYet = !watchedField;
       if (noTagsYet) {
         return;
       }
-
-      watchedField.forEach(tag => {
-        const noId = !tag.id;
-        if (noId) {
-          // eslint-disable-next-line no-param-reassign
-          tag.id = H5P.createUUID();
-        }
-
-        const noColor = !tag.color?.trim();
-        if (noColor) {
-          // eslint-disable-next-line no-param-reassign
-          tag.color = "#000";
-        }
-      });
 
       const hasChanges =
         JSON.stringify([...watchedField]) !== JSON.stringify(availableTags);
@@ -165,7 +149,7 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
       </div>
 
       <Select
-        options={availableTags.filter(tag => tag.name?.trim().length > 0)}
+        options={availableTags}
         closeMenuOnSelect={false}
         defaultValue={selectedTags}
         isMulti
