@@ -10,3 +10,5 @@ webpack.config.js
 .storybook
 storybook-static
 docs
+babel.config.js
+tsconfig.json
