@@ -1,0 +1,9 @@
+{
+  "libraryStrings": {
+    "dialog_close": "Diálogo para Cerrar",
+    "semantics-form_save": "Guardar",
+    "tag_edit": "Editar",
+    "tag_delete": "Borrar",
+    "tag_add": "Agregar"
+  }
+}
