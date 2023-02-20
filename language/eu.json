@@ -1,9 +1,9 @@
 {
   "libraryStrings": {
-    "dialog_close": "Close dialog",
-    "semantics-form_save": "Save",
-    "tag_edit": "Edit",
-    "tag_delete": "Delete",
-    "tag_add": "Add"
+    "dialog_close": "Itxi elkarrizketa-koadroa",
+    "semantics-form_save": "Gorde",
+    "tag_edit": "Editatu",
+    "tag_delete": "Ezabatu",
+    "tag_add": "Gehitu"
   }
 }
