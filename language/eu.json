@@ -1,0 +1,9 @@
+{
+  "libraryStrings": {
+    "dialog_close": "Close dialog",
+    "semantics-form_save": "Save",
+    "tag_edit": "Edit",
+    "tag_delete": "Delete",
+    "tag_add": "Add"
+  }
+}
