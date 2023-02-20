@@ -21,8 +21,8 @@
   "dependencies": {
     "chroma-js": "^2.4.2",
     "font-color-contrast": "^11.1.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-select": "^5.3.2"
   },
   "devDependencies": {
