@@ -1,9 +1,9 @@
 {
   "libraryStrings": {
-    "dialog_close": "Close dialog",
-    "semantics-form_save": "Save",
-    "tag_edit": "Edit",
-    "tag_delete": "Delete",
-    "tag_add": "Add"
+    "dialog_close": "Lukk dialog",
+    "semantics-form_save": "Lagre",
+    "tag_edit": "Rediger",
+    "tag_delete": "Slett",
+    "tag_add": "Legg til"
   }
 }
