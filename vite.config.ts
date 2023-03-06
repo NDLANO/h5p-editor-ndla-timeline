@@ -32,16 +32,19 @@ export default defineConfig({
 
     rollupOptions: {
       input: "src/index.tsx",
+      // Config suggests to use chunks, but puts them creates one file only
       output: {
-        file: "dist/bundle.js",
-        dir: null,
-        inlineDynamicImports: true,
-        manualChunks: null,
-        assetFileNames: assetInfo => {
+        dir: "dist",
+        inlineDynamicImports: true, //
+        manualChunks: undefined, //
+        assetFileNames: (assetInfo) => {
           if (assetInfo.name === "index.css") {
             return "main.css";
           }
-          return assetInfo.name;
+          return assetInfo.name ?? '';
+        },
+        entryFileNames: () => {
+          return 'bundle.js'; // See comment above
         },
       },
     },
