@@ -37,14 +37,14 @@ export default defineConfig({
         dir: "dist",
         inlineDynamicImports: true, //
         manualChunks: undefined, //
-        assetFileNames: (assetInfo) => {
+        assetFileNames: assetInfo => {
           if (assetInfo.name === "index.css") {
             return "main.css";
           }
-          return assetInfo.name ?? '';
+          return assetInfo.name ?? "";
         },
         entryFileNames: () => {
-          return 'bundle.js'; // See comment above
+          return "bundle.js"; // See comment above
         },
       },
     },
