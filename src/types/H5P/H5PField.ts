@@ -9,8 +9,8 @@ type H5PFieldWidgetExtension =
       widget?: string;
     }
   | {
-      // To use the Show When or NDLA Show When widgets, first add them to the editorDependencies list in library.json
-      widget: "showWhen" | "NDLAShowWhen";
+      // To use the Show When widget, first add them to the editorDependencies list in library.json
+      widget: "showWhen";
       showWhen: H5PShowWhenOptions;
     };
 
