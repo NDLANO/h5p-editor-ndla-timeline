@@ -3,6 +3,9 @@ src
 .babelrc
 .gitignore
 .h5pignore
+.eslintignore
+.eslintrc.json
+.github
 package.json
 package-lock.json
 README.md
@@ -12,3 +15,6 @@ storybook-static
 docs
 babel.config.js
 tsconfig.json
+jest.config.ts
+typings.d.ts
+build_info
