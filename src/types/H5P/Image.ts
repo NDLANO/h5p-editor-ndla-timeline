@@ -1,4 +1,4 @@
-import { Media } from "./Media";
+import { Media } from './Media';
 
 export type Image = Media & {
   alt?: string;

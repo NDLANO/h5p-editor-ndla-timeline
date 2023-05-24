@@ -1,1 +1,1 @@
-export type H5PEnterMode = "p" | "div";
+export type H5PEnterMode = 'p' | 'div';

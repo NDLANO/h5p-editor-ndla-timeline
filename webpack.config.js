@@ -1,27 +1,27 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mode =
-  process.env.NODE_ENV === "production" ? "production" : "development";
-const isDev = mode !== "production";
+  process.env.NODE_ENV === 'production' ? 'production' : 'development';
+const isDev = mode !== 'production';
 
 module.exports = {
   mode,
   entry: {
-    "h5p-editor-timeline": path.join(__dirname, "src", "index.tsx"),
+    'h5p-editor-timeline': path.join(__dirname, 'src', 'index.tsx'),
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: '[name].css',
     }),
   ],
   resolve: {
-    modules: [path.resolve("./src"), path.resolve("./node_modules")],
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss"],
+    modules: [path.resolve('./src'), path.resolve('./node_modules')],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
   },
   module: {
     rules: [
@@ -29,16 +29,16 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               presets: [
-                "@babel/preset-env",
-                "@babel/preset-react",
-                "@babel/preset-typescript",
+                '@babel/preset-env',
+                '@babel/preset-react',
+                '@babel/preset-typescript',
               ],
             },
           },
-          { loader: "ts-loader" },
+          { loader: 'ts-loader' },
         ],
         exclude: /node_modules/,
       },
@@ -49,10 +49,10 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
           },
         ],
       },
@@ -60,8 +60,8 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      name: "vendor",
-      chunks: "all",
+      name: 'vendor',
+      chunks: 'all',
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -77,7 +77,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, 'dist'),
     },
     compress: true,
     port: 9000,
@@ -86,5 +86,5 @@ module.exports = {
 };
 
 if (isDev) {
-  module.exports.devtool = "inline-source-map";
+  module.exports.devtool = 'inline-source-map';
 }

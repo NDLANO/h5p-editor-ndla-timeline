@@ -1,9 +1,9 @@
-import chroma from "chroma-js";
-import * as React from "react";
-import { FC, useEffect, useState } from "react";
-import Select, { MultiValue, StylesConfig } from "react-select";
-import { H5PForm } from "../types/H5P/H5PForm";
-import { PickerTagType } from "../types/PickerTagType";
+import chroma from 'chroma-js';
+import * as React from 'react';
+import { FC, useEffect, useState } from 'react';
+import Select, { MultiValue, StylesConfig } from 'react-select';
+import { H5PForm } from '../types/H5P/H5PForm';
+import { PickerTagType } from '../types/PickerTagType';
 
 type NDLATagsPickerAppProps = {
   storeTags: (tags: Array<PickerTagType>) => void;
@@ -51,7 +51,7 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
         setAvailableTags([...watchedField]);
 
         const updatedSelectedTags = selectedTags.filter(
-          ({ id }) => !!watchedField.find(tag => tag.id === id),
+          ({ id }) => !!watchedField.find((tag) => tag.id === id),
         );
 
         setSelectedTags(updatedSelectedTags);
@@ -70,7 +70,7 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
   };
 
   const colourStyles: StylesConfig<PickerTagType, true> = {
-    control: styles => ({ ...styles, backgroundColor: "white" }),
+    control: (styles) => ({ ...styles, backgroundColor: 'white' }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       const tagColor = chroma(data.color);
 
@@ -78,22 +78,26 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
       if (!isDisabled) {
         if (isSelected) {
           backgroundColor = data.color;
-        } else if (isFocused) {
+        }
+        else if (isFocused) {
           backgroundColor = tagColor.alpha(0.1).css();
         }
       }
 
       let color: string | undefined;
       if (isDisabled) {
-        color = "#ccc";
-      } else if (isSelected) {
-        const isDark = chroma.contrast(tagColor, "white") > 2;
+        color = '#ccc';
+      }
+      else if (isSelected) {
+        const isDark = chroma.contrast(tagColor, 'white') > 2;
         if (isDark) {
-          color = "white";
-        } else {
-          color = "black";
+          color = 'white';
         }
-      } else {
+        else {
+          color = 'black';
+        }
+      }
+      else {
         color = data.color;
       }
 
@@ -101,7 +105,8 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
       if (!isDisabled) {
         if (isSelected) {
           activeBackgroundColor = data.color;
-        } else {
+        }
+        else {
           tagColor.alpha(0.3).css();
         }
       }
@@ -110,10 +115,10 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
         ...styles,
         backgroundColor,
         color,
-        cursor: isDisabled ? "not-allowed" : "default",
+        cursor: isDisabled ? 'not-allowed' : 'default',
 
-        ":active": {
-          ...styles[":active"],
+        ':active': {
+          ...styles[':active'],
           backgroundColor: activeBackgroundColor,
         },
       };
@@ -135,9 +140,9 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
     multiValueRemove: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      ":hover": {
+      ':hover': {
         backgroundColor: data.color,
-        color: "white",
+        color: 'white',
       },
     }),
   };
@@ -154,9 +159,9 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
         defaultValue={selectedTags}
         isMulti
         styles={colourStyles}
-        onChange={newTags => onChange(newTags)}
-        getOptionLabel={tag => tag.name}
-        getOptionValue={tag => tag.id}
+        onChange={(newTags) => onChange(newTags)}
+        getOptionLabel={(tag) => tag.name}
+        getOptionValue={(tag) => tag.id}
       />
     </>
   );
