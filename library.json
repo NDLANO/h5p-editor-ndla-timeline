@@ -4,6 +4,7 @@
   "majorVersion": 0,
   "minorVersion": 0,
   "patchVersion": 5,
+  "license": "MIT",
   "runnable": 0,
   "preloadedJs": [
     {
