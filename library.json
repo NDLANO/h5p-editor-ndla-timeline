@@ -9,6 +9,9 @@
   "preloadedJs": [
     {
       "path": "dist/bundle.js"
+    },
+    {
+      "path": "dist/vendor.js"
     }
   ],
   "preloadedCss": [
