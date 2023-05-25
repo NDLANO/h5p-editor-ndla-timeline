@@ -18,3 +18,4 @@ tsconfig.json
 jest.config.ts
 typings.d.ts
 build_info
+H5P.d.ts
