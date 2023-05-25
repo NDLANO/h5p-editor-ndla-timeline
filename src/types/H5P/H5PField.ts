@@ -1,8 +1,8 @@
-import { H5PEnterMode } from "./H5PEnterMode";
-import { H5PFieldType } from "./H5PFieldType";
-import { H5PImportance } from "./H5PImportance";
-import { H5PShowWhenOptions } from "./H5PShowWhenOptions";
-import { H5PTextTags } from "./H5PTextTags";
+import { H5PEnterMode } from './H5PEnterMode';
+import { H5PFieldType } from './H5PFieldType';
+import { H5PImportance } from './H5PImportance';
+import { H5PShowWhenOptions } from './H5PShowWhenOptions';
+import { H5PTextTags } from './H5PTextTags';
 
 type H5PFieldWidgetExtension =
   | {
@@ -10,14 +10,14 @@ type H5PFieldWidgetExtension =
     }
   | {
       // To use the Show When widget, first add them to the editorDependencies list in library.json
-      widget: "showWhen";
+      widget: 'showWhen';
       showWhen: H5PShowWhenOptions;
     };
 
 type H5PTextFieldWidgetExtension =
   | H5PFieldWidgetExtension
   | {
-      widget?: "html";
+      widget?: 'html';
     };
 
 type H5PFieldCommon = {
@@ -78,19 +78,6 @@ type H5PFieldCommon = {
   common?: boolean;
 };
 
-export type H5PField =
-  | H5PFieldAudio
-  | H5PFieldBoolean
-  | H5PFieldFile
-  | H5PFieldGroup
-  | H5PFieldImage
-  | H5PFieldLibrary
-  | H5PFieldList
-  | H5PFieldNumber
-  | H5PFieldSelect
-  | H5PFieldText
-  | H5PFieldVideo;
-
 export type H5PFieldText =
   | H5PFieldCommon &
       H5PTextFieldWidgetExtension & {
@@ -104,13 +91,22 @@ export type H5PFieldText =
         font?: string;
 
         /**
-         * This attribute is used to give more detailed instructions and contains two parts, i.e description and example.
+         * This attribute is used to give more detailed instructions and contains two parts,
+         * i.e description and example.
          *
          * @example
          * ```
          * important: {
-         *   description: "<ul><li>Marked words are added with an asterisk (*).</li><li>Asterisks can be added within marked words by adding another asterisk, *correctword*** => correctword*.</li></ul>",
-         *   example: "The correct words are marked with like this: *correctword*, an asterisk is written like this: *correctword***."
+         *   description: "
+         * <ul>
+         *   <li>Marked words are added with an asterisk (*).</li>
+         *   <li>
+         *       Asterisks can be added within marked words by adding another asterisk,
+         *       *correctword*** => correctword*.
+         *   </li>
+         * </ul>",
+         *   example: "The correct words are marked with like this: *correctword*,
+         *    an asterisk is written like this: *correctword***."
          * }
          * ```
          *
@@ -155,6 +151,7 @@ export type H5PFieldGroup =
       H5PFieldWidgetExtension & {
         type: H5PFieldType.Group;
         widget?: string;
+        // eslint-disable-next-line no-use-before-define
         fields: Array<H5PField>;
         isSubContent?: boolean;
 
@@ -197,6 +194,7 @@ export type H5PFieldList =
          * @see https://h5p.org/semantics#attribute-widgets
          */
         widgets?: Array<{ name: string; label: string }>;
+        // eslint-disable-next-line no-use-before-define
         field: H5PField;
         min?: number;
         max?: number;
@@ -254,3 +252,16 @@ export type H5PFieldFile =
         type: H5PFieldType.File;
         widget?: string;
       };
+
+export type H5PField =
+  | H5PFieldAudio
+  | H5PFieldBoolean
+  | H5PFieldFile
+  | H5PFieldGroup
+  | H5PFieldImage
+  | H5PFieldLibrary
+  | H5PFieldList
+  | H5PFieldNumber
+  | H5PFieldSelect
+  | H5PFieldText
+  | H5PFieldVideo;

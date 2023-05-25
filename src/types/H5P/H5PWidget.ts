@@ -1,7 +1,7 @@
-import { H5P } from "../../H5P/H5P.util";
-import { H5PField } from "./H5PField";
-import { H5PForm } from "./H5PForm";
-import { H5PSetValue } from "./H5PSetValue";
+import { H5P } from '../../H5P/H5P.util';
+import { H5PField } from './H5PField';
+import { H5PForm } from './H5PForm';
+import { H5PSetValue } from './H5PSetValue';
 
 export class H5PWidget<
   Field extends H5PField,
@@ -33,6 +33,6 @@ export class H5PWidget<
   }
 
   private static createWrapperElement(): HTMLDivElement {
-    return document.createElement("div");
+    return document.createElement('div');
   }
 }

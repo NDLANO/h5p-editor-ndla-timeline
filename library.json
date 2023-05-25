@@ -3,16 +3,20 @@
   "machineName": "H5PEditor.NDLATimeline",
   "majorVersion": 0,
   "minorVersion": 0,
-  "patchVersion": 5,
+  "patchVersion": 6,
+  "license": "MIT",
   "runnable": 0,
   "preloadedJs": [
     {
-      "path": "dist/bundle.js"
+      "path": "dist/h5p-editor-timeline.js"
+    },
+    {
+      "path": "dist/vendor.js"
     }
   ],
   "preloadedCss": [
     {
-      "path": "dist/main.css"
+      "path": "dist/h5p-editor-timeline.css"
     }
   ]
 }

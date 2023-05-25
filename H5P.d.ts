@@ -1,62 +1,6 @@
-import { NDLATagsPicker } from "./src/widgets/NDLATagsPicker.widget";
-import { H5PField } from "./src/types/H5P/H5PField";
-import { H5PForm } from "./src/types/H5P/H5PForm";
-
-export interface H5PObject {
-  EventDispatcher: typeof EventDispatcher;
-  getPath: (path: string, contentId: string) => string;
-  createUUID: () => string;
-}
-
-export interface H5PEditorObject {
-  NDLATagsPicker: typeof NDLATagsPicker;
-  widgets: {
-    NDLATagsPicker: typeof NDLATagsPicker;
-  };
-  $: typeof jQuery;
-  contentId: string;
-
-  /**
-   * Translate text strings.
-   *
-   * @param library The library name(machineName), or "core".
-   * @param key Translation string identifier.
-   * @param vars Placeholders and values to replace in the text.
-   *
-   * @returns Translated string, or a default text if the translation is missing.
-   */
-  t: (
-    library: "H5PEditor.NDLATimeline" | "core",
-    key: string,
-    vars?: Record<string, string>,
-  ) => string;
-
-  /**
-   * Recursive processing of the semantics chunks.
-   *
-   * @param semanticsChunk Array of semantics
-   * @param params
-   * @param $wrapper
-   * @param parent
-   */
-  processSemanticsChunk: (
-    semanticsChunk: H5PField | Array<H5PField>,
-    params: unknown,
-    $wrapper: JQuery<HTMLElement>,
-    parent: H5PForm,
-  ) => void;
-
-  /**
-   * Search for a field or a set of fields. Returns `null` if the field isn't found.
-   *
-   * @param fieldName
-   * @param semanticsStructure
-   */
-  findSemanticsField: (
-    fieldName: string,
-    semanticsStructure: H5PField | Array<H5PField>,
-  ) => H5PField | Array<H5PField> | null;
-}
+import { NDLATagsPicker } from './src/widgets/NDLATagsPicker.widget';
+import { H5PField } from './src/types/H5P/H5PField';
+import { H5PForm } from './src/types/H5P/H5PForm';
 
 declare class EventDispatcher {
   /**
@@ -138,4 +82,60 @@ declare interface IH5PEditorWrapper {
   appendTo($wrapper: JQuery<HTMLElement>): void;
   validate(): boolean;
   remove(): void;
+}
+
+export interface H5PEditorObject {
+  NDLATagsPicker: typeof NDLATagsPicker;
+  widgets: {
+    NDLATagsPicker: typeof NDLATagsPicker;
+  };
+  $: typeof jQuery;
+  contentId: string;
+
+  /**
+   * Translate text strings.
+   *
+   * @param library The library name(machineName), or "core".
+   * @param key Translation string identifier.
+   * @param vars Placeholders and values to replace in the text.
+   *
+   * @returns Translated string, or a default text if the translation is missing.
+   */
+  t: (
+    library: 'H5PEditor.NDLATimeline' | 'core',
+    key: string,
+    vars?: Record<string, string>,
+  ) => string;
+
+  /**
+   * Recursive processing of the semantics chunks.
+   *
+   * @param semanticsChunk Array of semantics
+   * @param params
+   * @param $wrapper
+   * @param parent
+   */
+  processSemanticsChunk: (
+    semanticsChunk: H5PField | Array<H5PField>,
+    params: unknown,
+    $wrapper: JQuery<HTMLElement>,
+    parent: H5PForm,
+  ) => void;
+
+  /**
+   * Search for a field or a set of fields. Returns `null` if the field isn't found.
+   *
+   * @param fieldName
+   * @param semanticsStructure
+   */
+  findSemanticsField: (
+    fieldName: string,
+    semanticsStructure: H5PField | Array<H5PField>,
+  ) => H5PField | Array<H5PField> | null;
+}
+
+export interface H5PObject {
+  EventDispatcher: typeof EventDispatcher;
+  getPath: (path: string, contentId: string) => string;
+  createUUID: () => string;
 }

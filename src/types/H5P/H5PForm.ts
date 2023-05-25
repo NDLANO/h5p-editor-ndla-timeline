@@ -1,7 +1,7 @@
-import { H5PGroup } from "./H5PGroup";
-import { H5PMetadata } from "./H5PMetadata";
-import { H5PMetadataForm } from "./H5PMetadataForm";
-import { H5PSetValue } from "./H5PSetValue";
+import { H5PGroup } from './H5PGroup';
+import { H5PMetadata } from './H5PMetadata';
+import { H5PMetadataForm } from './H5PMetadataForm';
+import { H5PSetValue } from './H5PSetValue';
 
 type UberName = `H5P.${string} ${number}.${number}`;
 
@@ -37,7 +37,6 @@ export type H5PForm = {
   metadata: H5PMetadata;
   metadataForm: H5PMetadataForm | null;
   offset: { top: number; left: number };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any;
   passReadies: boolean;
   readies: Array<unknown>;
@@ -45,6 +44,6 @@ export type H5PForm = {
     libraryName: string,
     languageCodes: Array<string | undefined>,
   ) => void;
-  zebra: "odd" | "even";
+  zebra: 'odd' | 'even';
   ready: (callback: () => void) => void;
 };

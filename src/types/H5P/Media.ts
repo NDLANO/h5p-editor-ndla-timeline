@@ -1,4 +1,4 @@
-import { Copyright } from "./Copyright";
+import { Copyright } from './Copyright';
 
 export type Media = {
   path: string;

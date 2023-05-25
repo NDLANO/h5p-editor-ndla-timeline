@@ -1,1 +1,1 @@
-export type H5PImportance = "low" | "medium" | "high";
+export type H5PImportance = 'low' | 'medium' | 'high';

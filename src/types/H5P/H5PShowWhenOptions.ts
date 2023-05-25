@@ -1,4 +1,4 @@
-import { H5PShowWhenRule } from "./H5PShowWhenRule";
+import { H5PShowWhenRule } from './H5PShowWhenRule';
 
 export type H5PShowWhenOptions = {
   rules: Array<H5PShowWhenRule>;
@@ -12,7 +12,7 @@ export type H5PShowWhenOptions = {
   /**
    * @default "or"
    */
-  type?: "and" | "or";
+  type?: 'and' | 'or';
 
   widget?: string;
 };
