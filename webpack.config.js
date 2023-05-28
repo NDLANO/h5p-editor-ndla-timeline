@@ -1,9 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const mode =
-  process.env.NODE_ENV === 'production' ? 'production' : 'development';
-const isDev = mode !== 'production';
+const mode = process.argv.includes('--mode=production') ?
+  'production' :
+  'development';
 
 module.exports = {
   mode,
@@ -13,7 +13,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
+    clean: true
   },
+  target: ['browserslist'],
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -83,8 +85,5 @@ module.exports = {
     port: 9000,
     open: true,
   },
+  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' })
 };
-
-if (isDev) {
-  module.exports.devtool = 'inline-source-map';
-}
