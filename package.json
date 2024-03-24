@@ -1,6 +1,6 @@
 {
   "name": "h5p-editor-timeline",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "description": "",
   "repository": "github:NDLANO/h5p-editor-ndla-timeline",
   "main": "index.js",
