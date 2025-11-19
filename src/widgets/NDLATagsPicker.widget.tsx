@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { NDLATagsPickerApp } from '../apps/NDLATagsPicker.app';
 import { H5PFieldList } from '../types/H5P/H5PField';
 import { H5PForm } from '../types/H5P/H5PForm';
@@ -15,6 +15,8 @@ type Params = Array<PickerTagType>;
 export class NDLATagsPicker
   extends H5PWidget<Field, Params>
   implements IH5PWidget {
+  private root?: ReturnType<typeof createRoot>;
+
   constructor(
     parent: H5PForm,
     field: Field,
@@ -48,15 +50,15 @@ export class NDLATagsPicker
     );
     containerElement.appendChild(wrapper);
 
-    ReactDOM.render(
+    this.root = createRoot(wrapper);
+    this.root.render(
       <NDLATagsPickerApp
         storeTags={(newTags) => setValue(field, newTags)}
         tags={tags ?? []}
         fieldNameToWatch={field.fieldNameToWatch}
         parent={parent}
         label={field.label}
-      />,
-      wrapper
+      />
     );
   }
 
@@ -64,5 +66,7 @@ export class NDLATagsPicker
     return this.wrapper !== null;
   }
 
-  remove(): void {}
+  remove(): void {
+    this.root?.unmount();
+  }
 }
