@@ -1,11 +1,14 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import process from 'node:process';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const mode = process.argv.includes('--mode=production') ?
-  'production' :
-  'development';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-module.exports = {
+const mode = process.argv.includes('--mode=production') ? 'production' : 'development';
+
+export default {
   mode,
   entry: {
     'h5p-editor-timeline': path.join(__dirname, 'src', 'index.tsx'),
@@ -13,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    clean: true
+    clean: true,
   },
   target: ['browserslist'],
   plugins: [
@@ -85,5 +88,5 @@ module.exports = {
     port: 9000,
     open: true,
   },
-  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' })
+  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' }),
 };

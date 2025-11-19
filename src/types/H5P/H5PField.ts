@@ -151,7 +151,6 @@ export type H5PFieldGroup =
       H5PFieldWidgetExtension & {
         type: H5PFieldType.Group;
         widget?: string;
-        // eslint-disable-next-line no-use-before-define
         fields: Array<H5PField>;
         isSubContent?: boolean;
 
@@ -194,7 +193,6 @@ export type H5PFieldList =
          * @see https://h5p.org/semantics#attribute-widgets
          */
         widgets?: Array<{ name: string; label: string }>;
-        // eslint-disable-next-line no-use-before-define
         field: H5PField;
         min?: number;
         max?: number;

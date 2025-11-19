@@ -38,7 +38,7 @@ export const NDLATagsPickerApp: FC<NDLATagsPickerAppProps> = ({
 
     const interval = window.setInterval(() => {
       const watchedField: Array<PickerTagType> | null =
-        eldestParent?.params?.[fieldNameToWatch];
+        (eldestParent?.params as Record<string, Array<PickerTagType>>)?.[fieldNameToWatch];
 
       const noTagsYet = !watchedField;
       if (noTagsYet) {
