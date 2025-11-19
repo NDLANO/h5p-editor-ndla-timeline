@@ -37,7 +37,7 @@ export type H5PForm = {
   metadata: H5PMetadata;
   metadataForm: H5PMetadataForm | null;
   offset: { top: number; left: number };
-  params: any;
+  params: object;
   passReadies: boolean;
   readies: Array<unknown>;
   removeLanguages: (

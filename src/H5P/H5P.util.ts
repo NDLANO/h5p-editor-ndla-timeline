@@ -1,7 +1,12 @@
 import { H5PObject, H5PEditorObject } from '../../H5P';
 import { TranslationKey } from '../types/TranslationKey';
 
+// TODO: Why was this not typed before?
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const H5P: H5PObject = (window as any).H5P ?? {};
+
+// TODO: Why was this not typed before?
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const H5PEditor: H5PEditorObject = (window as any).H5PEditor ?? {};
 export const t: (
   key: TranslationKey,

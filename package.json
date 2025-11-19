@@ -11,7 +11,7 @@
     "start": "webpack serve --mode development",
     "watch": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint": "eslint './src/**/*' --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest"
   },
@@ -31,13 +31,10 @@
     "@types/jquery": "^3.5.33",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.47.0",
-    "@typescript-eslint/parser": "^8.47.0",
     "babel-jest": "^30.2.0",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
-    "eslint": "^8.57.1",
-    "eslint-config-ndla-h5p": "github:NDLANO/eslint-config-ndla-h5p",
+    "eslint-config-ndla-h5p": "github:ndlano/eslint-config-ndla-h5p",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -53,9 +50,11 @@
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0",
     "webpack": "^5.103.0",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
   },
-  "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead"
+  "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",
+  "type": "module"
 }
