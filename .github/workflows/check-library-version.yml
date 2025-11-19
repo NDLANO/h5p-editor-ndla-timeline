@@ -8,6 +8,13 @@ on:
       - unlabeled # A label is removed from PR
       - synchronize # A commit is added - i.e. the PR's code is changed
 
+  pull_request_target:
+    types:
+      - opened # PR opens
+      - labeled # PR is labeled
+      - unlabeled # A label is removed from PR
+      - synchronize # A commit is added - i.e. the PR's code is changed
+
 jobs:
   check-h5p-library-version:
     name: Check H5P if library version is updated
@@ -16,4 +23,4 @@ jobs:
 
     steps:
       - name: Check library version
-        uses: boyum/comment-h5p-library-version-action@v1 # https://github.com/boyum/comment-h5p-library-version-action
+        uses: boyum/comment-h5p-library-version-action@v2.4 # https://github.com/boyum/comment-h5p-library-version-action
