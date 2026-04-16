@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "chroma-js": "^3.2.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-select": "^5.10.2"
   },
   "devDependencies": {
@@ -48,8 +48,8 @@
     "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.58.1",
-    "webpack": "^5.105.4",
+    "typescript-eslint": "^8.58.2",
+    "webpack": "^5.106.2",
     "webpack-cli": "^7.0.2"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",
