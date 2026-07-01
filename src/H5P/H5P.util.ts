@@ -1,4 +1,4 @@
-import { H5PObject, H5PEditorObject } from '../../H5P';
+import type { H5PObject, H5PEditorObject } from '../../H5P';
 import { TranslationKey } from '../types/TranslationKey';
 
 // TODO: Why was this not typed before?
