@@ -21,10 +21,10 @@
     "react-select": "^5.10.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
-    "@babel/preset-react": "^7.29.7",
-    "@babel/preset-typescript": "^7.29.7",
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@babel/preset-react": "^8.0.1",
+    "@babel/preset-typescript": "^8.0.1",
     "@types/chroma-js": "^3.1.2",
     "@types/jest": "^30.0.0",
     "@types/jquery": "^4.0.1",
@@ -48,9 +48,9 @@
     "ts-loader": "^9.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
-    "webpack": "^5.107.2",
-    "webpack-cli": "^7.0.3"
+    "typescript-eslint": "^8.62.1",
+    "webpack": "^5.108.3",
+    "webpack-cli": "^7.1.0"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",
   "type": "module"
