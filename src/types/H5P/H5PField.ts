@@ -6,19 +6,19 @@ import { H5PTextTags } from './H5PTextTags';
 
 type H5PFieldWidgetExtension =
   | {
-      widget?: string;
-    }
+    widget?: string;
+  }
   | {
-      // To use the Show When widget, first add them to the editorDependencies list in library.json
-      widget: 'showWhen';
-      showWhen: H5PShowWhenOptions;
-    };
+    // To use the Show When widget, first add them to the editorDependencies list in library.json
+    widget: 'showWhen';
+    showWhen: H5PShowWhenOptions;
+  };
 
 type H5PTextFieldWidgetExtension =
   | H5PFieldWidgetExtension
   | {
-      widget?: 'html';
-    };
+    widget?: 'html';
+  };
 
 type H5PFieldCommon = {
   /**
@@ -155,7 +155,8 @@ export type H5PFieldGroup =
         isSubContent?: boolean;
 
         /**
-         * If set to true, group will be expanded. If set to false or not set at all, group will be collapsed. An exception is for groups in lists - they will be expanded except if this value is false.
+         * If set to true, group will be expanded. If set to false or not set at all, group will be collapsed.
+         * An exception is for groups in lists - they will be expanded except if this value is false.
          *
          * @default false
          *
